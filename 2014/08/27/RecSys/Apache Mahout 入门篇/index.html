@@ -1,0 +1,1122 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器学习," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="author: sheng junhui   weibo: @armysheng   blog: youngfor.me   email: armysheng@Gmail.com   转载请注明出处   0.  基本概念的介绍 在搭建开发环境know how的步骤前，最好是先做一些konw what的学习，这里先简单介绍一下一些基本的概念。 0.1 什么是Mahout？  Apache Maho">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache Mahout 入门篇">
+<meta property="og:url" content="http://yoursite.com/2014/08/27/RecSys/Apache Mahout 入门篇/index.html">
+<meta property="og:site_name" content="Eric&#39;s Blog">
+<meta property="og:description" content="author: sheng junhui   weibo: @armysheng   blog: youngfor.me   email: armysheng@Gmail.com   转载请注明出处   0.  基本概念的介绍 在搭建开发环境know how的步骤前，最好是先做一些konw what的学习，这里先简单介绍一下一些基本的概念。 0.1 什么是Mahout？  Apache Maho">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/hadoop.jpg">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/mahout.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/2.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/3.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/4.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/5.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/6.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/7.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/8.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/9.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/10.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/11.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/12.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/13.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/17.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/19.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/18.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/14.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/21.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/23.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/24.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/25.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/26.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/27.png">
+<meta property="og:updated_time" content="2017-07-02T14:57:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Apache Mahout 入门篇">
+<meta name="twitter:description" content="author: sheng junhui   weibo: @armysheng   blog: youngfor.me   email: armysheng@Gmail.com   转载请注明出处   0.  基本概念的介绍 在搭建开发环境know how的步骤前，最好是先做一些konw what的学习，这里先简单介绍一下一些基本的概念。 0.1 什么是Mahout？  Apache Maho">
+<meta name="twitter:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/hadoop.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":true,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2014/08/27/RecSys/Apache Mahout 入门篇/"/>
+
+
+
+
+
+  <title>Apache Mahout 入门篇 | Eric's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-101950574-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Eric's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">place to write</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/08/27/RecSys/Apache Mahout 入门篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eirc Sheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eric's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Apache Mahout 入门篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-08-27T22:04:02+08:00">
+                2014-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2014/08/27/RecSys/Apache Mahout 入门篇/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2014/08/27/RecSys/Apache Mahout 入门篇/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>author: sheng junhui</p>
+</blockquote>
+<blockquote>
+<p>weibo: @armysheng</p>
+</blockquote>
+<blockquote>
+<p>blog: youngfor.me</p>
+</blockquote>
+<blockquote>
+<p>email: armysheng@Gmail.com</p>
+</blockquote>
+<blockquote>
+<p>转载请注明出处</p>
+</blockquote>
+<hr>
+<h2>0.  基本概念的介绍</h2>
+<p>在搭建开发环境know how的步骤前，最好是先做一些konw what的学习，这里先简单介绍一下一些基本的概念。</p>
+<h3>0.1 什么是Mahout？</h3>
+<blockquote>
+<p><strong>Apache Mahout</strong> 翻译成中文是骑大象的人，或驯象师。这里是指Apache开源社区维护的一个可伸缩(Scable)的机器学习库。Mahout机器学习库*<a href="https://mahout.apache.org/users/basics/algorithms.html" target="_blank" rel="external">目前实现的算法</a>*包括协同滤波，分类，聚类，特征降维等等。我们知道Hadoop的logo是一头大象，而Mahout要做的就是驯服这头大象。Mahout致力于提供可支持超大数据集，支持商业使用的开源机器学习库，并且构建充满活力的开源社区。---<a href="http://mahout.apache.org/" target="_blank" rel="external">Mahout 主页</a>
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/hadoop.jpg" alt="Hadoop">          <img src="/2014/08/27/RecSys/Apache Mahout 入门篇/mahout.png" alt="Mahout"></p>
+</blockquote>
+<h3>0.2 Mahout又是一个Maven项目,Maven又是什么呢？</h3>
+<blockquote>
+<p><strong>Apache Maven</strong>，是一个软件（特别是Java软件）项目管理及自动构建工具，由Apache软件基金会所提供。基于项目对象模型（缩写：POM）概念，Maven利用一个中央信息片断能管理一个项目的构建、报告和文档等步骤。项目对象模型存储在命名为 pom.xml 的文件中。POM 文件中包含了它的配置信息，依赖信息等等。---<a href="http://zh.wikipedia.org/zh/Apache_Maven" target="_blank" rel="external">Maven wiki</a></p>
+<blockquote>
+<p>所以，Mahout是一个用java语言开发的，Maven管理工具管理的Maven project，因此整个过程也需要安装Maven。事实上，安装完<strong>java</strong>, <strong>Maven</strong>, <strong>Mahout</strong> 以后，不需要eclipse，整个Mahout机器学习库已经可以被完整的调用，也可以在此基础上进行开发。而eclipse是一个业界广泛使用的IDE，在eclipse上让人得心应手，而且eclipse对Maven项目也有很好的支持，只需要装上M2E插件便可以非常方便的使用。</p>
+</blockquote>
+</blockquote>
+<hr>
+<h2>1. 安装</h2>
+<p>首先介绍一下开发环境：Win7 32位系统
+需要安装的软件:	<code>jdk1.7.0_60</code> +<code>apache-maven-3.2.1</code>+<code>TortoiseSVN 1.8.7</code>+<code>mahout-distribution-0.9(源码&amp;&amp;包)</code>
+由于我们公司内部走的是代理网络，所以部分工具安装完成使用前，都会介绍如何配置代理信息，如果你使用的是直连网络，请忽视这些段落。</p>
+<h3>1.1 Java环境的安装</h3>
+<p>我们选择的java版本是<code>jdk1.7.0_60</code>，可以在oracle主页<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank" rel="external">下载</a>，这里不建议使用java8，在编译过程中可能会出现一些不必要的问题。java安装比较简单，直接下载二进制文件进行安装。我们安装在<code>D:\Program Files\Java\jdk1.7.0_60</code>,安装完成后在控制命令行中输入:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">C:\Users\shengjh&gt;java -version</div><div class="line">java version <span class="string">"1.7.0_60"</span></div><div class="line">Java(TM) SE Runtime Environment (build 1.7.0_60-b19)</div><div class="line">Java HotSpot(TM) Client VM (build 24.60-b09, mixed mode, sharing)</div></pre></td></tr></table></figure></p>
+<p>看似java已经可以运行，其实java的环境变量尚未加入，而是在安装过程中，将<code>java.exe,javaw.exe,javawc.exe</code> 三个文件copy到了<code>system32</code>目录下。所以我们需要手动添加环境变量:
+<em>右键计算机-&gt;属性-&gt;高级系统设置-&gt;环境变量-&gt;系统变量-&gt;新建</em>
+<code>变量名</code>:<code>JAVA_HOME</code>
+<code>变量值</code>:<code>D:\Program Files\Java\jdk1.7.0_60</code>
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/2.png" alt="Path">
+<strong>这一步非常重要，不做的话再Maven的安装上,会出现JAVA_HOME找不到的错误</strong>，至此我们完成了JAVA环境的配置。</p>
+<h3>1.2 Maven环境搭建</h3>
+<p>Maven 是一个项目管理和构建自动化工具。但是对于我们程序员来说，我们最关心的是它的项目构建功能。所以这里我们介绍的就是怎样用 maven 来满足我们项目的日常需要。
+Maven 使用惯例优于配置的原则 。它要求在没有定制之前，所有的项目都有如下的结构：</p>
+<table>
+<thead>
+<tr>
+<th><strong>目录</strong></th>
+<th><strong>目的</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>${basedir}</td>
+<td>存放 pom.xml和所有的子目录</td>
+</tr>
+<tr>
+<td>${basedir}/src/main/java</td>
+<td>项目的 java源代码</td>
+</tr>
+<tr>
+<td>${basedir}/src/main/resources</td>
+<td>项目的资源，比如说 property文件</td>
+</tr>
+<tr>
+<td>${basedir}/src/test/java</td>
+<td>项目的测试类，比如说 JUnit代码</td>
+</tr>
+<tr>
+<td>${basedir}/src/test/resources</td>
+<td>测试使用的资源</td>
+</tr>
+</tbody>
+</table>
+<p>一个 maven 项目在默认情况下会产生 JAR 文件，另外 ，编译后 的 classes 会放在 ${basedir}/target/classes 下面， JAR 文件会放在 ${basedir}/target 下面。
+在确保JAVA环境已经搭建好的情况下我们开始安装Maven，可以从<a href="http://maven.apache.org/download.cgi" target="_blank" rel="external">Maven的主页</a>下载二进制文件，这里我们选择的是Maven 3.2.1，并解压到你常用的软件路径，这里我们安装在<code>D:\Program Files\apache-maven-3.2.1\</code>。该页的最后也该处了Maven的安装方法。这里我们使用最简单的将Maven的bin路径<code>D:\Program Files\apache-maven-3.2.1\bin</code>加入到系统变量Path中:
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/3.png" alt="Path">
+完成后在命令行中输入<code>mvn --version</code> 查看maven的版本:
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/4.png" alt="Path"></p>
+<blockquote>
+<h4>代理配置</h4>
+</blockquote>
+<p>之前介绍了代理的问题，因为后续的操作，maven会自动联网搜索依赖包，这里在继续操作之前先介绍Maven的代理配置。
+在Maven的配置文件都在它的安装目录下的\config\setting.xml文件中<code>&lt;proxies&gt;</code>字段定义了代理的设置。根据代理情况修改Host，port，username，password等等。这里我们只修改了host和port。
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/5.png" alt="Path"></p>
+<p>接下来我们用 maven 来建立最著名的“Hello World!”程序，来更好的了解Maven。
+**注意：**如果你是第一次运行 maven，你需要 Internet 连接，因为 maven 需要从网上下载需要的插件。<br>
+我们要做的第一步是建立一个 maven 项目。在 maven 中，我们是执行 maven 目标 (goal) 来做事情的。
+maven 目标和 ant 的 target 差不多。在命令行中执行下面的命令来建立我们的 hello world 项目</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn archetype:create -DgroupId=com.`mycompany.app -DartifactId=my-app</div></pre></td></tr></table></figure></p>
+<p><img src="/2014/08/27/RecSys/Apache Mahout 入门篇/6.png" alt="Path">
+命令执行完后你将看到maven生成了一个名为my-app的目录，这个名字就是你在命令中指定的artifactId,进入该目录，你将发现以下标准的项目结构：
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/7.png" alt="Path">
+其中:src/main/java 目录包含了项目的源代码，src/test/java 目录包含了项目的测试代码，pom.xml是项目的项目对象模型（Project Object Model or POM）。
+之后我们输入<code>cd my-app</code>进入该项目
+再输入<code>mvn package</code> 回车来build这个项目，得到，折后target目录下回生成该项目的类文件和包：
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/8.png" alt="Path">
+接着你可以使用以下的命令来测试新编译和打包出来的jar包，</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App</div></pre></td></tr></table></figure></p>
+<p><img src="/2014/08/27/RecSys/Apache Mahout 入门篇/9.png" alt="Path">
+至此Maven的安装和介绍就到这里，这一章节主要参考了<a href="http://www.oracle.com/technetwork/cn/community/java/apache-maven-getting-started-1-406235-zhs.html" target="_blank" rel="external">Apache Maven 入门篇 ( 上 )</a>和<a href="http://wentao365.iteye.com/blog/903396" target="_blank" rel="external">maven 教程一 入门</a>，以及Maven主页，阅读原文获得更多的了解。</p>
+<h3>1.3 Mahout源码的编译</h3>
+<p>Mahout的源码和编译后的包可以从<a href="http://mahout.apache.org/general/downloads.html" target="_blank" rel="external">Mahout官网</a>上获得,然而在使用这里下载的0.9发行版源码时，somehow遇到了一些错误。
+这里我们选择用SVN获得它最新的源码。Tortoise	SVN是大家常用的代码托管工具，可以从它的<a href="http://tortoisesvn.net/downloads.html" target="_blank" rel="external">主页</a>上下载到。
+安装完成后，在使用之前，我们还要对他做一下代理配置。</p>
+<blockquote>
+<h4>代理配置</h4>
+</blockquote>
+<p>SVN的代理配置只需要打开，在开始按钮-&gt;程序-&gt;Tortoise	SVN-&gt;settings,找到Network项进行如下配置：
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/10.png" alt="Path"></p>
+<p>接着我们就可以开始编译源码了
+首先得到源码，在命令行输入：
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">svn co http://svn.apache.org/repos/asf/mahout/trunk</div></pre></td></tr></table></figure></p>
+<p><code>cd trunk</code>并编译：</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># With hadoop-1.2.1 dependency</span></div><div class="line">mvn clean install</div><div class="line"></div><div class="line"><span class="comment"># With hadoop-2.2.0 dependency</span></div><div class="line">mvn -Dhadoop2.version=2.2.0 clean install</div></pre></td></tr></table></figure></p>
+<p>这里可以选择Hadoop依赖版本，在没有hadoop的情况下，也可以编译。
+编译时经常会遇见<strong>Test failure的error</strong>而卡住，关于这个问题，是由于mahout中有大量的测试例子，test failure是遇到了broken unit test.遇到这种问题要么需要自己去定位修复这个broken test，要么可以等待官方发行并update svn 进行修复。关于这个问题参加<a href="http://stackoverflow.com/questions/17351177/maven-build-failure-when-installing-mahout-on-ubuntu" target="_blank" rel="external">这里</a>，一般的解决方法是使用：
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># With hadoop-1.2.1 dependency</span></div><div class="line">mvn -DskipTests clean install		</div><div class="line"></div><div class="line"><span class="comment"># With hadoop-2.2.0 dependency</span></div><div class="line">mvn -Dhadoop2.version=2.2.0 -DskipTests clean install</div></pre></td></tr></table></figure></p>
+<p>这里我们选的是	
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn -DskipTests clean install</div></pre></td></tr></table></figure></p>
+<p>最后得到结果：
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/11.png" alt="Path"></p>
+<p>至此，Mahout的源码就编译完毕，我们可以看到每个Mahout源码的目录下都生成了相应的target文件,包含对应的类和.jar包。
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/12.png" alt="Path"></p>
+<h3>1.4 如何在Eclipse上使用Mahout？</h3>
+<p>编译完后的mahout还是不能在eclipse上使用，下面我们介绍一下如何在eclipse下开发Maven project。</p>
+<p>首先Eclipse版本选择，关于eclipse的版本代号问题请参考<a href="http://stackoverflow.com/questions/4008976/difference-between-eclipse-europa-helios-galileo" target="_blank" rel="external">这里</a>。
+我们选择的是Eclipse IDE for Java EE Developers(JUNO)，它包含了Maven所需的一些依赖包。Eclipse standard (Indigo)由于缺乏依赖包，在安装上Maven插件上会有问题。eclipse安装包可以在<a href="http://www.eclipse.org/downloads/" target="_blank" rel="external">官网</a>下载。</p>
+<blockquote>
+<h4>代理配置</h4>
+</blockquote>
+<p>eclipse安装完成后，启动会自动检测本机的代理设置，将本机的代理设置填到软件设置界面。但是如果你想修改的话可以在下面找到:
+<em>eclipse-&gt;windows-&gt;perferences-&gt;general-&gt;Network Connection</em>
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/13.png" alt="Path"></p>
+<p>接着我们介绍一下m2eclipse插件和它的安装方法。<a href="https://www.eclipse.org/m2e/" target="_blank" rel="external">m2eclipse</a>插件是一款一流的支持Apache Maven的eclipse插件。用户可以用它更方便的编辑Maven的pom.xml文件，可以在IDE上build一个Maven工程。</p>
+<p>启动eclipse定位到 <code>Help -&gt; Install New Software…</code>
+点击<code>Add</code>，分别填入:</p>
+<p><code>Name</code>:m2e</p>
+<p><code>Location</code>:http://download.eclipse.org/technology/m2e/releases
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/17.png" alt="Path">
+点击<code>next</code>，同意协议，确认warning后安装。安装完成后，eclipse会提示你重启。</p>
+<p>安装完成后我们还需要做一些设置
+定位到
+<code>eclipse -&gt; windows -&gt; preference -&gt; Maven -&gt;Installations</code>
+将本地的Maven路径<code>Add</code>进来。
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/19.png" alt="Path">
+将<code>User-setting</code> 定位到Maven安装路径下的<code>.\conf\setting.xml</code>文件。
+这样我们就完成了插件的安装，我们便可以Import我们之前已经编译好的Mahout源码，在eclipse下方便的查看Mahout的类文件。
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/18.png" alt="Path">
+导入时可能会遇到Maven-scala-plugin缺失的情况，点击<code>finish</code> 会自动找到缺失的plugin并且安装（需重启eclipse）。
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/14.png" alt="Path">
+导入buliding workspace 后，提示了有错误：</p>
+<pre><code>error：Plugin execution not covered by lifecycle configuration: org.scala-tools:maven-scala-plugin:2.15.2:testCompile (execution: default, phase: test-compile)
+</code></pre>
+<p><img src="/2014/08/27/RecSys/Apache Mahout 入门篇/21.png" alt="Path"></p>
+<p>这是由于m2eclipse-scala插件的缺失，<code>The default maven plugin does not support Scala out of the box, so you need to install the m2eclipse-scala connector.</code> 即m2eclipse-scala connector 的缺失。所以我们需要再次安装这个插件,方法和上面的类似。
+<code>Add</code>:
+<code>Name</code>: <code>Maven for Scala</code>
+<code>Location</code>:<code>http://alchim31.free.fr/m2e-scala/update-site/</code>
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/23.png" alt="Path">
+(若错误持续，则右键改project-&gt; Maven -&gt; Update Project)</p>
+<p>最后我们成功的导入Mahout源码到了eclipse中。
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/24.png" alt="Path"></p>
+<hr>
+<h2>2. 简单推荐算法的实现</h2>
+<p>接着我们介绍如何用Mahout来建立简单的推荐算法，大部分过程我们follow了官方的这个<a href="http://mahout.apache.org/users/recommender/userbased-5-minutes.html" target="_blank" rel="external">quick guide</a></p>
+<p>Step 0:创建数据集，命名为Dataset.csv，内容如下：</p>
+<pre><code>1,10,1.0
+1,11,2.0
+1,12,5.0
+1,13,5.0
+1,14,5.0
+1,15,4.0
+1,16,5.0
+1,17,1.0
+1,18,5.0
+2,10,1.0
+2,11,2.0
+2,15,5.0
+2,16,4.5
+2,17,1.0
+2,18,5.0
+3,11,2.5
+3,12,4.5
+3,13,4.0
+3,14,3.0
+3,15,3.5
+3,16,4.5
+3,17,4.0
+3,18,5.0
+4,10,5.0
+4,11,5.0
+4,12,5.0
+4,13,0.0
+4,14,2.0
+4,15,3.0
+4,16,1.0
+4,17,4.0
+4,18,1.0
+</code></pre>
+<p>Step 1: 新建一个Maven Project，选择simple project
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/25.png" alt="Path"></p>
+<p>Step 2: 命名为<code>UBrecommender</code>
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/26.png" alt="Path"></p>
+<p>Step 3:打开<code>pom.xml</code>文件，加入Mahout的依赖配置,并将<em>Dataset.csv</em>放到工程目录下
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line"> 	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line"> 		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.mahout<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line"> 		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mahout-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"> 		<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"> 	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"> 	<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><img src="/2014/08/27/RecSys/Apache Mahout 入门篇/27.png" alt="Path"></p>
+<p>Step 4: 在<code>src\main\java\</code>下新建<code>SampleRecommender.java</code>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.model.file.FileDataModel;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.neighborhood.ThresholdUserNeighborhood;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.model.DataModel;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.recommender.RecommendedItem;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.recommender.UserBasedRecommender;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.similarity.UserSimilarity;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleRecommender</span></span></div><div class="line">&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, Exception</span>&#123;</div><div class="line">		</div><div class="line">		DataModel model = <span class="keyword">new</span> FileDataModel (<span class="keyword">new</span> File(<span class="string">"dataset.csv"</span>));</div><div class="line">		</div><div class="line">		UserSimilarity similarity = <span class="keyword">new</span> PearsonCorrelationSimilarity(model);</div><div class="line">		</div><div class="line">		UserNeighborhood neighborhood = <span class="keyword">new</span> ThresholdUserNeighborhood(<span class="number">0.1</span>, similarity, model);</div><div class="line">		</div><div class="line">		UserBasedRecommender recommender = <span class="keyword">new</span> GenericUserBasedRecommender(model, neighborhood, similarity);</div><div class="line">		</div><div class="line">		List&lt;RecommendedItem&gt;  recommendations =  recommender.recommend(<span class="number">2</span>,<span class="number">3</span>);</div><div class="line">		</div><div class="line">		<span class="keyword">for</span> (RecommendedItem recommendation : recommendations) &#123;</div><div class="line">		  System.out.println(recommendation);</div><div class="line">		&#125;</div><div class="line">	&#125;	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Step 5: 运行项目，<code>run as java application</code> 我们便得到推荐结果：</p>
+<pre><code>RecommendedItem[item:12, value:4.8328104]
+RecommendedItem[item:13, value:4.6656213]
+RecommendedItem[item:14, value:4.331242]
+</code></pre>
+<p>至此我们便完成了简单的一个推荐算法。</p>
+<h2>总结</h2>
+<p>总结来说我们安装了jdk，安装了Maven，安装了Eclipse以及在eclipse上使用Maven所需的一些插件，最后我们能够顺利地查看和修改Mahout的源码。</p>
+<blockquote>
+<p>**Tips：**环境配置中会遇到许多问题，请多谷歌，国内如果访问不够顺畅，请直接使用<a href="http://apps.farbox.com/post/google-quan-qiu-ip-di-zhi-ku" target="_blank" rel="external">一些谷歌的服务器IP</a>来流畅访问，你也可以将浏览器的默认搜索改为这个地址。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>请我喝杯咖啡吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weixin.jpg" alt="Eirc Sheng WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Eirc Sheng Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/27/Data structure and Algorithms/Leetcode 刷题记之Median of Two Sorted Arrays Problem/" rel="next" title="Leetcode 刷题记之Median of Two Sorted Arrays">
+                <i class="fa fa-chevron-left"></i> Leetcode 刷题记之Median of Two Sorted Arrays
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/09/05/RecSys/漫谈推荐系统/" rel="prev" title="漫谈“推荐系统”">
+                漫谈“推荐系统” <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Eirc Sheng" />
+          <p class="site-author-name" itemprop="name">Eirc Sheng</p>
+           
+              <p class="site-description motion-element" itemprop="description">Nothing much yet</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/armysheng" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/armysheng" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/armysheng" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/armysheng" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/armysheng" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">0.  基本概念的介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">0.1 什么是Mahout？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">0.2 Mahout又是一个Maven项目,Maven又是什么呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">1. 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 Java环境的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 Maven环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">代理配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 Mahout源码的编译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.1.</span> <span class="nav-text">代理配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 如何在Eclipse上使用Mahout？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.1.</span> <span class="nav-text">代理配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">2. 简单推荐算法的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eirc Sheng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2014/08/27/RecSys/Apache Mahout 入门篇/';
+          this.page.identifier = '2014/08/27/RecSys/Apache Mahout 入门篇/';
+          this.page.title = 'Apache Mahout 入门篇';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script>
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,925 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器学习," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="修订：  关于样本测试集和训练集数量上，一般是选择训练集数量不小于测试集，也就是说训练集选取6k可能还不够，大家可以多尝试得到更好的效果； 有人提出归一化方面可能有问题，大家可以查查其他的归一化方法，但是归一化环境是不可少的； 将部分代码传到了**github** 听说阿里又改赛制了，哈哈。   最近好累啊，简单总结一下吧。 碎碎念 这个比赛自己真的是花时间花精力去做了，虽然在s1止步，但是可以">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里大数据竞赛season1 总结">
+<meta property="og:url" content="http://yoursite.com/2014/07/12/alibaba/阿里大数据竞赛season1 总结/index.html">
+<meta property="og:site_name" content="Eric&#39;s Blog">
+<meta property="og:description" content="修订：  关于样本测试集和训练集数量上，一般是选择训练集数量不小于测试集，也就是说训练集选取6k可能还不够，大家可以多尝试得到更好的效果； 有人提出归一化方面可能有问题，大家可以查查其他的归一化方法，但是归一化环境是不可少的； 将部分代码传到了**github** 听说阿里又改赛制了，哈哈。   最近好累啊，简单总结一下吧。 碎碎念 这个比赛自己真的是花时间花精力去做了，虽然在s1止步，但是可以">
+<meta property="og:image" content="http://yoursite.com/2014/07/12/alibaba/阿里大数据竞赛season1%20总结/1.jpg.png">
+<meta property="og:updated_time" content="2017-07-02T16:55:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="阿里大数据竞赛season1 总结">
+<meta name="twitter:description" content="修订：  关于样本测试集和训练集数量上，一般是选择训练集数量不小于测试集，也就是说训练集选取6k可能还不够，大家可以多尝试得到更好的效果； 有人提出归一化方面可能有问题，大家可以查查其他的归一化方法，但是归一化环境是不可少的； 将部分代码传到了**github** 听说阿里又改赛制了，哈哈。   最近好累啊，简单总结一下吧。 碎碎念 这个比赛自己真的是花时间花精力去做了，虽然在s1止步，但是可以">
+<meta name="twitter:image" content="http://yoursite.com/2014/07/12/alibaba/阿里大数据竞赛season1%20总结/1.jpg.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":true,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2014/07/12/alibaba/阿里大数据竞赛season1 总结/"/>
+
+
+
+
+
+  <title>阿里大数据竞赛season1 总结 | Eric's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-101950574-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Eric's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">place to write</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/07/12/alibaba/阿里大数据竞赛season1 总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eirc Sheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eric's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">阿里大数据竞赛season1 总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-07-12T20:12:22+08:00">
+                2014-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2014/07/12/alibaba/阿里大数据竞赛season1 总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2014/07/12/alibaba/阿里大数据竞赛season1 总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h2>修订：</h2>
+<ol>
+<li>关于样本测试集和训练集数量上，一般是选择训练集数量不小于测试集，也就是说训练集选取6k可能还不够，大家可以多尝试得到更好的效果；</li>
+<li>有人提出归一化方面可能有问题，大家可以查查其他的归一化方法，但是归一化环境是不可少的；</li>
+<li>将部分代码传到了**<a href="https://github.com/armysheng/AliBigdataContestS1" target="_blank" rel="external">github</a>**</li>
+<li>听说阿里又改赛制了，哈哈。</li>
+</ol>
+<hr>
+<p>最近好累啊，简单总结一下吧。</p>
+<h2>碎碎念</h2>
+<p>这个比赛自己真的是花时间花精力去做了，虽然在s1止步，但是可以说对自己的数据分析入门算是蛮有意义的。收获的东西也蛮多，学了下python，真是一门灵活的语言（感谢o神的入门指南和规范易懂的代码，回头自己也得整理下代码，放到github上，其实之前在github上搜过，目测有10个左右的repository，==）；试着学习用了下git，每天提交的版本，不好好管理真的是会分不清最好成绩是那一版，git果然也是码农的神器；还接触了正则表达式（皮毛之皮毛），熟悉了sublime这款精美的编辑器，配上python简直高大上+爱不释手。算法方面，一开始面对这个题目，直接用了经验参数，8号的时候就到了6.8%，排名也蛮靠前，于是乎安安然，一直没去搞LR，cf等等算法，后来发现小伙伴们简直凶残，baseline 蹭蹭涨，排名蹭蹭往下掉。所以立马开始考虑转到LR，虽然之前也搞过一些分类问题，但是回头来看当时做的时候理解还是不够深的，这次索性从线性回归开始重新看了一遍Ng的视频，又加深了理解（但是还是喜欢直接调用，自己编的话太痛苦了吧），建立了逻辑回归模型，最后用纯LR线上到了6.5%吧，感觉还有提高的空间，但是调试的次数太少了。</p>
+<h2>关于比赛</h2>
+<p>大赛的赛题和数据在**<a href="http://102.alibaba.com/competition/addDiscovery/gameTopic.htm" target="_blank" rel="external">这里</a>**</p>
+<p>关于比赛入门什么的就不应该提了，毕竟能进入s2的大牛应该占大多数。但是目测s2应该还有一些规则用户。我稍微结合自己对模式识别的理解，讲讲一些思路吧，希望能对小白有一点帮助，大牛可以无视了。
+整个问题其实可以抽象成一个模式识别问题，对于任意的模式识别系统都可以套用如下的几个步骤：</p>
+<pre><code>数据采集-&gt;预处理-&gt;特征提取-&gt;特征选择-&gt;分类器选择-&gt;分类器评价-&gt;再改进分类器
+</code></pre>
+<h3>数据采集</h3>
+<p>这一步当然就不必说，阿里已经给了我们所有的数据</p>
+<h3>预处理</h3>
+<p>o神的第一发**<a href="http://oilbeater.com/2014/03/16/the-setup-of-bigdata-race/" target="_blank" rel="external">指南</a><strong>已经给出了明确的说明，如何数据处理成</strong>uid，bid，action_type,date** 其中date是离起始日4月15日的时差。然而模式识别中广义的预处理，除了将原始数据转换成可用的格式外，还包括数据清理，数据集成变换等等。比如说对于从未买过东西的Uid，从来没被买过的Bid直接删除（这对后面要说的正负样本采样很有意义），以及一些数据平滑，比如同一天点击数超过15就平滑为15，超过10次的购买平滑为10次。当然还有比较专业的平滑算法，如移动平滑，指数平滑。</p>
+<h3>特征提取</h3>
+<p>特征提取一般是整个系统的核心部分，好的特征是整个判别的关键，在图像处理领域，特征的提取一直是研究的热门。特征的提取一般是依靠个人的经验，这个例子中原始的点击数，购买数，搜藏数，以及加入购物车数，时间，很明显可以作为特征，但是单用这几个特征效果是不大好的。大家讨论的<strong>品牌热度，用户购买力,访问天数</strong>等等，都应该是不错的特征。这个阶段就需要靠你自己的购物体验，去提取出最好的特征。这样我们就可以得到一个如下的特征矩阵：</p>
+<p>---uid bid  F1....Fn  Label----
+12000  911 5   ...   0.8    0</p>
+<p>同时，为了使各个特征的本身属性对分类的影响，比如说点击数一般都是一个很大的数，而某某率则是一个0~1之间的数，这样点击数肯定会对分类有更显著的影响，所以我们必须对特征进行归一化，我这里采用的是列模归一化，具体的做法就是每个值除以它所在列的平均值。</p>
+<h3>特征选择</h3>
+<p>特征是不是越多越好呢，这可不一定。特征数量较多，其中可能存在不相关的特征，特征之间也可能存在相互依赖，容易导致如下的后果：</p>
+<p>Ø  特征个数越多，分析特征、训练模型所需的时间就越长。
+Ø  特征个数越多，容易引起“维度灾难”，模型也会越复杂，其推广能力会下降。</p>
+<p>S2里数据库更大，可玩性更高，估计大家要提前的特征也会更多，特征多的情况下，我们就要坐特征选择了。特征选择的意思就是通过算法能够得到前n个特征组合，使得分类器的error rate 最小，即这样组合最具有判别力。
+一般特征选择是利用相关系数，好的特征子集所包含的特征应该是与分类的相关度较高（相关度高），而特征之间相关度较低的（亢余度低）。
+可以使用线性相关系数(correlation coefficient) 来衡量向量之间线性相关度。</p>
+<p><img src="/2014/07/12/alibaba/阿里大数据竞赛season1 总结/1.jpg.png" alt="Image Title"></p>
+<p>还有之前论文中用到过的mutual information (MI) based method mRMR (minimal-Redundancy-Maximal-Relevance)，这个请参考【1】</p>
+<h3>分类器构造</h3>
+<p>首先在<strong>构建样本</strong>时，有个问题就是正负样本不平衡，常规的方法是重采用正样本，欠采样负样本。Bootstrap 采样是常用的重采样方法，简单的说就是又放回的抽样正样本。数据集第3月份的购买
+数（即正样本）为215，我们可以通过放回的随机抽样出1k的正样本，未购买数由20000+条，我们可以无放回的随机抽样出5k条，当然正负样本比例1：5，1：10都可以构造。
+构造完样本集，可以选择分类器了，貌似大部分选手都是选择的逻辑回归。逻辑回归的介绍请参见o神的**<a href="http://oilbeater.com/2014/04/04/the-bigdata-race-3/" target="_blank" rel="external">指南3</a>**，实现起来也是比较方便的，当然由于之前选择样本时随机性较大，一般会取1000次LR的结果取平均的参数来减少随机性的影响。
+最后就是分类器的评价了，我的训练集选择前2月的行为特征和第三个月的购买(不是所有购买，前两个月有记录且购买)作为label，这样测试集就是前三个月的行为，以及第四个月的购买行为作为label。这样就可以不停的测试本地的分类效果。</p>
+<p>最后说几点：</p>
+<ul>
+<li>模型融合会得到较好的效果，不要单纯的靠一种方法黑到底；</li>
+<li>多种模型融合的时候，要注意这两种模型尽量不要在同一维度，这样会得到较好的效果</li>
+<li>以上谈的数据集基本只能对出现过的历史行为做预测，对于没有出现的组合就无力了。如果要预测没有的组合就可以这样建矩阵：样本为所有 uid×bid,即摆出所有出现过的组合，特征还可以那样提，这样样本总数会变多，正样本数也会变多，对于未曾出现过的（uid，bid）组合其一些历史行为相关的特征可能为0，但是用户购买力，品牌热度的特征都是有的。所以也可以两类情况分开建模，没有试过，应该会有效果。当然cf之类的算法在预测未出现的组合上应该也会有不错的效果。排名靠前的港科同学们肯定也是发现了新组合这篇未开垦的处女地，预测数飙到270+。</li>
+<li>LR的结果作为特征再次进行迭代LR会怎么样，没有试过。</li>
+</ul>
+<p>[1]	H. Peng, F. Long, and C. Ding, “Feature selection based on mutual information criteria of max-dependency, max-relevance, and min-redundancy,” Pattern Analysis and Machine Intelligence, IEEE Transactions on, vol. 27, no. 8, pp. 1226-1238, 2005.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>请我喝杯咖啡吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weixin.jpg" alt="Eirc Sheng WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Eirc Sheng Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/07/10/Data structure and Algorithms/DataStructure--链表问题总结/" rel="next" title="链表问题学习大总结">
+                <i class="fa fa-chevron-left"></i> 链表问题学习大总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/08/01/RecSys/Mahout 推荐系统源码分析/" rel="prev" title="Mahout推荐系统源码分析">
+                Mahout推荐系统源码分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Eirc Sheng" />
+          <p class="site-author-name" itemprop="name">Eirc Sheng</p>
+           
+              <p class="site-description motion-element" itemprop="description">Nothing much yet</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/armysheng" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/armysheng" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/armysheng" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/armysheng" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/armysheng" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">修订：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">碎碎念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">关于比赛</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">数据采集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">特征提取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.</span> <span class="nav-text">特征选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.5.</span> <span class="nav-text">分类器构造</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eirc Sheng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2014/07/12/alibaba/阿里大数据竞赛season1 总结/';
+          this.page.identifier = '2014/07/12/alibaba/阿里大数据竞赛season1 总结/';
+          this.page.title = '阿里大数据竞赛season1 总结';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script>
+
+
+  
+
+</body>
+</html>

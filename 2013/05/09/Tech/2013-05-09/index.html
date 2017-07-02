@@ -1,0 +1,916 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器视觉," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Robust wide-baseline stereo from maximally stable extremal regions 译文 最近一直在研究MSER的区域特征提取方法，翻译了提出这种方法的文章，闲着没事发出来，有些地方翻的不好，就在这几天完善一下吧。 原文参见：这里 译文的pdf请参见：这里 摘要： 本文研究了宽基线立体问题，即在不同视角对同一对象拍摄的一组图片如何建立匹配。 同时引">
+<meta name="keywords" content="机器视觉">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Robust wide-baseline stereo from maximally stable extremal regions》 译文">
+<meta property="og:url" content="http://yoursite.com/2013/05/09/Tech/2013-05-09/index.html">
+<meta property="og:site_name" content="Eric&#39;s Blog">
+<meta property="og:description" content="Robust wide-baseline stereo from maximally stable extremal regions 译文 最近一直在研究MSER的区域特征提取方法，翻译了提出这种方法的文章，闲着没事发出来，有些地方翻的不好，就在这几天完善一下吧。 原文参见：这里 译文的pdf请参见：这里 摘要： 本文研究了宽基线立体问题，即在不同视角对同一对象拍摄的一组图片如何建立匹配。 同时引">
+<meta property="og:updated_time" content="2017-07-02T15:57:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《Robust wide-baseline stereo from maximally stable extremal regions》 译文">
+<meta name="twitter:description" content="Robust wide-baseline stereo from maximally stable extremal regions 译文 最近一直在研究MSER的区域特征提取方法，翻译了提出这种方法的文章，闲着没事发出来，有些地方翻的不好，就在这几天完善一下吧。 原文参见：这里 译文的pdf请参见：这里 摘要： 本文研究了宽基线立体问题，即在不同视角对同一对象拍摄的一组图片如何建立匹配。 同时引">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":true,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2013/05/09/Tech/2013-05-09/"/>
+
+
+
+
+
+  <title>《Robust wide-baseline stereo from maximally stable extremal regions》 译文 | Eric's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-101950574-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Eric's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">place to write</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2013/05/09/Tech/2013-05-09/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eirc Sheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eric's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《Robust wide-baseline stereo from maximally stable extremal regions》 译文</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-05-09T09:34:16+08:00">
+                2013-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2013/05/09/Tech/2013-05-09/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2013/05/09/Tech/2013-05-09/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1>Robust wide-baseline stereo from maximally stable extremal regions 译文</h1>
+<p>最近一直在研究MSER的区域特征提取方法，翻译了提出这种方法的文章，闲着没事发出来，有些地方翻的不好，就在这几天完善一下吧。
+原文参见：<a href="cmp.felk.cvut.cz/~matas/papers/matas-bmvc02.pdf"><em>这里</em></a>
+译文的pdf请参见：<a href="https://www.dropbox.com/s/9p274w9sep2yvp4/%E5%88%A9%E7%94%A8MSER%E8%BF%9B%E8%A1%8C%E9%B2%81%E6%A3%92%E7%9A%84%E5%AE%BD%E5%9F%BA%E7%BA%BF%E5%8C%B9%E9%85%8D.pdf" target="_blank" rel="external"><em>这里</em></a></p>
+<h3>摘要：</h3>
+<p>本文研究了宽基线立体问题，即在不同视角对同一对象拍摄的一组图片如何建立匹配。
+同时引入了一种新的图像元素集到图像匹配中，即所谓的极值区域。极值区域拥有非常有用的一些特性：这个集合在图像原点坐标的连续变换和图像强度的单调变换的情况下都是封闭的。并提出了一种针对仿射不变的极值区域稳定子集的高效（接近线性复杂度）和快速的检测算法（接近帧频），即最大稳定极值区域法(MSER)。
+进而本文提出了一种新的鲁棒的建立试探性匹配的相似性测量方法。该方法的鲁棒性保证了多测量区域（这些区域都由极值区域的不变结构获得）的仿射不变性。其中一些区域远大于MSER区域，因此更加有辨识度，可以用于建立试探性匹配。
+我们通过对室内和室外的场景所获取的图片组进行宽基带试验，选择了多测量区域，验证了MSERs的高实用性和算法的鲁棒性。在测试过程实现了尺度强烈变化（3.5X），光照条件变化，平面外旋转，闭塞情况，局部非均值尺度变换和拍摄视角的3D变换。最终在核面几何上获得了良好的估计（极线上的匹配点的平均距离低于像元间距离的0.09）。</p>
+<h3>关键词：宽基线匹配；显著边缘；最大稳定极值区域；MSER；鲁棒度量</h3>
+<h2>1.	引言</h2>
+<pre><code>在全自动的三维场景重建的过程中，用不同的摄像机在不同的光照条件下在任意的视角对同一个场景拍摄得到的两张照片进行比对，来寻找可靠的特征匹配是个非常困难又关键的步骤。这个过程至关重要的问题是对于已经寻找到匹配的元素的选择。在宽基线成像过程中，局部图像变形不能够通过变换或者旋转变化被现实的近似，因此需要一个全仿射模型。由于在欧式几何中一些固定的形状比如说长方形或者圆等，他们的形状经过仿射变换后将改变。因此特征匹配不能够通过比较这些固定形状区域的边缘来获得。
+大多数图像都有可以都会有一些一些区域可以检测出高重复性，因为这些区域有一些区别，不变性和稳定的特性。在本文中，我们把这些通常是数据依赖的区域称为显著区域（DRs），作为将要被放入到立体匹配或者目标识别的匹配当中的元素。
+</code></pre>
+<p>本文的第一件事是介绍了一个新的显著区域集合，即所谓的极值区域，极值区域拥有两个非常好的特性。一是在一对一图像坐标的连续变换中，集合是封闭的，二是在图像强度单调变换时，集合也是封闭的。并提出了一种针对仿射不变的极值区域稳定子集的高效（接近线性复杂度）和快速的检测算法（接近帧频），即最大稳定极值区域法(MSER)。对于某一特定累心的显著区域，它的鲁棒性依赖于图像数据，而且需要经过试验来测试。第四章将介绍了我们对于室内和室外的场景图进行的宽基带试验，试验的成功说明了MSERs非常有潜力。
+在宽基线匹配中，对于一些为数不多的潜在匹配点，可靠的提取是一个匹配成功的必要但是不充分的条件。当有两个显著区域集市，匹配问题可以归结为匹配空间的搜索。形成一幅完整的限制区域两偶图，寻找匹配点的全局一致性子集显然对于计算来说是轻而易举的。最近的该领域的研究提出了一整套具有共同结构的立体匹配和目标识别算法。这些方法利用了局部的不变特征子，来减少试探性特征点的数量。这个步骤重要的设计决策包括：(1) 测量区域的选择，即在选在图像的哪部分进行不变性计算。(2)根据不变性描述如何选取试探匹配点和（3）不变量的选择。
+通常，作为测量区域和试探匹配的特征区域或者它们的缩放版本，是通过利用马氏距离比较不变性后得到的。本文所做的第二件事是提出了一种鲁棒的相似性测量方法，来建立试探性的匹配，替代了原来的马氏距离测量方法。这种相似性测量方法允许我们可以使用一系列测量区域的不变性，有些区域甚至远大于相关的显著区域，非常具有鲁棒性。大区域的测量要么是非常容易识别（因为两个图片的大区域完全相同时非常不可能的）要么是完全错误的（比如如果区域的方向和深度不连续）。前者帮助建立了可靠的试探性匹配而由于该方法具有较强的鲁棒性，后者的影响很小。利用大多数的试探性匹配来寻找极几何一致性是 这整个宽基线算法的最后一步。就目前看来，RANSAC法是最被广泛采用的方法。而我们提出的算法采取了新奇的不走来增加匹配区域的数量，以及极几何的精度。为了更多的获取到区域匹配，依照试探性匹配进行了粗略的极几何预估。这样约束了极线的位置，预估了匹配区域之间的仿射映像。这个映像使得相关性过滤掉了不匹配。这个步骤显著的增加了极几何估计的精度。最后的平均内层窗极线间距离小于0.1像素。详情参见第三章。
+相关工作：自从Schmid和Mohr发表的有影响的论文依赖，许多图像匹配和宽基线算法被提了出来。许多通常使用Harris特征点来做为显著区域。Tell和Carlsson提出了一种方法将Harris特征点 用线段与测量区域相连。这个测量因为尺度不变傅里叶系数而非常有特点Harris特征点检测法在一定范围的尺度内是稳定的，但是没有定义尺度或者仿射不变的测量区域。
+本文余下的文章的组织结构是这样的。第二章定义了MSER，描述了MSER的检测算法。第三章给出新颖的鲁棒检测算法的细节。第四章这介绍了用未校准的摄像机拍摄的室内室外的图片的实验结果，第五种对实验进行了总结，在复述了本文所做的贡献。</p>
+<p>##	MSER
+这章我们介绍了一种在宽基线匹配中非常有用的新的图像元素，及最大稳定机制区域。这些区域是单独通过区域内合外围边界的强度函数的极值特性定义的。</p>
+<blockquote>
+<p>MSER的可以这样来解释：对于一副灰度图像I假设所有可能的阈值进行阈值化。我们认为像素点低于阈值的为黑色，高于或者等于阈值的为白色。如果我们把阈值为t的阈值化后的图像记作It并且以动画的形式一帧帧播放。那么我们第一眼看到的将是一张全白图像。然后对应于局部强度最小值的黑点将逐渐出现并且增长。在某一时刻，对应于两个局部灰度极小值的区域将会合并。最终，最末的一张图片将变成全黑。所有这些动画的帧中的连接元件集合就是所有极大区域的集合；极小值区域的获得方法则是将图像灰度进行翻转后，做同样的过程。MSER概念的正式定义以及必要的辅助定义见表1
+在许多图片中，特定区域的大范围局部二值化是稳定的。这些区域因为他们有如下的特性使得我们对它比较感兴趣：</p>
+</blockquote>
+<ul>
+<li>图像强度仿射不变</li>
+<li>邻域的方差保持（连续）在D-〉D的转换中</li>
+<li>稳定，因为只有在一系列阈值内框架几乎没有变化的极值区域被选了出来。</li>
+<li>多尺度检测，因为整个过程中没有进行平滑，所以被检测的区域框架非常完整，非常大</li>
+<li>这些所有极值区域的的集合的算法复杂度是O（n log log n）其中n是图像的像点个数。</li>
+</ul>
+<p>##	提出的鲁棒宽基线算法
+显著区域检测。第一步，检测显著区域，通过对于灰度图像的计算我们获得MSER+
+在通过对其反转图像的计算获得MSER-。
+	测量区域。如果构造过程是仿射协变的，每个显著区域都要和任意大小的测量区域相联系。更小的测量区域更可能满足平面条件，同时在深度和方向上不会出现不连续。另一方面，小区域更加没有辨识力，也就是说，他们更加不可能唯一。增加测量区域的大小又会有把两幅图片中完全不同的部分背景包括进去。所以显而易见。最优的测量区域是场景内来确定的，而且每个显著区域的测量区域是不同的。在参考文献[21]中Tuyetlaars 和Van Cool将椭圆的显著区域面积增加了一倍来增加辨别力。同时能够保证区域跨过对象边界的可能性在可接受范围内。
+在我们的算法中。我们选用了多尺度的策略区域，包括1倍、1.5倍、2倍、3倍的DR多边形。因为我们的方法是非常的鲁邦，我们增加区域面积获得了更高的分辨力，同时没有被显著区域的杂乱或者不平面而严重的影响，所以这是我们的算法的新奇之处。一般来说，在测量区域匹配中使用的是马氏距离。然而，这种测法的不鲁棒性是的，一个单独的错误测量就会使整个匹配过程失败。
+不变性描述。在所有试验中，在对显著区域的协方差矩阵应用了对角化变换后，都使用了基于复数矩的方向不变性。同时这还是一个仿射不变的过程。由于方向和仿射的不变性相结合，使得该方法在彩色模型下也有相似的结果。由于本身的原因，仿射不变在大尺寸变化的问题下不能够成功。
+鲁棒匹配。在几近平面的场景用稳定的不变描述来进行的测量称作是“好的测量”。不稳定、在非平面上计算的或者在深度和方向上不连续的策略被称作“差的测量”。
+	鲁棒相似点是专业计算的。我们把区域A的测量记作MAi .对于另一张图片上离MAi最近的k个区域B1,…,Bk，对应 的测量记作MB1i,…MBki. 我们对B1,…,Bk做一个投票，看谁和A的匹配性最强。在所有测量完成后再对投票进行求和。
+	投票最多的显著区域将被用来做试探性匹配。实验中，我们发现把k设成区域数量的1%时，会有较好的实验结果。而去预定数量一般都在100~1000的范围内，因此，k的值一般都在1到10之间。在当前的实现中，每个尺寸都有216个不变量。也就是说，一共有864次测量。216转动不变量在参考文献8中有详细描述，4个尺度的选择是通过试差法获得的，是运行速度和性能的一个折中。
+	由于每幅图像的不变量的权重以及对应的噪声都不一样，改过程成功的可能性的概率预测是比较复杂的。所以我们只能假设，错误的测量产生的投票是随即的，而不是共谋产生高的分数，好的测量更可能为正确的匹配投票。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>请我喝杯咖啡吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weixin.jpg" alt="Eirc Sheng WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Eirc Sheng Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器视觉/" rel="tag"># 机器视觉</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/05/07/life/2013-05-07/" rel="next" title="第一篇日志，看看自己能坚持写多久">
+                <i class="fa fa-chevron-left"></i> 第一篇日志，看看自己能坚持写多久
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/05/09/Tech/MSER笔记/" rel="prev" title="MSER笔记">
+                MSER笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Eirc Sheng" />
+          <p class="site-author-name" itemprop="name">Eirc Sheng</p>
+           
+              <p class="site-description motion-element" itemprop="description">Nothing much yet</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/armysheng" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/armysheng" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/armysheng" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/armysheng" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/armysheng" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Robust wide-baseline stereo from maximally stable extremal regions 译文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">摘要：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.2.</span> <span class="nav-text">关键词：宽基线匹配；显著边缘；最大稳定极值区域；MSER；鲁棒度量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">1.	引言</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eirc Sheng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2013/05/09/Tech/2013-05-09/';
+          this.page.identifier = '2013/05/09/Tech/2013-05-09/';
+          this.page.title = '《Robust wide-baseline stereo from maximally stable extremal regions》 译文';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script>
+
+
+  
+
+</body>
+</html>

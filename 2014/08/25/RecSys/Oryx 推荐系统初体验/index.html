@@ -1,0 +1,993 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="blog, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Oryx 推荐系统初体验 Summary Oryx 的前身叫 Myrrix，后来被 Cloudera 收购改了这个名字。值得一提的是 Oryx 的维护者就是 Mahout 的主要贡献者——Sean Owen Oryx开源项目旨在提供实时的大规模机器学习/预测分析基础框架目前它实现了一列工程应用常用到的机器学习算法：协同过滤，分类/回归以及聚类。Oryx 通过Apache hadoop来实现对大规模">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oryx 推荐系统初体验">
+<meta property="og:url" content="http://yoursite.com/2014/08/25/RecSys/Oryx 推荐系统初体验/index.html">
+<meta property="og:site_name" content="Eric&#39;s Blog">
+<meta property="og:description" content="Oryx 推荐系统初体验 Summary Oryx 的前身叫 Myrrix，后来被 Cloudera 收购改了这个名字。值得一提的是 Oryx 的维护者就是 Mahout 的主要贡献者——Sean Owen Oryx开源项目旨在提供实时的大规模机器学习/预测分析基础框架目前它实现了一列工程应用常用到的机器学习算法：协同过滤，分类/回归以及聚类。Oryx 通过Apache hadoop来实现对大规模">
+<meta property="og:image" content="https://camo.githubusercontent.com/6f77df14aea479fb653ced96298d0d59bd8a6d3f/68747470733a2f2f7261772e6769746875622e636f6d2f77696b692f636c6f75646572612f6f7279782f4f7279784c6f676f536d616c6c2e706e67">
+<meta property="og:image" content="http://yoursite.com/2014/08/25/RecSys/Oryx%20推荐系统初体验/2a.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/25/RecSys/Oryx%20推荐系统初体验/3a.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/25/RecSys/Oryx%20推荐系统初体验/4a.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/25/RecSys/Oryx%20推荐系统初体验/5a.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/25/RecSys/Oryx%20推荐系统初体验/6a.png">
+<meta property="og:image" content="http://yoursite.com/2014/08/25/RecSys/Oryx%20推荐系统初体验/7a.png">
+<meta property="og:updated_time" content="2017-07-02T15:17:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Oryx 推荐系统初体验">
+<meta name="twitter:description" content="Oryx 推荐系统初体验 Summary Oryx 的前身叫 Myrrix，后来被 Cloudera 收购改了这个名字。值得一提的是 Oryx 的维护者就是 Mahout 的主要贡献者——Sean Owen Oryx开源项目旨在提供实时的大规模机器学习/预测分析基础框架目前它实现了一列工程应用常用到的机器学习算法：协同过滤，分类/回归以及聚类。Oryx 通过Apache hadoop来实现对大规模">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/6f77df14aea479fb653ced96298d0d59bd8a6d3f/68747470733a2f2f7261772e6769746875622e636f6d2f77696b692f636c6f75646572612f6f7279782f4f7279784c6f676f536d616c6c2e706e67">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":true,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2014/08/25/RecSys/Oryx 推荐系统初体验/"/>
+
+
+
+
+
+  <title>Oryx 推荐系统初体验 | Eric's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-101950574-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Eric's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">place to write</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/08/25/RecSys/Oryx 推荐系统初体验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eirc Sheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eric's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Oryx 推荐系统初体验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-08-25T00:00:00+08:00">
+                2014-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2014/08/25/RecSys/Oryx 推荐系统初体验/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2014/08/25/RecSys/Oryx 推荐系统初体验/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1>Oryx 推荐系统初体验</h1>
+<h2>Summary</h2>
+<p>Oryx 的前身叫 Myrrix，后来被 Cloudera 收购改了这个名字。值得一提的是 Oryx 的维护者就是 Mahout 的主要贡献者——<a href="https://github.com/srowen" target="_blank" rel="external">Sean Owen</a>
+Oryx开源项目旨在提供实时的大规模机器学习/预测分析基础框架目前它实现了一列工程应用常用到的机器学习算法：协同过滤，分类/回归以及聚类。Oryx 通过Apache hadoop来实现对大规模的数据流进行建模。同时可以通过实时的REST API来对建好的模型进行查询，并且有也可以通过API将新数据输入到模型中进行训练。
+<img src="https://camo.githubusercontent.com/6f77df14aea479fb653ced96298d0d59bd8a6d3f/68747470733a2f2f7261772e6769746875622e636f6d2f77696b692f636c6f75646572612f6f7279782f4f7279784c6f676f536d616c6c2e706e67" alt="oryx_logo">
+Oryx 具有以下特点：</p>
+<ul>
+<li>Hadoop 版本跟着 CDH 升级</li>
+<li>将推荐引擎分为 Serving Layer 和 Computing Layer，隔离出 Serving Layer 让扩展变得很容易</li>
+<li>同时支持推荐、聚类、分类的机器学习</li>
+<li>数据引入了 Generation 的概念，提供了很好的增量补充数据的支持</li>
+</ul>
+<p>目前Oryx release的版本是Oryx1.0，而<a href="https://github.com/OryxProject/oryx" target="_blank" rel="external">Oryx2.0</a>也正在孵化当中。相较于1.0版本，Oryx2.0更好的实现了<a href="http://lambda-architecture.net/" target="_blank" rel="external">lambda架构</a>，使得各个层之间可复用性更强。实现了比1更多的机器学习算法（1.0只实现了，ALS协同过滤，随机森林，以及K-means++算法）同时2.0版本还引入更新的Spark和Streaming技术。</p>
+<h2>安装Oryx</h2>
+<p>Oryx 的安装需要运行环境，以及Hadoop2.3或以后的运行环境，这里我们悬着Cloudera公司的CDH5发行的hadoop版本，也是官方推荐的版本。CDH5的安装，请参见<a href="http://youngfor.me/post/recsys/an-zhuang-cdh5-step-by-step" target="_blank" rel="external">上一篇文章</a>。
+Oryx的Server层和Computation层都是独立的Jar包<code>oryx-serving-x.y.z.jar</code>和<code>oryx-computation-x.y.z.jar</code>，只需要用<code>java</code>命令单独的运行这两个Jar包即可。需要注意的是这里的两个jar包不是在<code>hadoop jar</code>命令中运行，只是在长期跑的服务器程序。</p>
+<h2>跑Oryx例子stepBystep</h2>
+<p><a href="https://github.com/cloudera/oryx#examples" target="_blank" rel="external">Orxy官方的项目</a>提供了3个机器学习的例子，分别是用协同过滤做推荐，用随机森林做分类，用K-means++做聚类。在运行这些例子之前我们先要做一下准备工作。</p>
+<ol>
+<li>已经建立了CDH5 或者Hadoop2.0+的环境，如果没有请参考<a href="">这里</a></li>
+<li>运行<code>git -clone https://github.com/cloudera/oryx.git</code>，将项目下载到本地的机子上并用<code>unzip</code>命令解压，并cd到该目录下。
+这样我们就准备好了，开始跑第一个例子吧。</li>
+</ol>
+<h3>例1.建立一个简单的推荐系统</h3>
+<p>第一个例子采用了交替最小二乘的算法ALS (alternating least squares)是对<code>audioscrobbler</code>数据库（last.fm的音乐数据）的一些样本建立推荐系统。为了建立这个系统，ALS-Modle要求的输入的原始数据格式必须是<code>user</code>,<code>item</code>或者是<code>user</code>,<code>item</code>,<code>strength</code>。每列的数据必须用<code>,</code>隔开，前两列可以是任何数据类型（数字和非数字都可以），最后一列是可选的，但必须是数字类型。
+我们看一眼<a href="http://raw.github.com/wiki/cloudera/oryx/datasets/audioscrobbler-sample.csv.gz" target="_blank" rel="external">audioscrobbler</a>数据库的数据。</p>
+<pre><code>1000002,&quot;A Perfect Circle&quot;,144
+1000002,&quot;Aerosmith&quot;,314
+1000002,&quot;Metallica&quot;,329
+1000002,&quot;Counting Crows&quot;,157
+1000002,&quot;Dire Straits&quot;,125
+1000002,&quot;Free&quot;,155
+1000002,&quot;Guns N' Roses&quot;,236
+1000002,&quot;Goo Goo Dolls&quot;,119
+1000002,&quot;Michael Jackson&quot;,104
+1000002,&quot;Barenaked Ladies&quot;,115
+</code></pre>
+<p>第一列为用户ID，第二列为歌手的名字，第三列为喜爱度。
+正常情况下会把数据放在hadoop下跑，我们可以通过下面的指令把下载下来的数据库存放到hdfs上：</p>
+<pre><code>hadoop fs -mkdir -p /user/oryx/example/00000/inbound
+hadoop fs -copyFromLocal [data file] /user/oryx/example/00000/inbound/
+</code></pre>
+<p>这里我们只在本地做一下实验，将数据拷贝到<code>/tmp/oryx/example</code>:</p>
+<pre><code>mkdir -p /tmp/oryx/example1/00000/inbound
+cp audioscrobbler-sample.csv.gz /tmp/oryx/example/00000/inbound/	
+</code></pre>
+<p>为了运行Serving层和computation层，我们必须定义一个配置文件，来告诉程序如何运行。配置文件详细的说明可以在<code>common/src/main/resources/reference.conf</code>下查看。我们这的配置例子如下：</p>
+<pre><code>model=${als-model}
+model.instance-dir=/tmp/oryx/example1
+model.local-computation=true
+model.local-data=true
+model.features=25
+model.lambda=0.065	
+</code></pre>
+<p>我们可以用<code>vim oryx-example1.conf</code>新建一个配置文件将内容填入。
+接着我们便可以运行计算层和服务层了。可以看到model类型为ALS-model，instance-dir，设定了存放数据的地址。</p>
+<pre><code>java -Dconfig.file=oryx-example1.conf -jar computation/target/oryx-computation-1.0.1-SNAPSHOT.jar
+</code></pre>
+<p>我们可以看到程序的运行日志，看到从读取数据到不停跌代进行矩阵分解的整个过程
+<img src="/2014/08/25/RecSys/Oryx 推荐系统初体验/2a.png" alt="log">
+接着我们运行serving层：</p>
+<pre><code>sudo java -Dconfig.file=oryx-example1.conf -jar serving/target/oryx-serving-1.0.1-SNAPSHOT.jar
+</code></pre>
+<p>serving 层开启了Tomcat网络服务，并且加载了模型中的元素。日志如下：
+<img src="/2014/08/25/RecSys/Oryx 推荐系统初体验/3a.png" alt="log">
+我们还可以在浏览器中查看运行的结果，在浏览器上输入<code>http:\\localhost</code>，我们便可以显示的看到所有oryx提供的API。
+<img src="/2014/08/25/RecSys/Oryx 推荐系统初体验/4a.png" alt="servinglayer">
+包括对某一用户做推荐，物品间的相似度，用户对某个item的偏好，最受欢迎Item等等，甚至可以在原来数据的基础上添加数据再对这些数据进行推荐，非常方便。
+在浏览器中输入<code>http:\\localhost:8080</code>可以查看计算时候的资源消耗等等一系列属性，由于我们是在本地跑，所以上面没有数据显示。
+<img src="/2014/08/25/RecSys/Oryx 推荐系统初体验/5a.png" alt="computinglayer"></p>
+<p>至此我们的第一个实验就做完了。</p>
+<h3>例2.利用随机森林算法做分类</h3>
+<p>这里随机森林算法是机器学习中常用的算法，有关它的介绍可以看<a href="http://www.zilhua.com/629.html" target="_blank" rel="external">这里</a>。例子二对某一地区的森林覆盖类型做分类的例子。数据集采用了<a href="http://archive.ics.uci.edu/ml/machine-learning-databases/covtype/" target="_blank" rel="external">UCL repository</a>。该数据集记录了581012个样本地区的54个特征，包括海拔，坡度，到最近水域的垂直距离和水平距离，土壤类型等等。更详细的描述可以参见<code>covtype.info</code>文件。
+它的一条样本是这个样子的：
+	2596,51,3,258,0,510,221,232,148,6279,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,5
+跟例子1类似，我们同意需要配置文件<code>orxy-example2.conf</code>，在里面输入：</p>
+<pre><code>model=${rdf-model}
+model.instance-dir=/tmp/oryx/example2
+model.local-computation=true
+model.local-data=true
+inbound.numeric-columns=[0,1,2,3,4,5,6,7,8,9]
+inbound.target-column=54
+inbound.column-names=[&quot;Elevation&quot;, &quot;Aspect&quot;, &quot;Slope&quot;, &quot;Horizontal_Distance_To_Hydrology&quot;,
+  &quot;Vertical_Distance_To_Hydrology&quot;, &quot;Horizontal_Distance_To_Roadways&quot;, &quot;Hillshade_9am&quot;, &quot;Hillshade_Noon&quot;,
+  &quot;Hillshade_3pm&quot;, &quot;Horizontal_Distance_To_Fire_Points&quot;, &quot;Wilderness_Area1&quot;, &quot;Wilderness_Area2&quot;,
+  &quot;Wilderness_Area3&quot;, &quot;Wilderness_Area4&quot;, &quot;Soil_Type1&quot;, &quot;Soil_Type2&quot;, &quot;Soil_Type3&quot;, &quot;Soil_Type4&quot;,
+  &quot;Soil_Type5&quot;, &quot;Soil_Type6&quot;, &quot;Soil_Type7&quot;, &quot;Soil_Type8&quot;, &quot;Soil_Type9&quot;, &quot;Soil_Type10&quot;, &quot;Soil_Type11&quot;,
+  &quot;Soil_Type12&quot;, &quot;Soil_Type13&quot;, &quot;Soil_Type14&quot;, &quot;Soil_Type15&quot;, &quot;Soil_Type16&quot;, &quot;Soil_Type17&quot;, &quot;Soil_Type18&quot;,
+  &quot;Soil_Type19&quot;, &quot;Soil_Type20&quot;, &quot;Soil_Type21&quot;, &quot;Soil_Type22&quot;, &quot;Soil_Type23&quot;, &quot;Soil_Type24&quot;, &quot;Soil_Type25&quot;,
+  &quot;Soil_Type26&quot;, &quot;Soil_Type27&quot;, &quot;Soil_Type28&quot;, &quot;Soil_Type29&quot;, &quot;Soil_Type30&quot;, &quot;Soil_Type31&quot;, &quot;Soil_Type32&quot;,
+  &quot;Soil_Type33&quot;, &quot;Soil_Type34&quot;, &quot;Soil_Type35&quot;, &quot;Soil_Type36&quot;, &quot;Soil_Type37&quot;, &quot;Soil_Type38&quot;, &quot;Soil_Type39&quot;,
+  &quot;Soil_Type40&quot;, &quot;Cover_Type&quot;]
+</code></pre>
+<p>这里模型选择是rdf-model，同意定义了数据的一些格式0~9为数字，label列是滴54列，以及各个列的名名称。
+然后我们把下载到的文件拷贝的<code>/tmp/oryx/example2/00000/inbound</code>下，按上例的方法运行serving层和computation层。只是配置文件做改变。</p>
+<pre><code>java -Dconfig.file=oryx-example2.conf -jar 
+computation/target/oryx-computation-1.0.1-SNAPSHOT.jar
+
+sudo java -Dconfig.file=oryx-example2.conf -jar serving/target/oryx-serving-1.0.1-SNAPSHOT.jar
+</code></pre>
+<p>计算层的时间会比较长，需要较长时间等待。相信在集群上跑回好很多。
+<img src="/2014/08/25/RecSys/Oryx 推荐系统初体验/6a.png" alt="servingLayer">
+我们可以在<code>/classify</code>栏里手动的输入一个样本：</p>
+<pre><code>2500,51,3,258,0,510,221,232,148,6279,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,
+</code></pre>
+<p>进行判别，得到分类结果。</p>
+<h3>例3.使用K-means++算法聚类</h3>
+<p>oryx的聚类算法采用了<a href="http://arxiv.org/abs/1203.6402" target="_blank" rel="external">Scalable K-Means++算法</a>。数据集使用<a href="http://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html" target="_blank" rel="external">KDD Cup 1999的数据</a>，kddcup.data_10_percent.gz A 10% subset. (2.1M; 75M Uncompressed)。
+由于内存较小，在用-Xmx 1024m分配了1G内存后，运行过程还是出现了OutofMemoryError。所以在本地单机没法进行，serve层开放的API如下：
+<img src="/2014/08/25/RecSys/Oryx 推荐系统初体验/7a.png" alt="servingLayer">
+可以使用<code>/assign</code>对新样本进行聚类。</p>
+<pre><code>0,tcp,http,SF,259,14420,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0.00,0.00,0.00,0.00,1.00,0.00,0.00,11,97,1.00,0.00,0.09,0.08,0.00,0.00,0.00,0.00
+</code></pre>
+<h2>总结</h2>
+<p>至此我们就初步体验了oryx这个开源的大规模机器学习框架，虽然目前oryx实现的算法比较少，但是可以看到他的lamda架构，提供Rest API，generation概念，以及对Hadoop乃至Spark的适配，必将使得它在未来推荐系统领域占领一席之地。</p>
+<h2>参考</h2>
+<p><a href="https://github.com/cloudera/oryx" target="_blank" rel="external">oryx官方github</a>
+<a href="http://liangshan.me/blog/2014/06/08/build-a-scalable-recommendation-system/" target="_blank" rel="external">build-a-scalable-recommendation-system</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>请我喝杯咖啡吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weixin.jpg" alt="Eirc Sheng WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Eirc Sheng Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/14/RecSys/安装CDH5 step by step/" rel="next" title="安装CDH5 step by step">
+                <i class="fa fa-chevron-left"></i> 安装CDH5 step by step
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/08/27/Data structure and Algorithms/Leetcode 刷题记之Median of Two Sorted Arrays Problem/" rel="prev" title="Leetcode 刷题记之Median of Two Sorted Arrays">
+                Leetcode 刷题记之Median of Two Sorted Arrays <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Eirc Sheng" />
+          <p class="site-author-name" itemprop="name">Eirc Sheng</p>
+           
+              <p class="site-description motion-element" itemprop="description">Nothing much yet</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/armysheng" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/armysheng" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/armysheng" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/armysheng" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/armysheng" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Oryx 推荐系统初体验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">安装Oryx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">跑Oryx例子stepBystep</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.1.</span> <span class="nav-text">例1.建立一个简单的推荐系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.2.</span> <span class="nav-text">例2.利用随机森林算法做分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.3.</span> <span class="nav-text">例3.使用K-means++算法聚类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eirc Sheng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2014/08/25/RecSys/Oryx 推荐系统初体验/';
+          this.page.identifier = '2014/08/25/RecSys/Oryx 推荐系统初体验/';
+          this.page.title = 'Oryx 推荐系统初体验';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script>
+
+
+  
+
+</body>
+</html>
