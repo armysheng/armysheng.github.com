@@ -413,16 +413,46 @@
       
         
           
+            <blockquote>
+<p>如果你也不是太理解Hibernate 什么时候要save，什么时候要用update，merge，什么时候可以直接set一下字段就能够将实体类存储到数据库中，这篇文章或许能解开你的迷雾。本文翻译自<a href="https://vladmihalcea.com/2014/07/30/a-beginners-guide-to-jpahibernate-entity-state-transitions/" target="_blank" rel="external">《A beginner’s guide to JPA/Hibernate entity state transitions
+》</a></p>
+</blockquote>
+<h2>引言</h2>
+<p>Hibernate帮助开发者的将SQL语句的转变成了实体类的状态转变。一旦Hibernate存储了一个实体类，它的所有变化都将会自动传播到数据库中。
+管理领域模型实体类以及他们的关联关系比写SQL语句管理SQL语句来说简单多了。如果没有Hibernate这样的ORM工具，增加一个字段会需要改写所有关联的 <strong>INSERT/UPDATE</strong>语句。
+但是Hibernate也并不是银弹。Hibernate也不能让我们完全不关心所最终执行的SQL语句。完全的掌握Hibernate也不是我们所想的那么简单直接，我们有时候也需要亲自检查所产生的SQL语句。</p>
+<h2>实体类状态</h2>
+<p>如之前所说，Hibernate监管了当前存储着的实体类。但是在一个实体类要被存储下来，我们需要知道它处于什么状态。
+首先我们必须定义所有实体类状态:</p>
+<h3>New(Transient)瞬态</h3>
+<p>一个新创建的对象，在还没有进入<em>Hibernate Session</em>(也即持久化上下文)，同时没有域数据库表中的行对应起来时的状态称为瞬态。
+想要对处于这个状态的对象进行持久化，我们需要明确的执行<em>EnittyManager</em>的persist或者使用是实体类持久化的传播机制（CasCade）。</p>
+<h3>Persistent（Managed）持久态</h3>
+<p>持久态的实体类已经和数据表中的行关联起来，并且被当前的持久化上下文所管理。所有该实体类的变化都会被检测到然后在事务flush的时候，将这些变化存储到数据库中。有了Hibernate，我们就不在需要执行增删改查的SQL语句。Hibernate使用了Transactional write-behind的工作方式。在当前事务flush时间的最后一个将实体类的改变同步到数据库中。</p>
+<h3>detached 分离态</h3>
+<p>一旦当前的跑着的事务关闭，所有当前状态下管理着的实体类就编程了分离太。后续的实体类中的变化将不会被检测到，并且也不会和自动和数据库去同步。
+如果想在一个当前事务关联一个将分离态的实体类，你可以选着下面的几种方式：</p>
+<ul>
+<li>Reattaching（重新关联）
+Hibernate支持通过Session的update方法来重新关联实体类。</li>
+<li>Merging
+合并操作会将分离态的实体类（源头）拷贝一份给到持久太的实体类（目标）。如果持久化的实体类在当前事务中不存在，那么就回去数据库中查一份。
+但是分类态的实体类（源头人就会保持分离态）。</li>
+</ul>
+<h3>removed 删除态</h3>
+<p>尽管JPA需要只有持久态的实体类才能够被删除，hibernate通用可以通过Session的delete方法删除分离态的实体类。</p>
+<h2>实体类状态转换</h2>
+<p>想要改变一个实体类的状态，我们需要使用下面之中的实体类管理接口：</p>
+<ul>
+<li>EntityManager</li>
+</ul>
+<p><img src="/2016/12/22/Tech/Hibernate  and JPA 实体类状态转变入门/23-03-04.jpg" alt="">
+*Session
+<img src="/2016/12/22/Tech/Hibernate  and JPA 实体类状态转变入门/23-02-46.jpg" alt=""></p>
+<h2>总结</h2>
+<p>以上这些接口是我们在实体类状态转变时候需要明确调用的，这些调用通知hibernate在事务刷新的时候将这些变换转换成SQL语句，最终去操作数据库。</p>
+
           
-如果你也不是太理解Hibernate 什么时候要save，什么时候要用update，merge，什么时候可以直接set一下字段就能够将实体类存储到数据库中，这篇文章或许能解开你的迷雾。本文翻译自《A beginner’s guide to JPA/Hibernate entity state tr
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/12/22/Tech/Hibernate  and JPA 实体类状态转变入门/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -574,22 +604,77 @@
       
         
           
-          观察者模式
+            <h1>观察者模式</h1>
+<blockquote>
+<p>2016-12-8 11:08:06</p>
+</blockquote>
+<p><img src="/2016/12/06/Tech/设计模式-观察者模式/11-02-18.jpg" alt=""></p>
+<p>观察者模式又叫发布-订阅模式，它定义了一种一对多的依赖关系，多个观察者对象可同时监听某一主题对象，当该主题对象状态发生变化时，相应的所有观察者对象都可收到通知。这是一个非常好理解的模式，简单介绍如下：</p>
+<h2>场景</h2>
+<p>假设我们有这样一个需求，我们的新闻博客写的不错，有几个读者向订阅我们的新闻。这样以便于我们的博客一有新闻更新，就可以推送到用户了。简单的我们可以这么写</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DisgraceNewsPublisher</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">newsPublished</span><span class="params">()</span> </span>&#123;</div><div class="line">        News news = getLatestNews();</div><div class="line">        jack.update(news);</div><div class="line">        amy.update(news);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但是我们发现如果我们的用户<code>Amy</code>对新闻内容不满意，想退订新闻的话，我们的发布新闻代码得更改，同时我们的新用户<code>Eric</code>想要订阅，代码又得重新改，这显然违背了开闭原则。这样做的问题有：</p>
+<ul>
+<li>我们是针对具体实现编程，而非针对接口。</li>
+<li>对于每个新的用户，我们都得修改代码。</li>
+<li>我们无法再运行时动态地增加（或删除）用户。</li>
+<li>用户没有实现一个公共的接口。所有用户都是update方法</li>
+<li>我们尚未封装改变的部分。</li>
+</ul>
+<h2>观察者模式</h2>
+<p>这个时候我们的观察者模式就登场了，观察者模式定义了对象之间的一对多依赖，这样一来，当一个对象改变状态时，它的所有依赖者都会受到通知并自动更新。观察者模式一般会有如下角色：</p>
+<p><strong>抽象主题角色</strong>：把所有对观察者对象的引用保存在一个集合中，每个抽象主题角色都可以有任意数量的观察者。抽象主题提供一个接口，可以增加和删除观察者角色。一般用一个抽象类和接口来实现。</p>
+<p><strong>抽象观察者角色</strong>：为所有具体的观察者定义一个接口，在得到主题的通知时更新自己。</p>
+<p><strong>具体主题角色</strong>：在具体主题内部状态改变时，给所有登记过的观察者发出通知。具体主题角色通常用一个子类实现。</p>
+<p><strong>具体观察者角色</strong>：该角色实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态相协调。通常用一个子类实现。如果需要，具体观察者角色可以保存一个指向具体主题角色的引用。
+它的类图如下：</p>
+<p><img src="/2016/12/06/Tech/设计模式-观察者模式/10-57-52.jpg" alt=""></p>
+<h3>松耦合的威力</h3>
+<p>观察者模式实现了松耦合，就如上文的例子，新闻的发布者和用户之间会有交互，但他们不需要清楚彼此的细节。
+当两个对象之间松耦合，他们依然可以互交，但是不太清楚彼此的细节。
+观察者模式提供了一种对象设计，让主题和观察者之间<strong>松耦合</strong>。
+关于观察者的一切，主题只知道观察者实现了某个接口（也就是Observer接口）。主题不需要知道观察者的具体类是谁，做了些什么或者其他任何细节。任何时候我们都可以增加新的观察者。因为主题唯一依赖的东西是一个实现Observer接口的对象列表，所以我们可以<strong>随时增加观察者</strong>。事实上，在运行时我们可以用心的观察者取代现有的观察者，主题不会受到任何影响。同样的，也可以在<strong>任何时候删除某些观察者</strong>。有新类型的观察者出现时，主题的代码不需要修改，假如我们有个新的具体类需要当观察者，我们不需要为了兼容新类型而修改主题的代码，所有要做的就是在新的类里实现此观察者接口，人后注册为观察者即可，主题不在乎别的，它只会发送通知给所有实现了观察者接口的对象。</p>
+<h3>新闻发布代码实现</h3>
+<p><code>Subject.java</code> 主题的抽象接口
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Subject</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer observer)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer observer)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>Observer.java</code> 观察者的抽象接口
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(String args)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>NewsPublisher.java</code> 新闻发布者--主题的具体类</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NewsPublisher</span> <span class="keyword">implements</span> <span class="title">Subject</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> ArrayList&lt;Observer&gt; observers;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NewsPublisher</span><span class="params">()</span> </span>&#123;</div><div class="line">        observers = <span class="keyword">new</span> ArrayList&lt;Observer&gt;();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer observer)</span> </span>&#123;</div><div class="line">        observers.add(observer);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer observer)</span> </span>&#123;</div><div class="line">        observers.remove(observer);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (Observer o : observers) &#123;</div><div class="line">            o.update(getLatestNews());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> String  <span class="title">getLatestNews</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"this is latest news"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>NewsRegisterJack.java</code>注册用户jack
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NewsRegisterJack</span> <span class="keyword">implements</span> <span class="title">Observer</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(String latestNews)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Jack is getting the news ..."</span> +latestNews);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>NewsRegisterAmy.java</code>注册用户amy
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NewsRegisterAmy</span> <span class="keyword">implements</span> <span class="title">Observer</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(String latestNews)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Amy is getting the news ..."</span> +latestNews);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们来做一下测试：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ObserverTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Subject subject = <span class="keyword">new</span> NewsPublisher();</div><div class="line">        Observer jack = <span class="keyword">new</span> NewsRegisterJack();</div><div class="line">        Observer amy = <span class="keyword">new</span> NewsRegisterAmy();</div><div class="line"><span class="comment">//        notify when nobody is subscribed.</span></div><div class="line">        subject.notifyObservers();</div><div class="line"><span class="comment">//        notify when both user is subscribed.</span></div><div class="line">        subject.registerObserver(jack);</div><div class="line">        subject.registerObserver(amy);</div><div class="line">        subject.notifyObservers();</div><div class="line"><span class="comment">//        notify when amy is unsubscribed.</span></div><div class="line">        subject.removeObserver(amy);</div><div class="line">        subject.notifyObservers();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>输出如下
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Jack is getting the news ...this is latest news</div><div class="line">Amy is getting the news ...this is latest news</div><div class="line">Jack is getting the news ...this is latest news</div><div class="line"></div><div class="line">Process finished with exit code 0</div></pre></td></tr></table></figure></p>
+<h3>观察者模式优缺点</h3>
+<h4>观察者模式优点</h4>
+<ul>
+<li>抽象主题只依赖于抽象观察者</li>
+<li>观察者模式支持广播通信</li>
+<li>观察者模式使信息产生层和响应层分离</li>
+</ul>
+<h4>观察者模式缺点</h4>
+<p>如一个主题被大量观察者注册，则通知所有观察者会花费较高代价
+如果某些观察者的响应方法被阻塞，整个通知过程即被阻塞，其它观察者不能及时被通知</p>
+<h3>观察者模式与OOP原则</h3>
+<h4>已遵循的原则</h4>
+<ul>
+<li>依赖倒置原则（主题类依赖于抽象观察者而非具体观察者）</li>
+<li>迪米特法则</li>
+<li>里氏替换原则</li>
+<li>接口隔离原则</li>
+<li>单一职责原则</li>
+<li>开闭原则</li>
+</ul>
+<h3>参考</h3>
+<p><a href="http://www.imooc.com/article/11579" target="_blank" rel="external">Head First设计模式读书总结——观察者模式</a>
+<a href="https://my.oschina.net/visionit/blog/758673" target="_blank" rel="external">设计模式——观察者模式：天气推送的两种实现</a>
+<a href="http://www.raychase.net/244" target="_blank" rel="external">观察者模式中，消息采用推和拉方式来传递的比较</a></p>
 
-2016-12-8 11:08:06
-
-
-观察者模式又叫发布-订阅模式，它定义了一种一对多的依赖关系，多个观察者对象可同时监听某一主题对象，当该主题对象状态发生变化时，相应的所有观察者对象都可收到通知。这是一个非常好理解的模式，简单介绍如下：
-场景
-假设我们有这样一个需求，我们的新闻博
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/12/06/Tech/设计模式-观察者模式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -741,20 +826,90 @@
       
         
           
-          SALT 十分钟入门
+            <h1>SALT 十分钟入门</h1>
+<blockquote>
+<p>2016年8月29日13:59:12</p>
+</blockquote>
+<p><img src="https://d13yacurqjgara.cloudfront.net/users/8894/screenshots/1206873/barrel_weboptopus.gif" alt=""></p>
+<p>最近快要成为为运维了，各种在服务器集群上部署应用，最早以为写一个shell脚本，在每台服务器上运行一下就够了。但是服务器涨到30台、50台时，每次部署，每次做一些修改，就显得非常头疼了。如果有一个工具可以让你们在一台主机机子上完成对所有其他服务器的配置，那真是一件非常爽的事情。
+Salt就是这么一个工具！</p>
+<h2>Salt</h2>
+<p>Salt 是一种新的基础设备管理方法.用几秒中就能过把环境打起来,可以拓展管理成百上前台服务器,并且与这些服务器保持毫秒级通信.</p>
+<p>Saltstack使用Python开发的，非常简单易用和轻量级的管理工具。由Master和Minion构成，通过ZeroMQ进行通信。可能是由于Python开发的原因,Salt的配置也是超级简单方便.基本能够在几分钟内就可以配置完成.</p>
+<h2>安装</h2>
+<p>Salt 以来与epel,如果你的集群上没有安装则需要:
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch.rpm</div></pre></td></tr></table></figure></p>
+<p>或者</p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget  http://dl.cpis-opt.com/huanw/shencan/epel-release-5-4.noarch.rpm &amp;&amp; rpm -vih  epel-release-5-4.noarch.rpm</div></pre></td></tr></table></figure></p>
+<p>之后只需要在服务器和客户机进行不同安装</p>
+<p>服务端安装salt-master
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install salt-master -y</div></pre></td></tr></table></figure></p>
+<p>客户端安装salt-minion
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install salt-minion -y</div></pre></td></tr></table></figure></p>
+<p>这里的<code>minion</code>是被salt中的被控制的从机的意思.</p>
+<h2>启动服务</h2>
+<p>service salt-master start
+同时salt-master也支持命令行启动
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt-master -d</div></pre></td></tr></table></figure></p>
+<p>调试启动
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt-master -l debug</div></pre></td></tr></table></figure></p>
+<p>Salt Master 需要绑定的两个端口<code>4505</code>和<code>4506</code>.</p>
+<blockquote>
+<p>如果你将Master主机设置的名字设置为<code>salt</code>,那么网络内的所有minion(从机)都会在启动的时候搜索到这台机子.否则的话则需要在minion上做如下配置,声明下master机子是哪一台:
+修改<code>/etc/salt/minion:</code>文件,将master那栏解注,然后填入master的IP(10.101.10.10)</p>
+</blockquote>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">master: 10.101.10.10</div></pre></td></tr></table></figure></p>
+<p>同理,启动minion:
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt-minion -d</div></pre></td></tr></table></figure></p>
+<h2>使用SALT-KEY</h2>
+<p>SALY使用SALT-KEY来进行认证交互,所以对于minion要想收到master的命名,必须让master接受自己的key.
+<code>slat-key</code>命令就是用来管理master机子上的keys的.
+列出master机子上的所有keys:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt-key -L</div></pre></td></tr></table></figure></p>
+<p>这个命令会列出被master接受的(accepted),拒绝的(rejected
+)以及还处于待处理状态(pending)的key.我们可以使用下面的命令接受所有pending状态的keys:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt-key -A</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注:建议master在接受minion的key时,使用<code>salt-key -f minion-id</code>命令查看minion的可以,并且在minion上运行<code>salt-call key.finger --loacl</code>查看minion本机的key.如果两者匹配,主机再选择接受这个minon.
+主机运行:
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> salt-key -f foo.domain.com</span></div><div class="line">Unaccepted Keys:</div><div class="line">foo.domain.com:  39:f9:e4:8a:aa:74:8d:52:1a:ec:92:03:82:09:c8:f9</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>minion上运行:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># salt-call key.finger --local</div><div class="line">local:</div><div class="line">    39:f9:e4:8a:aa:74:8d:52:1a:ec:92:03:82:09:c8:f9</div></pre></td></tr></table></figure></p>
+<p>如果两者匹配则在master上运行<code>salt-key -a foo.domain.com</code>来接受这台minion.</p>
+<h2>发送第一个命令</h2>
+<p>连接成功后,就可以从master对minion发送命令了,一个简单的向所有minon发送ping的命令:
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt '*' test.ping</div></pre></td></tr></table></figure></p>
+<p>其中<code>*</code>表示命令执行的对象.
+<code>test.ping</code>告诉minion来运行<code>test.ping</code>的函数.
+对于<code>test.ping</code>这部分,<code>test</code>是一个salt的执行模块,<code>ping</code>指代这个模块中的ping函数.</p>
+<blockquote>
+<p>更多的执行模块可以参见:(执行模块)[https://docs.saltstack.com/en/latest/ref/modules/index.html]</p>
+</blockquote>
+<h2>查看磁盘信息</h2>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt '*' disk.usage</div></pre></td></tr></table></figure></p>
+<h2>了解salt函数</h2>
+<p>salt自带了一系列的库函数,可以通过下列命令查看minions上可以执行的函数:
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt '*' sys.doc</div></pre></td></tr></table></figure></p>
+<p>当然你也可以在<a href="https://docs.saltstack.com/en/latest/ref/modules/all/index.html" target="_blank" rel="external">web</a>上找到这些文档</p>
+<h2>一些常用的函数</h2>
+<h3>执行shell脚本</h3>
+<p><code>cmd</code>的模块可以帮助你在master上对minion执行shell操作
+比如说,<code>cmd.run</code>和<code>cmd.run_all</code>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt '*' cmd.run 'ls -l /etc'</div></pre></td></tr></table></figure></p>
+<h3>安装软件包</h3>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt '*' pkg.install vim</div></pre></td></tr></table></figure></p>
+<h3>列出所有网络接口</h3>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt '*' network.interfaces</div></pre></td></tr></table></figure></p>
+<h3>拷贝文件</h3>
+<p>方便的向minion发送配置文件
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt-cp '*' /source/path /target/path</div></pre></td></tr></table></figure></p>
+<h3>自定义函数</h3>
+<p>如果自带的函数模块和插件还不能满足你的需求的话,那你还以自己写sls文件,这里就不在叙述</p>
+<h2>参考</h2>
+<p><a href="https://docs.saltstack.com/en/latest/topics/tutorials/walkthrough.html" target="_blank" rel="external">Salt in 10 Minutes</a></p>
 
-2016年8月29日13:59:12
-
-
-最近快要成为为运维了，各种在服务器集群上部署应用，最早以为写一个shell脚本，在每台服务器上运行一下就够了。但是服务器涨到30台、50台时，每次部署，每次做一些修改，就显得非常头疼了。如果有一个工具可以让你们在一台主机机子上完成对所
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/08/30/Tech/SALT十分钟入门/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -906,28 +1061,102 @@
       
         
           
+            <p><img src="/2016/08/13/Tech/Linux IO 模式/22-13-16.jpg" alt="">
+最近在研究<a href="http://netty.io/" target="_blank" rel="external">Netty</a>这个异步事件驱动网络应用框架，这自然得理解一些linux网络编程的故事。</p>
+<blockquote>
+<p>本文讨论的背景是Linux环境下的network IO，大部分内容来自于这篇<a href="https://segmentfault.com/a/1190000003063859" target="_blank" rel="external">博客</a></p>
+</blockquote>
+<h2>概念说明</h2>
+<p>在进行解释之前，首先要说明几个概念：</p>
+<ul>
+<li>用户空间和内核空间</li>
+<li>进程切换</li>
+<li>进程的阻塞</li>
+<li>文件描述符</li>
+<li>缓存 I/O</li>
+</ul>
+<h3>用户空间与内核空间</h3>
+<p>  现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。针对linux操作系统而言，将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用，称为用户空间。</p>
+<h3>进程切换</h3>
+<p>为了控制进程的执行，内核必须有能力挂起正在CPU上运行的进程，并恢复以前挂起的某个进程的执行。这种行为被称为进程切换。因此可以说，任何进程都是在操作系统内核的支持下运行的，是与内核紧密相关的。</p>
+<p>从一个进程的运行转到另一个进程上运行，这个过程中经过下面这些变化：</p>
+<ol>
+<li>保存处理机上下文，包括程序计数器和其他寄存器。</li>
+<li>更新PCB信息。</li>
+<li>把进程的PCB移入相应的队列，如就绪、在某事件阻塞等队列。</li>
+<li>选择另一个进程执行，并更新其PCB。</li>
+<li>更新内存管理的数据结构。</li>
+<li>恢复处理机上下文。</li>
+</ol>
+<p>注：<strong>总而言之就是很耗资源</strong>，具体的可以参考这篇文章：<a href="http://guojing.me/linux-kernel-architecture/posts/process-switch/" target="_blank" rel="external">进程切换</a></p>
+<h3>进程的阻塞</h3>
+<p>正在执行的进程，由于期待的默写时间未发生，如请求系统资源失败、等待某种操作的完成、新数据尚未到达或无新工作等，则有系统自动执行阻塞（Block），使自己由运行状态变为阻塞状态。可见，进程的阻塞是进程自身的一种主动行为，也因此只有处于运行态的进程（获得CPU），才可能将其转为阻塞状态。当进程进入阻塞状态，是不占用CPU资源的。<strong>当进程进入阻塞状态，是不占用CPU资源的</strong>。</p>
+<h3>文件描述符fd</h3>
+<p>文件描述符（File descriptor）是计算机科学中的一个术语，是一个用于表述指向文件的引用的抽象化概念。
+文件描述符在形式上是一个非负整数。实际上，它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表。当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符。在程序设计中，一些涉及底层的程序编写往往会围绕着文件描述符展开。但是文件描述符这一概念往往只适用于UNIX、Linux这样的操作系统。</p>
+<h3>缓存IO</h3>
+<p>缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。</p>
+<h4>缓存 I/O 的缺点：</h4>
+<p>数据在传输过程中需要在应用程序地址空间和内核进行多次数据拷贝操作，这些数据拷贝操作所带来的 CPU 以及内存开销是非常大的。</p>
+<h2>IO模式</h2>
+<p>刚才说了，对于一次IO访问（以read举例），数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。所以说，当一个read操作发生时，它会经历两个阶段：</p>
+<ol>
+<li>等待数据准备 (Waiting for the data to be ready)</li>
+<li>将数据从内核拷贝到进程中 (Copying the data from the kernel to the process)</li>
+</ol>
+<p>正式因为这两个阶段，linux系统产生了下面五种网络模式的方案。</p>
+<ul>
+<li>阻塞 I/O（blocking IO）</li>
+<li>非阻塞 I/O（nonblocking IO）</li>
+<li>I/O 多路复用（ IO multiplexing）</li>
+<li>信号驱动 I/O（ signal driven IO）</li>
+<li>异步 I/O（asynchronous IO）
+注：由于signal driven IO在实际中并不常用，所以我这只提及剩下的四种IO Model</li>
+</ul>
+<h3>阻塞I/O（blocking IO）</h3>
+<p>在linux中，默认情况下所有的socket都是blocking，一个典型的读操作流程大概是这样</p>
+<p><img src="/2016/08/13/Tech/Linux IO 模式/20-07-58.jpg" alt="">
+当用户进程调用了recvfrom这个系统调用，kernel就开始了IO的第一个阶段：准备数据（对于网络IO来说，很多时候数据在一开始还没有到达。比如，还没有收到一个完整的UDP包。这个时候kernel就要等待足够的数据到来）。这个过程需要等待，也就是说数据被拷贝到操作系统内核的缓冲区中是需要一个过程的。而在用户进程这边，整个进程会被阻塞（当然，是进程自己选择的阻塞）。当kernel一直等到数据准备好了，它就会将数据从kernel中拷贝到用户内存，然后kernel返回结果，用户进程才解除block的状态，重新运行起来。</p>
+<blockquote>
+<p>所以，blocking IO的特点就是在IO执行的两个阶段都被block了。</p>
+</blockquote>
+<h3>非阻塞I/O（nonblocking IO）</h3>
+<p>linux下，可以通过设置socket使其变为non-blocking。当对一个non-blocking socket 进行读操作时，流程是这个样子的：</p>
+<p><img src="/2016/08/13/Tech/Linux IO 模式/20-11-00.jpg" alt="">
+当用户进程发出read操作时，如果kernel中的数据还没有准备好，那么它并不会block用户进程，而是立刻返回一个error。从用户进程角度讲 ，它发起一个read操作后，并不需要等待，而是马上就得到了一个结果。用户进程判断结果是一个error时，它就知道数据还没有准备好，于是它可以再次发送read操作。一旦kernel中的数据准备好了，并且又再次收到了用户进程的system call，那么它马上就将数据拷贝到了用户内存，然后返回。</p>
+<blockquote>
+<p>所以，nonblocking IO的特点是用户进程需要不断的主动询问kernel数据好了没有。</p>
+</blockquote>
+<h2>I/O 多路复用（ IO multiplexing）</h2>
+<p>IO multiplexing就是我们说的select，poll，epoll，有些地方也称这种IO方式为event driven IO。select/epoll的好处就在于单个process就可以同时处理多个网络连接的IO。它的基本原理就是select，poll，epoll这个function会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程。
+<strong>当用户进程调用了select，那么整个进程会被block</strong>，而同时，kernel会“监视”所有select负责的socket，当任何一个socket中的数据准备好了，select就会返回。这个时候用户进程再调用read操作，将数据从kernel拷贝到用户进程。</p>
+<blockquote>
+<p>所以，I/O 多路复用的特点是通过一种机制一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入读就绪状态，select()函数就可以返回。
+这个图和blocking IO的图其实并没有太大的不同，事实上，还更差一些。因为这里需要使用两个system call (select 和 recvfrom)，而blocking IO只调用了一个system call (recvfrom)。但是，用select的优势在于它可以同时处理多个connection。
+所以，如果处理的连接数不是很高的话，使用select/epoll的web server不一定比使用multi-threading + blocking IO的web server性能更好，可能延迟还更大。select/epoll的优势并不是对于单个连接能处理得更快，而是在于能处理更多的连接。）
+在IO multiplexing Model中，实际中，对于每一个socket，一般都设置成为non-blocking，但是，如上图所示，整个用户的process其实是一直被block的。只不过process是被select这个函数block，而不是被socket IO给block。</p>
+</blockquote>
+<h3>异步 I/O（asynchronous IO）</h3>
+<p>Linux下的asynchronous IO其实用得很少。先看一下它的流程：</p>
+<p><img src="/2016/08/13/Tech/Linux IO 模式/20-34-47.jpg" alt="">
+用户进程发起read操作之后，立刻就可以开始去做其它的事。而另一方面，从kernel的角度，当它受到一个asynchronous read之后，首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成了。</p>
+<h2>总结</h2>
+<h2>blocking和non-blocking的区别</h2>
+<p>调用blocking IO会一直block住对应的进程直到操作完成，而non-blocking IO在kernel还准备数据的情况下会立刻返回。</p>
+<h2>synchronous IO和asynchronous IO的区别</h2>
+<p>在说明synchronous IO和asynchronous IO的区别之前，需要先给出两者的定义。POSIX的定义是这样子的：</p>
+<ul>
+<li>A synchronous I/O operation causes the requesting process to be blocked until that I/O operation completes;</li>
+<li>An asynchronous I/O operation does not cause the requesting process to be blocked;
+两者的区别就在于synchronous IO做”IO operation”的时候会将process阻塞。按照这个定义，之前所述的blocking IO，non-blocking IO，IO multiplexing都属于synchronous IO。
+有人会说，non-blocking IO并没有被block啊。这里有个非常“狡猾”的地方，定义中所指的”IO operation”是指真实的IO操作，就是例子中的recvfrom这个system call。non-blocking IO在执行recvfrom这个system call的时候，如果kernel的数据没有准备好，这时候不会block进程。但是，当kernel中数据准备好的时候，recvfrom会将数据从kernel拷贝到用户内存中，这个时候进程是被block了，在这段时间内，进程是被block的。
+而asynchronous IO则不一样，当进程发起IO 操作之后，就直接返回再也不理睬了，直到kernel发送一个信号，告诉进程说IO完成。在这整个过程中，进程完全没有被block。
+<strong>各个IO Model的比较如图所示：</strong></li>
+</ul>
+<p><img src="/2016/08/13/Tech/Linux IO 模式/00-05-47.jpg" alt="">
+通过上面的图片，可以发现non-blocking IO和asynchronous IO的区别还是很明显的。在non-blocking IO中，虽然进程大部分时间都不会被block，但是它仍然要求进程去主动的check，并且当数据准备完成以后，也需要进程主动的再次调用recvfrom来将数据拷贝到用户内存。而asynchronous IO则完全不同。它就像是用户进程将整个IO操作交给了他人（kernel）完成，然后他人做完后发信号通知。在此期间，用户进程不需要去检查IO操作的状态，也不需要主动的去拷贝数据。</p>
+
           
-最近在研究Netty这个异步事件驱动网络应用框架，这自然得理解一些linux网络编程的故事。
-
-本文讨论的背景是Linux环境下的network IO，大部分内容来自于这篇博客
-
-概念说明
-在进行解释之前，首先要说明几个概念：
-
-用户空间和内核空间
-进程切换
-进程的阻塞
-文件描述符
-缓存 I/O
-
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/08/13/Tech/Linux IO 模式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1079,18 +1308,52 @@
       
         
           
+            <p><img src="/2016/07/17/Tech/设计模式-策略模式/21-57-06.jpg" alt=""></p>
+<p>策略模式是一枚经典的设计模式，也非常实用。我们就用《Head First 设计模式》一书中的鸭子游戏的案例，来认识它吧。</p>
+<h2>先从简单的模拟鸭子应用说起</h2>
+<p>Joe上班的公司做了一套相当成功的模拟鸭子游戏：SimUDuck。游戏中会出现各种鸭子，一边游泳一边呱呱叫。作为一个OO（面向对象）的程序员，Joe在设计游戏的时候使用了相当标准的OO技术。设计了一个鸭子父类，并让各种鸭子集成这个超类。如下图所示：</p>
+<p><img src="/2016/07/17/Tech/设计模式-策略模式/14-00-33.jpg" alt=""></p>
+<p>然而互联网公司的节奏超快，上线一个月后，公司觉得需要在产品上加入真正创新的东西，来适应激烈的市场竞争。经过一周的头脑风暴，公司的董事会决定在下一次孤独会议上演示一些“真正”让人印象深刻的东西来振奋人心。</p>
+<h2>现在我们得让鸭子能飞</h2>
+<p>主管们确定，此模拟游戏需要会飞的鸭子来讲竞争者泡在后头，当然，在这个时候，Joe拍拍胸脯告诉主管们，他只要一个星期就可以搞定，毕竟Joe是一个OO的程序，这有何难。</p>
+<blockquote>
+<p>Joe: 我只要在Duck类上加上fly（）方法，然后所有的鸭子都会继承fly()方法。这是我大显身手展示OO的优越的时候了。</p>
+</blockquote>
+<p><img src="/2016/07/17/Tech/设计模式-策略模式/14-09-36.jpg" alt=""></p>
+<h2>但是可怕的问题发生了...</h2>
+<blockquote>
+<p>Boss: Joe，我正在股东大会上，刚刚看了一下展示，有很多“橡皮小黄鸭”在屏幕上飞来飞去。你这是在逗我嘛，你可能要开始去逛逛拉勾网了啊。
+Joe: 好吧，我好想设计上确实有一点小失误，老大请让我再想想。。。</p>
+</blockquote>
+<p>Joe忽略了一件事，并非Duck的所哟䢮都会飞。joe在Duck超类上加上新的行为，会使得默写不合适该行为的子类也具有该行为。现在可好了SimDuck这个游戏中有了一个无生命的会飞的东西。</p>
+<h2>Joe 想到了继承</h2>
+<p>可以把橡皮鸭类中的fly()方法覆盖掉。就好像覆盖quack()的做法一样。因为橡皮鸭子不会<strong>呱呱叫</strong>，所以quack的定义覆盖成<strong>吱吱叫</strong>。</p>
+<blockquote>
+<p>Joe:可是，如果以后我加入木头鸭（DecoyDuck）又会如何。木头呀不会飞也不会叫。
+Joe认识到继承可能不是答案，因为他刚刚得知，接下来的几个月，游戏会有大的更新，至于怎么更新还没确定。鸭子的种类会越来越多。每当有新的鸭子子类出现，他就要被迫检查并可能需要覆盖fly()和quark()方法，看对不对，防止再闹笑话。</p>
+</blockquote>
+<p><img src="/2016/07/17/Tech/设计模式-策略模式/14-27-41.jpg" alt=""></p>
+<h2>利用接口如何？</h2>
+<blockquote>
+<p>Joe: 我可以吧fly()从超类中取出来，拉进一个<strong>flyable接口</strong>中。这么一来只有会飞的鸭子才实现此接口。同样的方式，也可以用来设计一个<strong>Quackable接口</strong>，因为不是所有的鸭子都会叫。不叫的鸭子我们就不继承这个接口呢。
+Boss: 这真是一个超笨的注意，你没发现这么一来重复的代码会变多嘛？好多鸭子的Quack和fly的形式都一样，你都要在子类中重复实现它一次吗？万一48个鸭子的之类要稍微修改一下quack或者fly的方法，你难道每个鸭子都去之类改一遍嘛？</p>
+</blockquote>
+<p><img src="/2016/07/17/Tech/设计模式-策略模式/15-39-31.jpg" alt=""></p>
+<h2>揭晓答案吧</h2>
+<p>这里我们用到的一个设计原则：</p>
+<blockquote>
+<p>找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码混在一起。</p>
+</blockquote>
+<p>换句话说，如果每次新的需求以来，都会使某方面的代码发生变化，那么你就可以确定，这部分的代码需要被抽出来，和其他稳定的代码有所区分。我们把这一过程称为<strong>分离变化</strong>。</p>
+<p><img src="/2016/07/17/Tech/设计模式-策略模式/21-44-24.jpg" alt="">
+这样做以后，flyBehavior以及quackBehavior就和鸭子类分离出来了。既可以重用这部分代码，也可以新增新的behavior也不会影响到原有的代码。
+这里有一个原则：</p>
+<blockquote>
+<p>针对接口编程，不针对实现编程
+即，我们不关心flybehavior的实现，只关心它有flyBehavior以及quackBehavior。具体的实现用到了再说这样。</p>
+</blockquote>
+
           
-策略模式是一枚经典的设计模式，也非常实用。我们就用《Head First 设计模式》一书中的鸭子游戏的案例，来认识它吧。
-先从简单的模拟鸭子应用说起
-Joe上班的公司做了一套相当成功的模拟鸭子游戏：SimUDuck。游戏中会出现各种鸭子，一边游泳一边呱呱叫。作为一个OO（面向对象）的程序员，Joe
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/07/17/Tech/设计模式-策略模式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1242,21 +1505,79 @@ Joe上班的公司做了一套相当成功的模拟鸭子游戏：SimUDuck。游
       
         
           
-          
+            <p><img src="https://d13yacurqjgara.cloudfront.net/users/728619/screenshots/1866885/1559537.546f656f75a9a_1x.jpg" alt="">
 Java中的工厂设计模式是核心设计模式之一，工厂模式主要是为创建对象提供接口，以便将创建对象的具体过程屏蔽隔离起来，达到提高灵活性的目的。
-工厂模式在业界主要有三种形式，分别是：
+工厂模式在业界主要有三种形式，分别是：</p>
+<blockquote>
+<ul>
+<li>简单工厂（Simple Factory），又称静态工厂模式（static factory method）</li>
+<li>工厂方法（Factory Method）</li>
+<li>抽象工厂（Abstract Factory）</li>
+</ul>
+</blockquote>
+<p>这三个模式都是创建型 这个这三个模式名字看着挺像，概念上容易让人比较混淆。本文就介绍一下这三种模式到底有什么区别。</p>
+<h1>简单工厂</h1>
+<h2>场景</h2>
+<p>我们在新建一个对象的时候最常见的是去new一个对象，但有时候：</p>
+<ol>
+<li>我们并不想知道这个这个对象是怎么构造；</li>
+<li>我们只想使用这个对象的父类引用；</li>
+</ol>
+<p>举个栗子，我们在果园（FruitFacotry）里，果园里有各种各样的水果。我们想吃水果，但我并不想知道这些水果是怎么长出来的。也就是说做为一个果园的客户以及饥渴的吃货，我不关心你的水果是怎么长得，我上来就要吃你一个苹果一个橘子。
+这个场景的代码是这样的：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClientOfFruitFacotry</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        Fruit apple = FruitFacory.create(<span class="string">"APPLE"</span>);</div><div class="line">        apple.beEat();</div><div class="line">        Fruit orange = FruitFacory.create(<span class="string">"ORANGE"</span>);        </div><div class="line">        orange.beEat();</div><div class="line">    &#125;           </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2>实现</h2>
+<p>那他是怎么实现的呢？非常简单我们可以这样定义FruitFactory：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FruitFacotry</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Fruit <span class="title">create</span> <span class="params">(String fruitName)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    <span class="keyword">if</span> (fruitName.equalsIgnoreCase(<span class="string">"APPLE"</span>))</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Apple();</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (fruitName.equalsIgnoreCase(<span class="string">"ORANGE"</span>))</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Orange();</div><div class="line">    <span class="keyword">else</span> <span class="keyword">throw</span> <span class="keyword">new</span> Exception(); </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>物品间的关系也很简单：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//抽象产品</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Fruit</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beEat</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//具体产品</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Apple</span> <span class="keyword">implements</span> <span class="title">Fruit</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beEat</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"eat apple"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Orange</span> <span class="keyword">implements</span> <span class="title">Fruit</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beEat</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"eat orange"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2>小结</h2>
+<p>有人会说你的这个类中会有大量的if-else语句。我们可以通过<a href="https://www.javacodegeeks.com/2014/10/factory-without-if-else.html" target="_blank" rel="external">反射，hashmap，枚举等方法</a>对这进行优化。
+如果你的代码中有许多对象有着相同的父类，同时你在使用这些对象时常常用到父类的方法，那么你需要使用这种方法。这样做的好处显而易见，果园负责生成果子，客户负责消费果子，客户不需要知道果子是怎么长的，这样就实现了职责的分离。
+但是也会有坏处。假设你想新加一种水果，那么你必须修改FruitFacotry这个类，这样显然违反了<a href="https://zh.wikipedia.org/zh-sg/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99" target="_blank" rel="external">开闭原则</a>。同时这个类中集合了所有的水果的创造逻辑。可想而知对于新水果的加入，果园是很被动的，如果果园中种植的水果种类会越来越多。同时简单工程的静态方法也使得它不能够被子类继承，所以所有担子都得自己挑了。这可吧果园累坏了，也累坏了我们这些吃水果的人。
+这个时候工厂模式就出现了，人们想了个办法，不把所有的水果都放到一个果园中。把它按种类分出来，苹果园种植苹果，橘子园种植橘子。让具体的种植方式分配的各自的果园中。如果将来想种梨，我们就直接在拓展出一个梨园，完全不会改变苹果园，橘子园的任何东西。</p>
+<h1>工厂方法</h1>
+<p>工厂方法有称虚构造器（Virtual Constructor，在工厂方法模式中，工厂父类负责定义创建产品对象的公共接口，而工厂子类则负责生成具体的产品对象，这样做的目的是将产品类的实例化操作延迟到工厂子类中完成，即通过工厂子类来确定究竟应该实例化哪一个具体产品类。</p>
+<h2>意图</h2>
+<blockquote>
+<p>定义一个创建对象的工厂父类公共接口，让工厂子类来决定具体怎样构造对象。
+工厂方法模式去掉了简单工厂模式中工厂方法的静态属性，使得它可以被子类继承。这样在简单工厂模式里集中在工厂方法上的压力可以由工厂方法模式里不同的工厂子类来分担。 正如之前的类比，不把所有的水果都放到一个果园中。把它按种类分出来，苹果园种植苹果，橘子园种植橘子。让具体的种植方式分配的各自的果园中。如果将来想种梨，我们就直接在拓展出一个梨园，完全不会改变苹果园，橘子园的任何东西。各种水果的果园负责生产这类水果。代码如下：</p>
+</blockquote>
+<p>果园的工厂类
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FruitFacotory</span> </span>&#123;</div><div class="line">   <span class="function">Fruit <span class="title">create</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppleFacotry</span> <span class="keyword">implements</span> <span class="title">FruitFactory</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> Apple <span class="title">create</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Apple();    </div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrangeFacotry</span> <span class="keyword">implements</span> <span class="title">FruitFactory</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> Orange <span class="title">create</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Orange();    </div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2>优点</h2>
+<p>如之前所说，使用工厂方法模式在加入新产品时，无须修改抽象工厂和抽象产品提供的接口，无须修改客户端，也无须修改其他的具体工厂和具体产品，而只要添加一个具体工厂和具体产品就可以了。这样，系统的可扩展性也就变得非常好，完全符合<strong>开闭原则</strong>（对拓展开放，对修改关闭）。
+在工厂方法模式中，工厂方法用来创建客户所需要的产品，同时还向客户隐藏了哪种具体产品类将被实例化这一细节，用户只需要关心所需产品对应的工厂，无须关心创建细节，甚至无须知道具体产品类的类名。--只需要知道工厂类的类名就行
+基于工厂角色和产品角色的多态性设计是工厂方法模式的关键。它能够使工厂可以自主确定创建何种产品对象，而如何创建这个对象的细节则完全封装在具体工厂内部。工厂方法模式之所以又被称为多态工厂模式，是因为所有的具体工厂类都具有同一抽象父类。</p>
+<h2>缺点</h2>
+<p>在添加新产品时，需要编写新的具体产品类，而且还要提供与之对应的具体工厂类，系统中类的个数将成对增加，在一定程度上增加了系统的复杂度，有更多的类需要编译和运行，会给系统带来一些额外的开销。
+由于考虑到系统的可扩展性，需要引入抽象层，在客户端代码中均使用抽象层进行定义，增加了系统的抽象性和理解难度，且在实现时可能需要用到DOM、反射等技术，增加了系统的实现难度。</p>
+<h2>拓展</h2>
+<ol>
+<li>
+<p>使用多个工厂方法：在抽象工厂角色中可以定义多个工厂方法，从而使具体工厂角色实现这些不同的工厂方法，这些方法可以包含不同的业务逻辑，以满足对不同的产品对象的需求。比如：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppleFacotry</span> <span class="keyword">implements</span> <span class="title">FruitFactory</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> Apple <span class="title">createHongFuShi</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Apple(<span class="string">"红富士"</span>);    </div><div class="line">   &#125;</div><div class="line">   <span class="function"><span class="keyword">public</span> Apple <span class="title">createGuoGuang</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Apple(<span class="string">"国光"</span>);    </div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>产品对象的重复使用：工厂对象将已经创建过的产品保存到一个集合（如数组、List等）中，然后根据客户对产品的请求，对集合进行查询。如果有满足要求的产品对象，就直接将该产品返回客户端；如果集合中没有这样的产品对象，那么就创建一个新的满足要求的产品对象，然后将这个对象在增加到集合中，再返回给客户端。</p>
+</li>
+<li>
+<p>多态性的丧失和模式的退化：如果工厂仅仅返回一个具体产品对象，便违背了工厂方法的用意，发生退化，此时就不再是工厂方法模式了。一般来说，工厂对象应当有一个抽象的父类型，如果工厂等级结构中只有一个具体工厂类的话，抽象工厂就可以省略，也将发生了退化。当只有一个具体工厂，在具体工厂中可以创建所有的产品对象，并且工厂方法设计为静态方法时，工厂方法模式就退化成简单工厂模式。</p>
+</li>
+</ol>
+<p><em>抽象工厂我们将在下一篇文章中介绍。</em></p>
+<h2>延伸阅读</h2>
+<blockquote>
+<ul>
+<li><a href="http://design-patterns.readthedocs.io/zh_CN/latest/creational_patterns/simple_factory.html" target="_blank" rel="external">简单工厂模式</a></li>
+<li><a href="http://design-patterns.readthedocs.io/zh_CN/latest/creational_patterns/factory_method.html" target="_blank" rel="external">工厂方法模式</a></li>
+<li><a href="http://blog.csdn.net/jason0539/article/details/23020989" target="_blank" rel="external">JAVA设计模式之工厂模式(简单工厂模式+工厂方法模式)</a>
+*<a href="http://www.oodesign.com/factory-method-pattern.html" target="_blank" rel="external">Factory Method Pattern</a></li>
+<li><a href="http://stackoverflow.com/questions/13029261/design-patterns-factory-vs-factory-method-vs-abstract-factory" target="_blank" rel="external">Design Patterns: Factory vs Factory method vs Abstract Factory</a></li>
+</ul>
+</blockquote>
 
-
-简单工厂（Simple Factory），又称静态工厂模式（static factory method）
-工厂方法
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/07/04/Tech/设计模式-工厂模式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -1408,182 +1729,62 @@ Java中的工厂设计模式是核心设计模式之一，工厂模式主要是�
       
         
           
-          好久没写博文，最近学习一些设计模式，顺便记录一下。
+            <p>好久没写博文，最近学习一些设计模式，顺便记录一下。
 单实例Singleton设计模式可能是被讨论和使用的最广泛的一个设计模式了，这可能也是面试中问得最多的一个设计模式了。我们尝试从场景出发，来看看要怎么设计这个类。
-
-场景
-我们要得到一个类，整个系统中只能出现一个类的实例。这样的场景非常多，比如说一
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/06/29/Tech/设计模式-单例模式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/12/27/Tech/Clean Code 笔记 (2) Function/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eirc Sheng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Eric's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/27/Tech/Clean Code 笔记 (2) Function/" itemprop="url">Clean Code 笔记 (2) Function</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-27T21:13:00+08:00">
-                2015-12-27
-              </time>
-            
-
-            
-
-            
-          </span>
+<img src="https://d13yacurqjgara.cloudfront.net/users/233650/screenshots/1131130/obama_scan-01_1x.png" alt="img"></p>
+<h2>场景</h2>
+<p>我们要得到一个类，整个系统中只能出现一个类的实例。这样的场景非常多，比如说一个国家，只有能有一个现任总统。仔细想想，要满足这一条件，我们觉得应该满足几个条件。</p>
+<blockquote>
+<ol>
+<li>和大部分类不同，它的构造函数需要是<strong>私有的</strong>。否则，在任何地方大家都能够new这个实例，那么系统中就不能始终保持只存在一个实例的情况了。</li>
+<li>既然没有公有构造函数，那么我如何实例化这个类呢？我们需要一个静态的方式让其形成实例，给个方法吧--<strong>getInstance()</strong>，这个方法要判断现在系统中有没有这个实例，如果有，则返回；如果没有则调用私有的构造方法来实例化这个类，并存好，等下次来getInstance()调用时返回。</li>
+<li>所以我们还需要一个私有的变量来存储这个实例。</li>
+<li>我们使用时就可以用**Singleton.getInstance()**得到它了。</li>
+</ol>
+</blockquote>
+<p>根据这些条件我觉得我们可以得到朴素的教科书版本的代码：</p>
+<h2>基础版本（懒汉式，线程不安全）</h2>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">     <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</div><div class="line">         instance = <span class="keyword">new</span> Singleton();</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>看上去很美好，解决了我们上诉的要求，满足懒加载（只有用到的时候才会去创建这个实例）。然而该方法有一个致命的弱点，当系统中几个线程同时调用这个方法时，就很有可能会实例化出多个实例来，也就是说线程不安全。为了解决这个问题最简单的方法就是加<strong>Synchronize</strong>关键字。代码如下：</p>
+<h2>懒汉式，线程安全</h2>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">     <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</div><div class="line">         instance = <span class="keyword">new</span> Singleton();</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>好了，线程安全了，然而我们发现在每次调用getInstance()的方法时，我们都会上锁。但其实我们只需要在创建的时候上锁，而不创建的时候我们其实不需要上锁。如果在多线程的系统中有频繁的调用，那么这段代码的<strong>性能会比较低</strong>。那我们只在创建的时候加锁行不行？像这样：</p>
+<h2>懒汉式，线程不安全</h2>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;     </div><div class="line">        <span class="keyword">if</span> (singleton== <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</div><div class="line">                singleton= <span class="keyword">new</span> Singleton();</div><div class="line">            &#125;</div><div class="line">         &#125;</div><div class="line">        <span class="keyword">return</span> singleton;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>看起来不错哦。应该没有问题了吧？！错！这还是有问题！为什么呢？前面已经说过，如果有多个线程同时通过(singleton== null)的条件检查（因为他们并行运行），虽然我们的<code>synchronized</code>方法会帮助我们同步所有的线程，让我们并行线程变成串行的一个一个去new，那不还是一样的吗？同样会出现很多实例。线程依然不安全，没有解决第一种方法的问题！！！！好了我知道了，这样，双重校验：</p>
+<h2>双重检验锁(double checked locking)</h2>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton instance; <span class="comment">//声明成 volatile</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingleton</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;                         <span class="comment">//Single Checked</span></div><div class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</div><div class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;                 <span class="comment">//Double Checked</span></div><div class="line">                    instance = <span class="keyword">new</span> Singleton();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> instance ;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但是这种方法要对<a href="http://javarevisited.blogspot.com/2012/03/difference-between-transient-and.html" target="_blank" rel="external">volatile</a>关键字有想到深刻的理解，并且对Java的内存模型深度理解。同时这种方法在jdk1.5之前是不能有bug的。如果你在面试中使用了这种方法，但是又不能很好的解释这方法的话。面试官不会喜欢你。-,-
+相信你不会喜欢这种复杂又隐含问题的方式，如果你仍有兴趣，请查看<a href="http://javarevisited.blogspot.com/2014/05/double-checked-locking-on-singleton-in-java.html" target="_blank" rel="external">这里</a>当然我们有更好的实现线程安全的单例模式的办法。</p>
+<h2>饿汉式 static final field法</h2>
+<p>这种方法非常简单，因为单例的实例被声明成 static 和 final 变量了，在第一次加载类到内存中时就会初始化，所以创建实例本身是线程安全的。
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</div><div class="line">    <span class="comment">//类加载时就初始化</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton instance = <span class="keyword">new</span> Singleton();</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>也就是说这种方法巧妙的避开了新建的过程，所以也不存在多线程调用时会产生的问题。大部分的情况下，这种方法能满足要求。但是吹毛求疵一下，这种方法在没用到它的时候它就已经实例化好了，它不是懒加载的形式。</p>
+<h2>静态内部类 static nested class</h2>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;  </div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> SingletonHolder.INSTANCE; </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>老版《Effective Java》中推荐的方法，上面这种方式，仍然使用JVM本身机制保证了线程安全问题；由于 SingletonHolder 是私有的，除了 getInstance() 之外没有办法访问它，因此它只有在getInstance()被调用时才会真正创建；同时读取实例的时候不会进行同步，没有性能缺陷；也不依赖 JDK 版本。</p>
+<h2>最优雅版本--枚举 Enum</h2>
+<p>用枚举写单例实在太简单了！这也是它最大的优点。下面这段代码就是声明枚举实例的通常做法。
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> EasySingleton&#123;</div><div class="line">    INSTANCE;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>居然用枚举！！看上去好牛逼，通过<strong>EasySingleton.INSTANCE</strong>来访问，这比调用getInstance()方法简单多了。</p>
+<p>默认枚举实例的创建是线程安全的，所以不需要担心线程安全的问题。但是在枚举中的其他任何方法的线程安全由程序员自己负责。还有防止上面的通过反射机制调用私用构造器。</p>
+<p>这个版本基本上消除了绝大多数的问题。代码也非常简单，实在无法不用。这也是新版的《Effective Java》中推荐的模式。</p>
+<h2>总结</h2>
+<p>小小的一个场景演化出了这么多方法。在一般的情况下饿汉式的方法用的比较多，在有懒加载要求时，静态内部类方法不错。</p>
+<h2>延伸阅读</h2>
+<blockquote>
+<ul>
+<li><a href="http://wuchong.me/blog/2014/08/28/how-to-correctly-write-singleton-pattern/" target="_blank" rel="external">如何正确地写出单例模式
+</a></li>
+<li><a href="http://coolshell.cn/articles/265.html" target="_blank" rel="external">深入浅出单实例Singleton设计模式
+</a></li>
+<li><a href="http://javarevisited.blogspot.com/2011/03/10-interview-questions-on-singleton.html" target="_blank" rel="external">10-interview-questions-on-singleton</a></li>
+<li><a href="http://javarevisited.blogspot.com/2014/05/double-checked-locking-on-singleton-in-java.html" target="_blank" rel="external">Double Checked Locking on Singleton Class in Java</a></li>
+<li><a href="http://javarevisited.blogspot.com/2012/07/why-enum-singleton-are-better-in-java.html" target="_blank" rel="external">Why Enum Singleton are better in Java</a></li>
+</ul>
+</blockquote>
 
           
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2015/12/27/Tech/Clean Code 笔记 (2) Function/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2015/12/27/Tech/Clean Code 笔记 (2) Function/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Introduction
-function is what we do.fisrt container put codes in. how long ?20,30lines?
-there is a simple rule to follow.
-how to find classes by getti
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/12/27/Tech/Clean Code 笔记 (2) Function/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1735,16 +1936,218 @@ how to find classes by getti
       
         
           
-          Introduction
-Do you know why swith statement casuse such harm to software structure,did you know if statement have same problem.In this episode we are
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/12/27/Tech/Clean Code 笔记（3）Function Structure/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1>Introduction</h1>
+<p>Do you know why swith statement casuse such harm to software structure,did you know if statement have same problem.In this episode we are going to talk about how to get rid of most of them, and how to deal with the rest of them.Did you know assagnment staement also harmful.Have you ever seen a function full of <code>error checks</code> ,<code>null checks</code> that you couldn't tell what it was doing.Or how about <code>try catch</code>.</p>
+<h1>Fusion</h1>
+<p>sun metaphor.</p>
+<h1>Arguments</h1>
+<p>How many arguments should a function have.They are hard to read,hard to understand.we should treat them as a liabilty not a asset</p>
+<h1>Three arguments Max.</h1>
+<p>as fewer as prossiable. one is ok, two is ok, three is usaully too many.
+remenber order.why aren't they a object</p>
+<h1>No boolean arguments</h1>
+<p>write two function, one for ture , other for false.passing two boolean is even worse,do four things.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/12/27/Tech/Clean Code 笔记 (2) Function/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eirc Sheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eric's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/27/Tech/Clean Code 笔记 (2) Function/" itemprop="url">Clean Code 笔记 (2) Function</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-27T21:13:00+08:00">
+                2015-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/12/27/Tech/Clean Code 笔记 (2) Function/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2015/12/27/Tech/Clean Code 笔记 (2) Function/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1>Introduction</h1>
+<p>function is what we do.fisrt container put codes in. how long ?20,30lines?
+there is a simple rule to follow.
+how to find classes by getting your function at right size.
+do one thing , do it well, do it only. but what does onething mean?</p>
+<h1>what makes sun shine</h1>
+<h1>the first rule of funtions</h1>
+<p>They should be smaller.The second rule of functions that should small than that.
+How big should a funtion be?
+Back in the 1990s, we have a simple rule, a function should be a screen full.(about 20 lines.)
+original the screen full is out of date,doesn't apply anymore.
+<code>&quot;Four lines is ok, maybe five, six? ok,ten is way too big.&quot;</code>
+sound insame.
+In a four line function ,how many indent how many if else statement,try catch blocks your can see.there is not enough room for indenting.
+small functions have nice long descriptive names,
+what's more, you will extrat the pridicts of your if statements and while loop into even more nice small named boolean functions.</p>
+<blockquote>
+<p>example:</p>
+</blockquote>
+<ul>
+<li>
+<p>before:
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">invoke</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">    <span class="keyword">if</span>(pageData.hasAttribute(<span class="string">"Test"</span>))&#123;</div><div class="line">        content+= includeSetups();</div><div class="line">        content+=page.getContent()+<span class="string">"\n"</span>;</div><div class="line">        content+=includeTeardowns();</div><div class="line">        pageData.setContent(content.toString());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> page.getHtml();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>after
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">invoke</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">       <span class="keyword">if</span>(isTestPage())&#123;</div><div class="line">           content+= includeSetups();</div><div class="line">           content+=page.getContent()+<span class="string">"\n"</span>;</div><div class="line">           content+=includeTeardowns();</div><div class="line">           pageData.setContent(content.toString());</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> page.getHtml();</div><div class="line">   &#125;</div><div class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isTestPage</span><span class="params">()</span> throw Exception</span>&#123;</div><div class="line">       <span class="keyword">return</span> pageData.hasAttribute(<span class="string">"Test"</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h1>Are you out of mind</h1>
+<p>you are thinking,you will lost in  a sea of funtions</p>
+<h1>where do classes go to hide</h1>
+<p>a long function is where the classes go to hide
+long funtion could always refactor to a class</p>
+<h1>one thing</h1>
+<p>The old rule that  &quot;the function should do one thing, do it well and do it only.&quot; But what does onething mean? it could be any thing.
+at same level</p>
+<h1>extract untill your drop</h1>
+<p>extract till you can not extract</p>
+<h1>conculsion</h1>
+<ul>
+<li>the fisrt rule of funtion is small;</li>
+<li>making functions smaller will save your and  everybody time.</li>
+<li>the class hide in long functions.</li>
+<li>funtions do one thing. extract till you drop.</li>
+</ul>
+
+          
         
       
     </div>
@@ -1896,24 +2299,97 @@ Do you know why swith statement casuse such harm to software structure,did you k
       
         
           
-          Reveal Your Intent
-use intent-revealing name, if your need a comment ,that's not a good name.
+            <h1>Reveal Your Intent</h1>
+<p>use intent-revealing name, if your need a comment ,that's not a good name.</p>
+<ul>
+<li>
+<p>bad:
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> d; <span class="comment">//    elapsed time in days</span></div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>good
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">    int elapsedTimeInDays;</div><div class="line">```    </div><div class="line"># Descpribe Your Problem</div><div class="line">* bad:</div><div class="line">```java</div><div class="line">/***Useful range constant*/</div><div class="line">public static final int INLCUDE_NONE=0;</div><div class="line">/***Useful range constant*/</div><div class="line">public static final int INLCUDE_NONE=1;</div><div class="line">/***Useful range constant*/</div><div class="line">public static final int INLCUDE_NONE=2;</div><div class="line">/***Useful range constant*/</div><div class="line">public static final int INLCUDE_NONE=3;</div></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<blockquote>
+<p>can you tell me what they mean,did the comment helpful?
+'userful?' are their useless code?'range?'range of what?'Constant' ofco use its a constant</p>
+</blockquote>
+<p><strong>whenever you have to read the code in order to understand the name, the name has pretty much failed to communicate the intent.It's a bad name.</strong>
+Remember names are not for your convienient, it's your primariy tools for communicate  intent.Commuicate your intent is always your first priority,it's even more important than the code work.</p>
+<h1>Avoid Disinformation</h1>
+<ul>
+<li>disinformation: name in code does not mean what it's said.(worsest sins)
+a misleading name can cous</li>
+</ul>
+<h1>Pronounceable Names</h1>
+<ul>
+<li>bad
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> PC_GWDA;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getYYYY</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.year;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> qty_tests =<span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> qty_pass_m=<span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> qty_pass_s =<span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> qty_skip = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> qty_fails=<span class="number">0</span>;</div></pre></td></tr></table></figure></li>
+</ul>
+<h1>Avoid Encoding</h1>
+<p>prifix: p mean point,c mean char, b mean boolean.C for Class,I for Interface.
+C: Class CAccount
+I：Interface IAccount
+p: pointer pAccount
+s: String sName
+st: Null Terminated StName</p>
+<blockquote>
+<p>now days,IDE can tell all this informations,i won't be using them.That' 1990s legency,silly prifixs.Just use names! Let the IDE,compiller and test do the rest.
+<strong>'Account is better than IAccount'</strong></p>
+</blockquote>
+<h1>Part of Speech</h1>
+<p>class and variable are norns or norn pharse,methods are verbs.
+ignore silly nosie words.</p>
+<ul>
+<li>
+<p>good
+ACOUUNT,MESSAGEPARSER</p>
+</li>
+<li>
+<p>silly nosie words
+MANAGER,DATA,INFO,PROSSOR</p>
+</li>
+<li>
+<p>boolean variabels should been write like predicats,they read well,like <code>isEmpty</code>,<code>isTerminated</code></p>
+</li>
+<li>
+<p>methods should been verbs or verbs pharese, they read well,like <code>getPirce</code>,<code>postPayment</code></p>
+</li>
+<li>
+<p>if a methods returns a boolean,then should be predicats,beacuse they likely be used in if statement and they read well,like<code>isPostable</code>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">boolean</span> isEmpty;</div><div class="line"><span class="keyword">boolean</span> isTerminated;</div><div class="line">---</div><div class="line"><span class="keyword">if</span>(isEmpty)&#123;</div><div class="line">    <span class="keyword">if</span> (payment.isPostable())&#123;</div><div class="line">        postPayment(payment);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Enums tends to be states or object descriptors,so they often adj.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Color&#123;RED,GREEN,BLUE&#125;;</div><div class="line"><span class="keyword">enum</span> Status&#123;PENDING,CLOSED,CANCELLED&#125;;</div><div class="line"><span class="keyword">enum</span> Size&#123;SMALL,MEDIUM,LARGE&#125;;</div></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<blockquote>
+<p>remmeber: it's a lot easier to read code if the statements form sentences that read like well written poems.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(employee.isLate() employee.reprimand();</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h1>The Scope of Length Rule</h1>
+<ul>
+<li>for varibales:</li>
+</ul>
+<p>the longger the scope of variable,the longger veriable names,but the variable with short scope should have short names;
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (ITestResult tr: m_configIssues)&#123;</div><div class="line">Elemtent element = createElement(d,tr);</div><div class="line">rootElement.appendChild(element);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>here <code>tr</code> is a good name,but <code>d</code> is bad.<code>element</code> should be shorten to <code>e</code>.</p>
+</blockquote>
+<ul>
+<li>for funtions(oppsite):</li>
+</ul>
+<p>the longer the scope,the shorter the function or name should be;
+the shortter the scope,the longer the function should be.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">server</span><span class="params">(Socket s)</span></span>&#123;</div><div class="line">    <span class="keyword">try</span>&#123;</div><div class="line">                tryProcessInstructions(s);</div><div class="line">        &#125;<span class="keyword">catch</span>(Throwable e)&#123;</div><div class="line">            slimFactory.stop();</div><div class="line">            close();</div><div class="line">            closeEnclosingServiceInSeperateThread();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>we like long socpe public function names  short like <code>serve</code>,convinient to use,long name hard to tell apart;we like short scope private function names long like <code>tryProcessInstructions</code>,<code>closeEnclosingServiceInSeperateThread</code>,only called from here ,it's kind of a comment, explain themselves.
+The same arguement can be applied to Classes.</p>
+</blockquote>
 
-
-bad:
-1int d; //    elapsed time in days
-
-
-good
-1234567
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/12/21/Tech/Clean Code 笔记（1）Name/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>

@@ -413,22 +413,74 @@
       
         
           
-          Jira Basic User guide
-
-创建时间:2015-09-28
+            <h1>Jira Basic User guide</h1>
+<blockquote>
+<p>创建时间:2015-09-28
 修订时间:2015-09-28
-编写：shengjunhui
+编写：shengjunhui</p>
+</blockquote>
+<h2>What is jira ?</h2>
+<p><a href="https://www.atlassian.com/software/Jira" target="_blank" rel="external">JIRA</a>是Atlassian公司出品的** Issue &amp; Project Tracking(项目与事务跟踪)工具**，被广泛应用于缺陷跟踪、客户服务、需求收集、流程审批、任务跟踪、项目跟踪和敏捷管理等工作领域。</p>
+<p>JIRA中配置灵活、功能全面、部署简单、扩展丰富，其超过150项特性得到了全球115个国家超过19,000家客户的认可。</p>
+<p>对于Jira中的一些概念，我整理了一个对应的脑图**<a href="http://naotu.baidu.com/file/361ad7a51bda5bb19a3c6eb6450313e2" target="_blank" rel="external">Jira简介</a>**，以便于我们能够简洁明了理解这些词在Jira中的含义。</p>
+<h2>What is project?</h2>
+<p><img src="/2015/10/10/Tools/Jira Basic User Guide/project.bmp" alt="Original page">
+项目的基本单位,有名字，标识(key)，模块，版本等组成。每一个项目都会有一个key（例如，<code>“BD”</code>）,所有的该项目下的issue都会被分配一个issue key(例如<code>&quot;BD-1&quot;</code>)。</p>
+<h2>What is issue?</h2>
+<p><img src="/2015/10/10/Tools/Jira Basic User Guide/issue.bmp" alt="Original page">
+Issue(问题)为一切可以追踪的议题，包括史诗，用户故事，任务，子任务，缺陷等等。一般的项目中的惯例是一个项目有多个史诗级故事Epics。对于每一个Epic，又可以由多个用户故事组成。对于每一个用户故事我们可以将其分解成几个任务来进行。当任务还是比较难以执行时，我们还可以将任务分解为多个可以执行的子任务。</p>
+<blockquote>
+<p>任务和用户故事的区别：</p>
+</blockquote>
+<ul>
+<li>任务一般是开发人员拿过来直接可以执行的单元。</li>
+<li>用户故事是用户对于需求场景的简短的描述。</li>
+<li>任务是对用户故事的分解，是一些为了完成用户故事需要做的一些工作。</li>
+</ul>
+<h4>issue的属性</h4>
+<p>在创建一个issue时，我们需要填写它的一些属性。目前一个issue所含的属性有：
+[img5]:img/createIssue.bmp
+![Original page][img5]
+我们可以选择填写所有的属性，也可以自定义选择要填的属性。其中值得注意的是：</p>
+<h4>Issue 详细</h4>
+<p><img src="/2015/10/10/Tools/Jira Basic User Guide/IssueDetail.png" alt="Original page">　
+对于每一个issue，我们都可以通过点击它的issue key（例如<code>“BD-1”</code>）或者右键选择<code>“在Jira中浏览”</code>，查看它的详细信息</p>
+<h2>What is workflow?</h2>
+<p><img src="/2015/10/10/Tools/Jira Basic User Guide/w.bmp" alt="Original page"></p>
+<p><img src="/2015/10/10/Tools/Jira Basic User Guide/workflow.bmp" alt="Original page"></p>
+<h2>Scrum 面板</h2>
+<p>Scrum面板是JIRA目前主推的敏捷插件中的重要功能，是团队中最常用的一个面板。用来记录开发活动中的issue。</p>
+<p><img src="/2015/10/10/Tools/Jira Basic User Guide/Scrumboard.bmp" alt="Original page">
+面板的右上角为三个不同的菜单：<strong>Plan</strong>， <strong>Work</strong>， <strong>Report</strong> 分别用来记录项目在不同阶段的内容。</p>
+<h4>Plan</h4>
+<p>在项目计划阶段，项目需求管理人员将需求转换成对应的大的Epic Stroy 录入到Product backlog中，并将这些Epic Stroy 分解成小故事以及任务。
+该面板中，可以通过设置不同的filter来搜索得到不同的结果。比如“Only my Issues”,“Recently update”，还可以根据版本，epic，来筛选查找对应的issue。</p>
+<h4>Work</h4>
+<p>当我们在Plan面板录完了对于的用户故事后，可以将这个迭代需要做的issue拖入到Sprint框中，点击Strat Sprint开始这个sprint。</p>
+<p><img src="/2015/10/10/Tools/Jira Basic User Guide/work.bmp" alt="Original page">
+该面板展示了当前sprint的所有issue，并在不同的状态的栏目中能够看这些issue。</p>
+<h4>Report</h4>
+<p>Report 面板是对项目的sprint中的各种指标进行监控，包括Burndown Chart(燃尽图),Sprint Report(Sprint报告，在项目的回顾中分析使用)，Epic Report(针对每一个Epic的进度分析图)，Version Report, Control Chart,Velocity Chart,Cumulative Flow Diagram 等等
+[img9]:img/workreport.bmp
+![Original page][img9]</p>
+<h2>项目的概览</h2>
+<p>另外一个项目中常用的页面时项目概览页面，我们通过点击<code>**项目**</code>菜单下对应的项目，便可以查看项目的概览。包括项目的简介
+如果你的角色是管理员，还可以管理对应栏目下的内容。</p>
+<p><img src="/2015/10/10/Tools/Jira Basic User Guide/summary.bmp" alt="Original page"></p>
+<h2>一些插件</h2>
+<h4>SVN插件</h4>
+<p>在提交代码时，在commit message中输入对应的issue key，则在对应的issue下，能够看到相应的svn记录。
+例如：commit message: BD-1: 添加了xxxx功能
+[img11]:img/svn.bmp
+![Original page][img11]</p>
+<h4>Draw.io 插件</h4>
+<p>在对某一个任务做设计时，可以方便的使用draw.io插件对它做流程图的设计</p>
+<p><img src="/2015/10/10/Tools/Jira Basic User Guide/drawio.bmp" alt="Original page"></p>
+<blockquote>
+<p><a href="https://confluence.atlassian.com/jira063/" target="_blank" rel="external">Jira的官方用户手册6.3.6</a>很详细的描述了更多的关于Jira的使用说明，请参考！(PS. 如果你们是敏捷的小团队，我会更推荐teambition,tower,trello等更加轻的小工具。)</p>
+</blockquote>
 
-What is jira ?
-JIRA是Atlassian公司出品的** Issue &amp; Project Tracking(项目与事务跟踪)工具**，
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/10/10/Tools/Jira Basic User Guide/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -580,20 +632,31 @@ JIRA是Atlassian公司出品的** Issue &amp; Project Tracking(项目与事务�
       
         
           
-          最近看了几句话非常有感觉，觉得它是属于一个合格专业的程序员应该具备的修养，写出来分享给大家，同时主要是勉励自己。
+            <p><img src="/2015/08/12/life/程序员的自我修养/23-44-33.jpg" alt="">
+最近看了几句话非常有感觉，觉得它是属于一个合格专业的程序员应该具备的修养，写出来分享给大家，同时主要是勉励自己。
+&lt;!-- more --&gt;</p>
+<h1>第一句</h1>
+<blockquote>
+<p><strong>Amateurs practice until they get it right, professionals practice until they can’t get it wrong.</strong></p>
+</blockquote>
+<p>来自<a href="http://www.oilbeater.com" target="_blank" rel="external">O神</a>的qq签名，大意是说业余选手会不断的练习直到他们作对了，专业的选手也会不断练习知道他们不会犯错。这段话大概是o神入职阿里2~3个月后修改的，想必是他工作几个月后的感悟。虽然他现在已经不再阿里，但是这条qq签名一直留在那里，想必这还是他以后工作人生中的一个感悟吧。虽然作为一个程序员不犯错，不出bug基本是一个不可能的问题，但这句话要传达的意思想要成为一个专业的程序员，离不开的是<strong>不断的学习，不断训练，不断的严格要求自己</strong>。</p>
+<h1>第二句</h1>
+<blockquote>
+<p><strong>才华撑不起野心的时候，你要静下心来学习</strong></p>
+</blockquote>
+<p>来自<a href="http://www.wuchong.me" target="_blank" rel="external">wuchong</a>同学博客的签名，一度我还把它设成了微信的签名。这句话就更直白了，告诫我们这些明明可以靠脸吃饭的同学，但是又对才华有不懈追求的同学，要充满野心并且不断学习。IT行业是一个高速奔跑的行业，想要成为professional，**不断学习，做一个<a href="https://en.wikipedia.org/wiki/Lifelong_learning" target="_blank" rel="external">lifelong learner</a>**是非常有必要的。</p>
+<h1>第三句</h1>
+<blockquote>
+<p><strong>一天天消失 // Stay Focused, Keep Shipping. Build Early, Build Always. Improve yourself, Write Solid/Simple/Stupid code.</strong></p>
+</blockquote>
+<p>这是阮一峰老师的微博签名（擦，是有多闲，一直在看别人签名，也是醉了 - -！）。看吧，阮大神也是这么说的，而且阮大神境界更高，毕竟是独立思考，有思想的（参见阮老师大作<a href="http://book.douban.com/subject/26268552/" target="_blank" rel="external">《如何变的有思想》</a>）经历也丰富的大神。<strong>Improve yourself，Write Solid/Simple/Stupid code</strong>是督促我们要不断学习提高自己，写出3个S的代码。三个S开头的单词说起来简简单单，但不经过长年累月的积累和学习应该是很难做到的。同时阮老师用一个<strong>一天天消失</strong>,简单有力的说出了时间流逝之快，看明天又是周四了，一周又要立马的过去了。<strong>Stay Focused, Keep Shipping</strong>告诫我们要保持专注，保持源源不断的向用户输送自己的代码，自己的产品。这句话也是FB的zucker对自己的告诫。
+至于<strong>Bulid Early, Build Always</strong>我也不大理解，大概是说要尽早的把产品传递给用户，这个变化快速的市场，精雕细琢产品错过最佳的推向市场的时机是非常可悲的。一直保持行动，一直保持将产品输送给用户。</p>
+<h1>总结</h1>
+<p>最后，说了这么多，这篇文章主要是告诫我这个非科班出身的，刚毕业进入职场的码农，要<strong>严格要求自己，不断学习进步，学做lifelong learner，早日成为一个professional的码农</strong>。</p>
+<p><em>Happy Coding,Happy Hacking.</em>
+<em>Eric Sheng</em></p>
 
-&lt;!-- more --&gt;
-第一句
-
-Amateurs practice until they get it right, professionals practice u
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/08/12/life/程序员的自我修养/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -745,17 +808,48 @@ Amateurs practice until they get it right, professionals practice u
       
         
           
-          用Scrapy爬网易新闻简易教程
-最近在研究爬虫相关的东东，经过上一篇文章的一系列调研比较后，收敛到scarpy这个Python的开源框架。它的好处和简单介绍可以参见上一篇文章。
-Scrapy的安装和最简单的入门也可以参见官方文档tutorial,同时readthedocs上也挂有完整翻译的Scra
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/04/02/Spider/用Scrapy爬网易新闻简易教程/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1>用Scrapy爬网易新闻简易教程</h1>
+<p>最近在研究爬虫相关的东东，经过<a href="">上一篇文章</a>的一系列调研比较后，收敛到scarpy这个Python的开源框架。它的好处和简单介绍可以参见上一篇文章。
+Scrapy的安装和最简单的入门也可以参见官方文档<a href="http://doc.scrapy.org/en/latest/intro/tutorial.html" target="_blank" rel="external">tutorial</a>,同时readthedocs上也挂有完整翻译的<a href="http://scrapy-chs.readthedocs.org/zh_CN/latest/intro/overview.html" target="_blank" rel="external">Scrapy中文文档</a>,也有几篇中文的<a href="http://www.cnblogs.com/txw1958/archive/2012/07/16/scrapy-tutorial.html" target="_blank" rel="external">博客</a>将该文档翻译了过来，这些都是非常好的入门材料。如果想完全弄懂爬虫的一些更加高阶的功能，比如分布式，缓存技术，并发等等问题，那么就必须好好研究下文档了。</p>
+<p>这里我们直接举一个简单的用Scrapy来爬去网易科技新闻的例子。爬虫之前我们先应该把我们的大体思路理清楚，我们爬虫的对象是<a href="tech.163.com">网易科技新闻</a>。这个网页上会有很多信息，有导航，有专栏，有新闻，还有一些广告，我们的目的则很明确——爬新闻，细分一下主要可以包括新闻的标题，正文，来源，时间等等。同时为了简单起见，我们对于新闻里的图片，视频等等一系列多媒体元素也不做处理。同时我们还要考虑到如何把爬到内容用数据库存储起来。好，那我们开始吧。</p>
+<h2>创建项目</h2>
+<p>使用命令创建项目：
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scrapy startproject tech163</div></pre></td></tr></table></figure></p>
+<p>我们可以看到新建的项目目录结构如下：</p>
+<pre><code>tech163/
+├── scrapy.cfg
+└── tech163
+    ├── __init__.py
+    ├── items.py
+    ├── pipelines.py
+    ├── settings.py
+    └── spiders
+        └── __init__.py
+</code></pre>
+<p>其中<code>scrapy.cfg</code>定义的是项目的配置文件，一般里面的内容只是做了一个指向，将配置指向到了<code>settings.py</code>这个文件，这才是我们对项目进行配置的地方，包括对pipeline，download middleware，useragent。</p>
+<h2>定义要爬的内容</h2>
+<p>在scrapy框架中 要爬的内容都被定义在<code>items.py</code>文件中，定义也非常简单，代码如下：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># Define here the models for your scraped items</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># See documentation in:</span></div><div class="line"><span class="comment"># http://doc.scrapy.org/en/latest/topics/items.html</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tech163Item</span><span class="params">(scrapy.Item)</span>:</span></div><div class="line">    <span class="comment"># define the fields for your item here like:</span></div><div class="line">    <span class="comment"># name = scrapy.Field()</span></div><div class="line">    news_thread=scrapy.Field()</div><div class="line">    news_title = scrapy.Field()</div><div class="line">    news_url = scrapy.Field()</div><div class="line">    news_time=scrapy.Field()</div><div class="line">    news_from=scrapy.Field()</div><div class="line">    from_url=scrapy.Field()</div><div class="line">    news_body=scrapy.Field()</div></pre></td></tr></table></figure></p>
+<p>其中，<code>news_thread</code>是从每条新闻的url中提取特有的一个字符串，比如<a href="http://tech.163.com/14/0813/10/A3H72TD4000915BF.html" target="_blank" rel="external">这条新闻</a>,它的地址是：<code>http://tech.163.com/14/0813/10/A3H72TD4000915BF.html</code>， 那么它的thread就是：<code>A3H72TD4000915BF</code>，个人感觉它应该是随机产生的新闻的识别号，<code>14</code>和<code>0813</code>是年份份和日期，<code>10</code>是一个两位的数字。<code>news_title</code>，<code>news_url</code>，<code>news_time</code>，<code>news_from</code>，<code>from_url</code>，<code>news_body</code>这些定义的是之前提到新闻的属性。</p>
+<h2>开始写爬虫蜘蛛</h2>
+<p>定义完要爬的内容，我们再开始来写我们的爬虫蜘蛛——spider，我们在目录<code>tech163/spiders/</code>下，创建我们的spider文件叫做<code>news_spider.py</code>。
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#encoding: utf-8</span></div><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">from</span> scrapy.selector <span class="keyword">import</span> Selector</div><div class="line"><span class="keyword">from</span> tech163.items <span class="keyword">import</span> Tech163Item</div><div class="line"><span class="keyword">from</span> scrapy.contrib.linkextractors <span class="keyword">import</span> LinkExtractor</div><div class="line"><span class="keyword">from</span> scrapy.contrib.spiders <span class="keyword">import</span> CrawlSpider,Rule</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleSpider</span><span class="params">(CrawlSpider)</span>:</span></div><div class="line">	name = <span class="string">"news"</span></div><div class="line">	allowed_domains = [<span class="string">"tech.163.com"</span>]</div><div class="line">	start_urls = [<span class="string">'http://tech.163.com/'</span>]</div><div class="line">	rules=(</div><div class="line">		Rule(LinkExtractor(allow=<span class="string">r"/14/08\d+/\d+/*"</span>),</div><div class="line">		callback=<span class="string">"parse_news"</span>,follow=<span class="keyword">True</span>),</div><div class="line">	)</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">printcn</span><span class="params">(suni)</span>:</span></div><div class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> uni:</div><div class="line">			<span class="keyword">print</span> uni.encode(<span class="string">'utf-8'</span>)</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">parse_news</span><span class="params">(self,response)</span>:</span></div><div class="line">		item = Tech163Item()</div><div class="line">		item[<span class="string">'news_thread'</span>]=response.url.strip().split(<span class="string">'/'</span>)[<span class="number">-1</span>][:<span class="number">-5</span>]</div><div class="line">		<span class="comment"># self.get_thread(response,item)</span></div><div class="line">		self.get_title(response,item)</div><div class="line">		self.get_source(response,item)</div><div class="line">		self.get_url(response,item)</div><div class="line">		self.get_news_from(response,item)</div><div class="line">		self.get_from_url(response,item)</div><div class="line">		self.get_text(response,item)</div><div class="line">		<span class="comment">#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!remenber to Retrun Item after parse</span></div><div class="line">		<span class="keyword">return</span> item </div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">get_title</span><span class="params">(self,response,item)</span>:</span></div><div class="line">		title=response.xpath(<span class="string">"/html/head/title/text()"</span>).extract()</div><div class="line">		<span class="keyword">if</span> title:</div><div class="line">			<span class="comment"># print 'title:'+title[0][:-5].encode('utf-8')</span></div><div class="line">			item[<span class="string">'news_title'</span>]=title[<span class="number">0</span>][:<span class="number">-5</span>]</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">get_source</span><span class="params">(self,response,item)</span>:</span></div><div class="line">		source=response.xpath(<span class="string">"//div[@class='left']/text()"</span>).extract()</div><div class="line">		<span class="keyword">if</span> source:</div><div class="line">			<span class="comment"># print 'source'+source[0][:-5].encode('utf-8')</span></div><div class="line">			item[<span class="string">'news_time'</span>]=source[<span class="number">0</span>][:<span class="number">-5</span>]</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">get_news_from</span><span class="params">(self,response,item)</span>:</span></div><div class="line">		news_from=response.xpath(<span class="string">"//div[@class='left']/a/text()"</span>).extract()</div><div class="line">		<span class="keyword">if</span> news_from:</div><div class="line">			<span class="comment"># print 'from'+news_from[0].encode('utf-8')		</span></div><div class="line">			item[<span class="string">'news_from'</span>]=news_from[<span class="number">0</span>]</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">get_from_url</span><span class="params">(self,response,item)</span>:</span></div><div class="line">		from_url=response.xpath(<span class="string">"//div[@class='left']/a/@href"</span>).extract()</div><div class="line">		<span class="keyword">if</span> from_url:</div><div class="line">			<span class="comment"># print 'url'+from_url[0].encode('utf-8')		</span></div><div class="line">			item[<span class="string">'from_url'</span>]=from_url[<span class="number">0</span>]	</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">def</span>  <span class="title">get_text</span><span class="params">(self,response,item)</span>:</span></div><div class="line">		news_body=response.xpath(<span class="string">"//div[@id='endText']/p/text()"</span>).extract()</div><div class="line">		<span class="keyword">if</span> news_body:</div><div class="line">			<span class="comment"># for  entry in news_body:</span></div><div class="line">			<span class="comment"># 	print entry.encode('utf-8')</span></div><div class="line">			item[<span class="string">'news_body'</span>]=news_body	</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">get_url</span><span class="params">(self,response,item)</span>:</span></div><div class="line">		news_url=response.url</div><div class="line">		<span class="keyword">if</span> news_url:</div><div class="line">			<span class="comment">#print news_url	</span></div><div class="line">		item[<span class="string">'news_url'</span>]=news_url</div></pre></td></tr></table></figure></p>
+<p>代码非常简单,大部分都是对网页做解析，解析的地方，大部分是用xpath对内容进行提取，这部分还是得参考文档。这些解析只实现了对单张新闻网页的解析，那么是什么能够让它不停的爬取科技频道的新闻呢？scrapy的方便之处就是。这个机制只用一行代码就实现了
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rules=(</div><div class="line">Rule(LinkExtractor(allow=<span class="string">r"/14/08\d+/\d+/*"</span>),</div><div class="line">callback=<span class="string">"parse_news"</span>,follow=<span class="keyword">True</span>),</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>这行代码，设置了整个爬虫的规则，通过LinkExtractor这个元件从response提取到所有的链接，再通过设置allow来设置需要再递归往下爬的新闻。这里使用正则表达式，将新闻的url做了约束。我们可以回顾下，正常的url的格式是这样的<code>http://tech.163.com/14/0813/10/A3H72TD4000915BF.html</code> ，代码中的正则<code>/14/08\d+/\d+/*</code>的含义是大概是爬去<code>/14/08</code>开头并且后面是<code>数字/数字/任何格式/</code>的新闻，可以说是14年8月份的新闻。通过这个正则我们便可以很好的对递归爬去做出筛选。<code>follow=ture</code>定义了是否再爬到的结果上继续往后爬。</p>
+<h2>定义数据的处理管道</h2>
+<p>scrapy通过在pipeline来对每次爬去到的items值进行处理，这里我们使用mongodb数据库来存储我们爬到的数据，新建的数据库为NewsDB。我们先在<code>tech163</code>目下单独使用文件，新建一个文件<code>store.py</code>来配置数据库存储，这里需要mongodb的依赖，以及pymongo依赖。
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#encoding: utf-8</span></div><div class="line"><span class="keyword">import</span> pymongo</div><div class="line"><span class="keyword">import</span> random</div><div class="line">HOST = <span class="string">"127.0.0.1"</span></div><div class="line">PORT = <span class="number">27017</span></div><div class="line">client = pymongo.MongoClient(HOST, PORT)</div><div class="line">NewsDB = client.NewsDB</div></pre></td></tr></table></figure></p>
+<p>然后我们的pipeline文件这么写：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># Define your item pipelines here</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Don't forget to add your pipeline to the ITEM_PIPELINES setting</span></div><div class="line"><span class="comment"># See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html</span></div><div class="line"><span class="comment">#encoding: utf-8</span></div><div class="line"><span class="keyword">from</span> store <span class="keyword">import</span> NewsDB</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tech163Pipeline</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></div><div class="line">        <span class="keyword">if</span> spider.name != <span class="string">"news"</span>:  <span class="keyword">return</span> item</div><div class="line">        <span class="keyword">if</span> item.get(<span class="string">"news_thread"</span>, <span class="keyword">None</span>) <span class="keyword">is</span> <span class="keyword">None</span>: <span class="keyword">return</span> item</div><div class="line"></div><div class="line">        spec = &#123; <span class="string">"news_thread"</span>: item[<span class="string">"news_thread"</span>] &#125;</div><div class="line">        NewsDB.news.update(spec, &#123;<span class="string">'$set'</span>: dict(item)&#125;, upsert=<span class="keyword">True</span>)</div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div></pre></td></tr></table></figure></p>
+<p>最后我们在setting.py 文件中做一些设置，主要是定义pipeline：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="comment"># Scrapy settings for tech163 project</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># For simplicity, this file contains only the most important settings by</span></div><div class="line"><span class="comment"># default. All the other settings are documented here:</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment">#     http://doc.scrapy.org/en/latest/topics/settings.html</span></div><div class="line"><span class="comment">#</span></div><div class="line"></div><div class="line">BOT_NAME = <span class="string">'tech163'</span></div><div class="line"></div><div class="line">SPIDER_MODULES = [<span class="string">'tech163.spiders'</span>]</div><div class="line">NEWSPIDER_MODULE = <span class="string">'tech163.spiders'</span></div><div class="line">ITEM_PIPELINES = [<span class="string">'tech163.pipelines.Tech163Pipeline'</span>,</div><div class="line">			]</div><div class="line"></div><div class="line"><span class="comment"># Crawl responsibly by identifying yourself (and your website) on the user-agent</span></div><div class="line"><span class="comment">#USER_AGENT = 'tech163 (+http://www.yourdomain.com)'</span></div><div class="line">USER_AGENT = <span class="string">'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.7'</span></div><div class="line"></div><div class="line">DOWNLOAD_TIMEOUT = <span class="number">15</span></div><div class="line"><span class="comment"># DOWNLOAD_DELAY = 0.1</span></div><div class="line"><span class="comment"># LOG_LEVEL = "INFO"</span></div><div class="line"><span class="comment"># LOG_STDOUT = True</span></div><div class="line"><span class="comment"># LOG_FILE = "log/newsSpider.log"</span></div></pre></td></tr></table></figure></p>
+<p>这样我们就完成了整个项目的配置，我们便可以在命令行中敲入：</p>
+<pre><code>scrapy crawl news
+</code></pre>
+<p>来开始爬去新闻。整个项目的源代码传到了<a href="https://github.com/armysheng/tech163newsSpider" target="_blank" rel="external">github</a>上供大家参考，完成这个以后可以学习图片爬取，分布式处理，以及缓存技术等等问题。</p>
+
+          
         
       
     </div>
@@ -907,16 +1001,20 @@ Scrapy的安装和最简单的入门也可以参见官方文档tutorial,同时re
       
         
           
-          Balabala
-好久没更新日志了，现在人已在魔都，刚刚开始第一天的实习，刚刚下班，闲得无聊，坐下来写写我的近况。之前辗转的求职路都不想提，因为受不了帝都的空气和压力，帝都的许多互联网我也没有多去尝试。一心想回杭州阿里的我，在阿里的内推电面以及校招笔试挂掉之后，就无缘和阿里的面试官当面聊一聊了。直到
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/01/12/life/CtripDay1-2015-1-12/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h2>Balabala</h2>
+<p>好久没更新日志了，现在人已在魔都，刚刚开始第一天的实习，刚刚下班，闲得无聊，坐下来写写我的近况。之前辗转的求职路都不想提，因为受不了帝都的空气和压力，帝都的许多互联网我也没有多去尝试。一心想回杭州阿里的我，在阿里的内推电面以及校招笔试挂掉之后，就无缘和阿里的面试官当面聊一聊了。直到10月份才拿到2个自己比较满意的offer，一个在杭州离家超近，一个在上海离家也不远；一个是传统IT行业正起步转型互联网，一个是国内最大的在线旅游网站，携程。懒惰的我，自此求职战斗力就直线下降。沉迷于offer比较，研究两家公司的背景，财报，股票，口碑等等，甚至其行业内的竞争对手的材料，简直调研了在线旅游和安防两个行业（-_-）。这时处女座的选择困难症上身，两边还是分不出胜负，最后决定先来携程实习一下，感受一下大互联网的氛围。</p>
+<h2>互联网深度用户的魔都新生活</h2>
+<p>由于携程一直有入职前先实习的惯例，正好导师这边活也都忙完了，便约定了来上海实习。我一直是一个非常会做计划，喜欢提前把事安排的妥妥当当的人。</p>
+<h3>行</h3>
+<p>于是我便早早的在12306上订好了票，非常熟练的抢到票，并且是一辆经过上海但是终点站杭州的车，刚好符合我的学生票优惠区间。（后来发现携程的APP顶高铁票十分方便）</p>
+<h3>住</h3>
+<p>最令人头疼的是租房问题，只能实习一个月，所以是一个月的短租，非常不方便，而且最好是希望那边直接能提供被子，枕头等等一些大件的生活用品，省的自己买，用完丢了也不合适，还得搬来搬去。最先想到的解决方案当然是上58，赶集，安居客，搜房等等一些信息网上去找，找了一阵发现这边已经被中介占领的死死的。后来来到了豆瓣小组，不可否认，豆瓣现在是为数不多的个人房源阵地了，不过对与我们这种短租一月的还是困难。再后来想到了鼎鼎大名的Airbnb，这个靠谱，门槛高，还看不到中介的身影，好多房子都是英文介绍。不过门槛高了价格也高，一些装修不错的房子都超过了200yuan/night。便宜的也有，不过大多数是沙发或者气垫床。最后总算发现了一个做短租的国内网站，<a href="www.xiaozhu.com">小猪短租</a>，价格合适，与房东商量后，以一个略高于市场价的价格租到了一个不错的<a href="">次卧</a>。</p>
+<h3>吃</h3>
+<p>刚来第一天，叫了份饿了么，不过尽管魔都是饿了么的老巢，但是覆盖情况还是一般
+在爱博家园这边还是只有零星几家有送外卖服务，满减活动基本上么有。不过楼下有个小购物广场，上面有不少吃的，打开大众点评搜罗了附近的美食与娱乐场所。找了家老鸭粉丝汤的店试了试。</p>
+<p>陆续体验其他中。。</p>
+
+          
         
       
     </div>
@@ -1068,20 +1166,29 @@ Scrapy的安装和最简单的入门也可以参见官方文档tutorial,同时re
       
         
           
-          
-概述
-k近邻算法是机器学习算法中最简单基础的算法,大意是给你一个样本a,计算出和它距离最近的k个样本,这k个样本也即与a最相似的样本,它们组成了a的K近邻域.k的取值通常是一个不大于20的整数.
-k近邻算法可以用来做分类
+            <hr>
+<h3>概述</h3>
+<p>k近邻算法是机器学习算法中最简单基础的算法,大意是给你一个样本a,计算出和它距离最近的k个样本,这k个样本也即与a最相似的样本,它们组成了a的K近邻域.k的取值通常是一个不大于20的整数.</p>
+<h3>k近邻算法可以用来做分类</h3>
+<blockquote>
+<p>具体做法是,对于未知类别的样本a,我们计算a样本与每个训练样本的距离,然后对距离排序,得到前k个距离最小的样本,这k个样本中哪个类别的样本多,我们就说a可以分到该类别中.</p>
+</blockquote>
+<h3>关于样本间的距离</h3>
+<blockquote>
+<p>样本间的距离,也即特征向量间的距离 定义的方式比较多,常见的有最简单的欧氏距离,还有其他的一些距离计算方式也需要了解,比如余弦距离,pearson距离,CityBlock距离,Minkowski距离等等等等,不同距离的选择会对相似度计算产生不同的影响,在实际的项目中,可以多做尝试,来选取最好的距离公式.距离的计算在很多机器学习算法中都有用到,比如以后会提到的相似度计算,k均值聚类等等等.</p>
+</blockquote>
+<h3>优缺点</h3>
+<p>优点:
+最简单最有效,对异常值不敏感
+缺点:
+当训练数据量很大时,必须有非常大的空间来存储训练数据,此外必须对数据集中的每个数据计算距离值,回非常耗时.另一个缺陷是他无法给出任何数据的 基础结构信息,因此我们无法知晓平均实例样本和典型实例样本具有什么特征.后续的概率测量方法处理分类会解决这个问题</p>
+<h3>Python实现</h3>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#encoding:utf8</span></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="keyword">import</span> operator</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDataSet</span><span class="params">()</span>:</span></div><div class="line">    group = array([[<span class="number">1.0</span>,<span class="number">1.1</span>],[<span class="number">1.0</span>,<span class="number">1.0</span>],[<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0.1</span>]])</div><div class="line">    labels = [<span class="string">'A'</span>,<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'B'</span>]</div><div class="line">    <span class="keyword">return</span> group, labels</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify0</span><span class="params">(inX, dataSet, labels, k)</span>:</span></div><div class="line">    dataSetSize = dataSet.shape[<span class="number">0</span>]      <span class="comment">#dataSet的行数,等于labels向量的元素数目</span></div><div class="line">    diffMat = tile(inX, (dataSetSize, <span class="number">1</span>)) - dataSet</div><div class="line">    <span class="comment">#print diffMat</span></div><div class="line">    sqDiffMat = diffMat**<span class="number">2</span></div><div class="line">    <span class="comment">#print sqDiffMat</span></div><div class="line">    sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>) <span class="comment">#计算每行的和</span></div><div class="line">    <span class="comment">#print sqDistances</span></div><div class="line">    distances = sqDistances**<span class="number">0.5</span>        <span class="comment">#计算欧式距离</span></div><div class="line">    <span class="comment">#print distances</span></div><div class="line">    sortedDistIndicies = distances.argsort()<span class="comment">#返回矩阵中每个元素的排序序号-&gt;来自原矩阵的序号:升序排列!!!</span></div><div class="line">    <span class="comment">#print sortedDistIndicies</span></div><div class="line">    </div><div class="line">    classCount = &#123;&#125;<span class="comment">#建立一个空字典/哈希表/映射:键值为label;值为每个label出现的频率</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</div><div class="line">        voteIlabel = labels[sortedDistIndicies[i]]</div><div class="line">        classCount[voteIlabel] = classCount.get(voteIlabel,<span class="number">0</span>) + <span class="number">1</span><span class="comment">#统计每个label出现的频率</span></div><div class="line">        <span class="comment">#D.get(k[,d]) -&gt; D[k] if k in D, else d.  d defaults to None.</span></div><div class="line">    sortedClassCount = sorted(classCount.iteritems(), key = operator.itemgetter(<span class="number">1</span>), reverse = <span class="keyword">True</span>)</div><div class="line">    <span class="comment">#D.iteritems() -&gt; an iterator over the (key, value) items of D</span></div><div class="line">    <span class="comment">#key = operator.itemgetter(1)-&gt;获取函数key第一个域的值</span></div><div class="line">    </div><div class="line">    <span class="comment">#reverse = True-&gt;逆序排序</span></div><div class="line">    <span class="comment">#将字典分解为列表,</span></div><div class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</div></pre></td></tr></table></figure></p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">group, labels = createDataSet()</div><div class="line"><span class="keyword">print</span> classify0([<span class="number">0</span>,<span class="number">0</span>], group, labels, <span class="number">3</span>)</div></pre></td></tr></table></figure></p>
+<p>运行结果:
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Python <span class="number">2.7</span><span class="number">.6</span> (default, Nov <span class="number">10</span> <span class="number">2013</span>, <span class="number">19</span>:<span class="number">24</span>:<span class="number">18</span>) [MSC v<span class="number">.1500</span> <span class="number">32</span> bit (Intel)] on win32</div><div class="line">Type <span class="string">"copyright"</span>, <span class="string">"credits"</span> <span class="keyword">or</span> <span class="string">"license()"</span> <span class="keyword">for</span> more information.</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>================================ RESTART ================================</div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line">B</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
 
-具体做法是,对于未知类别的样本a,我们计算a样本与每个训练样本的距离,然后
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/11/04/Data structure and Algorithms/机器学习实战之k近邻算法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -1233,17 +1340,29 @@ k近邻算法可以用来做分类
       
         
           
-          sublime是一款非常令人爱不释手的编译器，功能强大，界面美观，跨平台。但是最近在ubuntu下发现他没法输入中文，本来写代码可能需要的中文输入情况比较少，但是奈何有时候写写markdown，注释之类的可能还是需要用到中文，所以今天索性找方法解决他。
-这种问题力求快速解决,不废话.
-##安装搜狗输
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/11/03/Tools/ubuntu下 sublime无法输入中文解决办法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>sublime是一款非常令人爱不释手的编译器，功能强大，界面美观，跨平台。但是最近在ubuntu下发现他没法输入中文，本来写代码可能需要的中文输入情况比较少，但是奈何有时候写写markdown，注释之类的可能还是需要用到中文，所以今天索性找方法解决他。
+这种问题力求快速解决,不废话.</p>
+<p>##安装搜狗输入法</p>
+<p>搜狗输入法最近适配了linux系统,简直是linux粉们的福音,安装可以参见<a href="pinyin.sogou.com/linux/">Sougoupinyin官网</a>,安装完成后,需要进行重启并且配置输入法(按win键,然后输入keyboard),选择Fcitx.</p>
+<p>##安装补丁
+装完搜狗貌似还是不能进行中文输入,网上找到一个解决方案:</p>
+<p>新建文件<code>sub-fcitx.c</code>,建议放到<code>Subime Text</code>所在的目录下,将下面的代码复制:
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">sublime-imfix.c</div><div class="line">Use LD_PRELOAD to interpose some function to fix sublime input method support for linux.</div><div class="line">By Cjacker Huang</div><div class="line"> </div><div class="line">gcc -shared -o libsublime-imfix.so sublime-imfix.c `pkg-config --libs --cflags gtk+-2.0` -fPIC</div><div class="line">LD_PRELOAD=./libsublime-imfix.so subl</div><div class="line">*/</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;gtk/gtk.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;gdk/gdkx.h&gt;</span></span></div><div class="line"><span class="keyword">typedef</span> GdkSegment GdkRegionBox;</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">GdkRegion</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">long</span> size;</div><div class="line">  <span class="keyword">long</span> numRects;</div><div class="line">  GdkRegionBox *rects;</div><div class="line">  GdkRegionBox extents;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">GtkIMContext *local_context;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span></span></div><div class="line"><span class="title">gdk_region_get_clipbox</span> <span class="params">(<span class="keyword">const</span> GdkRegion *region,</span></div><div class="line">            GdkRectangle    *rectangle)</div><div class="line">&#123;</div><div class="line">  g_return_if_fail (region != <span class="literal">NULL</span>);</div><div class="line">  g_return_if_fail (rectangle != <span class="literal">NULL</span>);</div><div class="line"> </div><div class="line">  rectangle-&gt;x = region-&gt;extents.x1;</div><div class="line">  rectangle-&gt;y = region-&gt;extents.y1;</div><div class="line">  rectangle-&gt;width = region-&gt;extents.x2 - region-&gt;extents.x1;</div><div class="line">  rectangle-&gt;height = region-&gt;extents.y2 - region-&gt;extents.y1;</div><div class="line">  GdkRectangle rect;</div><div class="line">  rect.x = rectangle-&gt;x;</div><div class="line">  rect.y = rectangle-&gt;y;</div><div class="line">  rect.width = <span class="number">0</span>;</div><div class="line">  rect.height = rectangle-&gt;height;</div><div class="line">  <span class="comment">//The caret width is 2;</span></div><div class="line">  <span class="comment">//Maybe sometimes we will make a mistake, but for most of the time, it should be the caret.</span></div><div class="line">  <span class="keyword">if</span>(rectangle-&gt;width == <span class="number">2</span> &amp;&amp; GTK_IS_IM_CONTEXT(local_context)) &#123;</div><div class="line">        gtk_im_context_set_cursor_location(local_context, rectangle);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="comment">//this is needed, for example, if you input something in file dialog and return back the edit area</span></div><div class="line"><span class="comment">//context will lost, so here we set it again.</span></div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">static</span> GdkFilterReturn <span class="title">event_filter</span> <span class="params">(GdkXEvent *xevent, GdkEvent *event, gpointer im_context)</span></span></div><div class="line">&#123;</div><div class="line">    XEvent *xev = (XEvent *)xevent;</div><div class="line">    <span class="keyword">if</span>(xev-&gt;type == KeyRelease &amp;&amp; GTK_IS_IM_CONTEXT(im_context)) &#123;</div><div class="line">       GdkWindow * win = g_object_get_data(G_OBJECT(im_context),<span class="string">"window"</span>);</div><div class="line">       <span class="keyword">if</span>(GDK_IS_WINDOW(win))</div><div class="line">         gtk_im_context_set_client_window(im_context, win);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> GDK_FILTER_CONTINUE;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">gtk_im_context_set_client_window</span> <span class="params">(GtkIMContext *context,</span></span></div><div class="line">          GdkWindow    *window)</div><div class="line">&#123;</div><div class="line">  GtkIMContextClass *klass;</div><div class="line">  g_return_if_fail (GTK_IS_IM_CONTEXT (context));</div><div class="line">  klass = GTK_IM_CONTEXT_GET_CLASS (context);</div><div class="line">  <span class="keyword">if</span> (klass-&gt;set_client_window)</div><div class="line">    klass-&gt;set_client_window (context, window);</div><div class="line"> </div><div class="line">  <span class="keyword">if</span>(!GDK_IS_WINDOW (window))</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">  g_object_set_data(G_OBJECT(context),<span class="string">"window"</span>,window);</div><div class="line">  <span class="keyword">int</span> width = gdk_window_get_width(window);</div><div class="line">  <span class="keyword">int</span> height = gdk_window_get_height(window);</div><div class="line">  <span class="keyword">if</span>(width != <span class="number">0</span> &amp;&amp; height !=<span class="number">0</span>) &#123;</div><div class="line">    gtk_im_context_focus_in(context);</div><div class="line">    local_context = context;</div><div class="line">  &#125;</div><div class="line">  gdk_window_add_filter (window, event_filter, context);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>安装变异环境
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install build-essential</div><div class="line">sudo apt-get install libgtk2.0-dev</div></pre></td></tr></table></figure></p>
+<p>切换到<code>sub-fcitx.c</code>，所在目录，编译生成so文件.
+正常的话，目录下会多一个libsublime-imfix.so文件
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gcc -shared -o libsublime-imfix.so sub-fcitx.c `pkg-config --libs --cflags gtk+-2.0` -fPIC</div></pre></td></tr></table></figure></p>
+<p>切换到Sublime Text目录下，通过LD_PRELOAD=./libsublime-imfix.so ./sublime_text命令启动Sublime Text之后，就会发现可以输入中文了，但是这样太麻烦了，通过添加自己的启动脚本可以简化这一过程。
+##添加启动脚本
+在<code>～/bin</code>目录下新建文件<code>sub3</code>，把下面的的代码复制到文件里，其中<code>SUB3_HOME</code>是Sublime Text的根目录，根据自己放的目录更改。另外,Ubuntu13.04下<code>~/bin</code>是默认在用户PATH里的，其它系统可能要自己在<code>~/.bash_profile</code>或者<code>~/.profile</code>中添加环境变量。
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></div><div class="line">SUB3_HOME=$HOME/Software/sublime_text_3</div><div class="line">CMD="LD_PRELOAD=./libsublime-imfix.so ./sublime_text"</div><div class="line">FILENAME=$1</div><div class="line">if [ -n "$1" ]</div><div class="line">then </div><div class="line"> CMD=$&#123;CMD&#125;" "`pwd`/$FILENAME</div><div class="line">fi</div><div class="line">cd "$SUB3_HOME"</div><div class="line">eval $CMD</div></pre></td></tr></table></figure></p>
+<p>修改文件权限
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod 777 sub3</div></pre></td></tr></table></figure></p>
+<p>测试,可以带参数表示文件名也可以不带参数
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">打开Sublime Text,对文件a.sh进行编辑</span></div><div class="line">sub3 a.sh</div><div class="line"><span class="meta">#</span><span class="bash">打开Sublime Text,回到之前关闭时的工作状态</span></div><div class="line">sub3</div></pre></td></tr></table></figure></p>
+
+          
         
       
     </div>
@@ -1395,16 +1514,18 @@ k近邻算法可以用来做分类
       
         
           
-          #压栈思想计算Java运算表达式
-栈的规则是先进后出。利用压栈的思想来计算四则运算表达式是这样的：我们给定两个栈，一个用来存放数字、一个用来存放对应的操作符。假定我们有一个给定的四则运算表达式a+b+c/d*(e+f)-da，那我们先把这个表达式拆分成一个个的数字或者是运算符、或者就是括号了。然后我
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/09/25/Data structure and Algorithms/压栈思想计算Java运算表达式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>#压栈思想计算Java运算表达式</p>
+<p>栈的规则是先进后出。利用压栈的思想来计算四则运算表达式是这样的：我们给定两个栈，一个用来存放数字、一个用来存放对应的操作符。假定我们有一个给定的四则运算表达式a+b+c/d*(e+f)-d<em>a，那我们先把这个表达式拆分成一个个的数字或者是运算符、或者就是括号了。然后我们从左至右遍历每一个元素，遍历过程中遵循步骤和原则如下：
+（1）遇到数字则直接压到数字栈顶。
+（2）遇到运算符（+-</em>/）时，若操作符栈为空，则直接放到操作符栈顶，否则，见（3）。
+（3）若操作符栈顶元素的优先级比当前运算符的优先级小，则直接压入栈顶，否则执行步骤（4）。
+（4）弹出数字栈顶的两个数字并弹出操作符栈顶的运算符进行运算，把运算结果压入数字栈顶，重复（2）和（3）直到当前运算符被压入操作符栈顶。
+（5）遇到左括号“（”时则直接压入操作符栈顶。
+（6）遇到右括号“）”时则依次弹出操作符栈顶的运算符运算数字栈的最顶上两个数字，直到弹出的操作符为左括号。
+下面的例子中分别使用java.util.Vector和java.util.Stack基于上述原则实现了这一运算过程。</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"><span class="keyword">import</span> java.util.Stack;</div><div class="line"><span class="keyword">import</span> java.util.StringTokenizer;</div><div class="line"><span class="keyword">import</span> java.util.Vector;</div><div class="line"><span class="keyword">import</span> java.util.regex.Pattern;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">		String computeExpr = <span class="string">"1 + 5 * 6 + 3 * (2 + 3*2+2-1+3*3) + 10/5 - 6*1"</span>;</div><div class="line">		Test test = <span class="keyword">new</span> Test();</div><div class="line">		<span class="keyword">double</span> result1 = test.computeWithVector(computeExpr);</div><div class="line">		<span class="keyword">double</span> result2 = test.computeWithStack(computeExpr);</div><div class="line">		System.out.println(result1 + <span class="string">"======="</span> + result2);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 利用java.util.Vector计算四则运算字符串表达式的值，如果抛出异常，则说明表达式有误，这里就没有控制</div><div class="line">	 * <span class="doctag">@param</span> computeExpr 四则运算字符串表达式</div><div class="line">	 * <span class="doctag">@return</span> 计算结果</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">computeWithVector</span><span class="params">(String computeExpr)</span> </span>&#123;</div><div class="line">		StringTokenizer tokenizer = <span class="keyword">new</span> StringTokenizer(computeExpr, <span class="string">"+-*/()"</span>, <span class="keyword">true</span>);</div><div class="line">		Vector&lt;Double&gt; nums = <span class="keyword">new</span> Vector&lt;Double&gt;();</div><div class="line">		Vector&lt;Operator&gt; operators = <span class="keyword">new</span> Vector&lt;Operator&gt;();</div><div class="line">		Map&lt;String, Operator&gt; computeOper = <span class="keyword">this</span>.getComputeOper();</div><div class="line">		Operator curOper;</div><div class="line">		String currentEle;</div><div class="line">		<span class="keyword">while</span> (tokenizer.hasMoreTokens()) &#123;</div><div class="line">			currentEle = tokenizer.nextToken().trim();</div><div class="line">			<span class="keyword">if</span> (!<span class="string">""</span>.equals(currentEle)) &#123;<span class="comment">//只处理非空字符</span></div><div class="line">				<span class="keyword">if</span> (<span class="keyword">this</span>.isNum(currentEle)) &#123; <span class="comment">// 数字</span></div><div class="line">					nums.add(Double.valueOf(currentEle));</div><div class="line">				&#125; <span class="keyword">else</span> &#123; <span class="comment">// 非数字，即括号或者操作符</span></div><div class="line">					curOper = computeOper.get(currentEle);</div><div class="line">					<span class="keyword">if</span> (curOper != <span class="keyword">null</span>) &#123; <span class="comment">// 是运算符</span></div><div class="line">						<span class="comment">// 运算列表不为空且之前的运算符优先级较高则先计算之前的优先级</span></div><div class="line">						<span class="keyword">while</span> (!operators.isEmpty()</div><div class="line">								&amp;&amp; operators.lastElement().priority() &gt;= curOper</div><div class="line">										.priority()) &#123;</div><div class="line">							compute(nums, operators);</div><div class="line">						&#125;</div><div class="line">						<span class="comment">// 把当前运算符放在运算符队列的末端</span></div><div class="line">						operators.add(curOper);</div><div class="line">					&#125; <span class="keyword">else</span> &#123; <span class="comment">// 括号</span></div><div class="line">						<span class="keyword">if</span> (<span class="string">"("</span>.equals(currentEle)) &#123; <span class="comment">// 左括号时直接放入操作列表中</span></div><div class="line">							operators.add(Operator.BRACKETS);</div><div class="line">						&#125; <span class="keyword">else</span> &#123;<span class="comment">// 当是右括号的时候就把括号里面的内容执行了。</span></div><div class="line">							<span class="comment">// 循环执行括号里面的内容直到遇到左括号为止。试想这种情况(2+5*2)</span></div><div class="line">							<span class="keyword">while</span> (!operators.lastElement().equals(Operator.BRACKETS)) &#123;</div><div class="line">								compute(nums, operators);</div><div class="line">							&#125;</div><div class="line">							<span class="comment">//移除左括号</span></div><div class="line">							operators.remove(operators.size()-<span class="number">1</span>);</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 经过上面代码的遍历后最后的应该是nums里面剩两个数或三个数，operators里面剩一个或两个运算操作符</span></div><div class="line">		<span class="keyword">while</span> (!operators.isEmpty()) &#123;</div><div class="line">			compute(nums, operators);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> nums.firstElement();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 利用java.util.Stack计算四则运算字符串表达式的值，如果抛出异常，则说明表达式有误，这里就没有控制</div><div class="line">	 * java.util.Stack其实也是继承自java.util.Vector的。</div><div class="line">	 * <span class="doctag">@param</span> computeExpr 四则运算字符串表达式</div><div class="line">	 * <span class="doctag">@return</span> 计算结果</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">computeWithStack</span><span class="params">(String computeExpr)</span> </span>&#123;</div><div class="line">		<span class="comment">//把表达式用运算符、括号分割成一段一段的，并且分割后的结果包含分隔符</span></div><div class="line">		StringTokenizer tokenizer = <span class="keyword">new</span> StringTokenizer(computeExpr, <span class="string">"+-*/()"</span>, <span class="keyword">true</span>);</div><div class="line">		Stack&lt;Double&gt; numStack = <span class="keyword">new</span> Stack&lt;Double&gt;();	<span class="comment">//用来存放数字的栈</span></div><div class="line">		Stack&lt;Operator&gt; operStack = <span class="keyword">new</span> Stack&lt;Operator&gt;();	<span class="comment">//存放操作符的栈</span></div><div class="line">		Map&lt;String, Operator&gt; computeOper = <span class="keyword">this</span>.getComputeOper();	<span class="comment">//获取运算操作符</span></div><div class="line">		String currentEle;	<span class="comment">//当前元素</span></div><div class="line">		<span class="keyword">while</span> (tokenizer.hasMoreTokens()) &#123;</div><div class="line">			currentEle = tokenizer.nextToken().trim();	<span class="comment">//去掉前后的空格</span></div><div class="line">			<span class="keyword">if</span> (!<span class="string">""</span>.equals(currentEle)) &#123;	<span class="comment">//只处理非空字符</span></div><div class="line">				<span class="keyword">if</span> (<span class="keyword">this</span>.isNum(currentEle)) &#123; <span class="comment">//为数字时则加入到数字栈中</span></div><div class="line">					numStack.push(Double.valueOf(currentEle));</div><div class="line">				&#125; <span class="keyword">else</span> &#123; <span class="comment">//操作符</span></div><div class="line">					Operator currentOper = computeOper.get(currentEle);<span class="comment">//获取当前运算操作符</span></div><div class="line">					<span class="keyword">if</span> (currentOper != <span class="keyword">null</span>) &#123;	<span class="comment">//不为空时则为运算操作符</span></div><div class="line">						<span class="keyword">while</span> (!operStack.empty() &amp;&amp; operStack.peek().priority() &gt;= currentOper.priority()) &#123;</div><div class="line">							compute(numStack, operStack);</div><div class="line">						&#125;</div><div class="line">						<span class="comment">//计算完后把当前操作符加入到操作栈中</span></div><div class="line">						operStack.push(currentOper);</div><div class="line">					&#125; <span class="keyword">else</span> &#123;<span class="comment">//括号</span></div><div class="line">						<span class="keyword">if</span> (<span class="string">"("</span>.equals(currentEle)) &#123; <span class="comment">//左括号时加入括号操作符到栈顶</span></div><div class="line">							operStack.push(Operator.BRACKETS);</div><div class="line">						&#125; <span class="keyword">else</span> &#123; <span class="comment">//右括号时, 把左括号跟右括号之间剩余的运算符都执行了。</span></div><div class="line">							<span class="keyword">while</span> (!operStack.peek().equals(Operator.BRACKETS)) &#123;</div><div class="line">								compute(numStack, operStack);</div><div class="line">							&#125;</div><div class="line">							operStack.pop();<span class="comment">//移除栈顶的左括号</span></div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 经过上面代码的遍历后最后的应该是nums里面剩两个数或三个数，operators里面剩一个或两个运算操作符</span></div><div class="line">		<span class="keyword">while</span> (!operStack.empty()) &#123;</div><div class="line">			compute(numStack, operStack);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> numStack.pop();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 判断一个字符串是否是数字类型</div><div class="line">	 * <span class="doctag">@param</span> str</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isNum</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">		String numRegex = <span class="string">"^\\d+(\\.\\d+)?$"</span>;	<span class="comment">//数字的正则表达式</span></div><div class="line">		<span class="keyword">return</span> Pattern.matches(numRegex, str);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 获取运算操作符</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">private</span> Map&lt;String, Operator&gt; <span class="title">getComputeOper</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> HashMap&lt;String, Operator&gt;() &#123; <span class="comment">// 运算符</span></div><div class="line">			<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">7706718608122369958L</span>;</div><div class="line">			&#123;</div><div class="line">				put(<span class="string">"+"</span>, Operator.PLUS);</div><div class="line">				put(<span class="string">"-"</span>, Operator.MINUS);</div><div class="line">				put(<span class="string">"*"</span>, Operator.MULTIPLY);</div><div class="line">				put(<span class="string">"/"</span>, Operator.DIVIDE);</div><div class="line">			&#125;</div><div class="line">		&#125;;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 取nums的最后两个数字，operators的最后一个运算符进行运算，然后把运算结果再放到nums列表的末端</div><div class="line">	 * <span class="doctag">@param</span> nums</div><div class="line">	 * <span class="doctag">@param</span> operators</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">compute</span><span class="params">(Vector&lt;Double&gt; nums, Vector&lt;Operator&gt; operators)</span> </span>&#123;</div><div class="line">		Double num2 = nums.remove(nums.size() - <span class="number">1</span>); <span class="comment">// 第二个数字，当前队列的最后一个数字</span></div><div class="line">		Double num1 = nums.remove(nums.size() - <span class="number">1</span>); <span class="comment">// 第一个数字，当前队列的最后一个数字</span></div><div class="line">		Double computeResult = operators.remove(operators.size() - <span class="number">1</span>).compute(</div><div class="line">				num1, num2); <span class="comment">// 取最后一个运算符进行计算</span></div><div class="line">		nums.add(computeResult); <span class="comment">// 把计算结果重新放到队列的末端</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 取numStack的最顶上两个数字，operStack的最顶上一个运算符进行运算，然后把运算结果再放到numStack的最顶端</div><div class="line">	 * <span class="doctag">@param</span> numStack	数字栈</div><div class="line">	 * <span class="doctag">@param</span> operStack 操作栈</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">compute</span><span class="params">(Stack&lt;Double&gt; numStack, Stack&lt;Operator&gt; operStack)</span> </span>&#123;</div><div class="line">		Double num2 = numStack.pop(); <span class="comment">// 弹出数字栈最顶上的数字作为运算的第二个数字</span></div><div class="line">		Double num1 = numStack.pop(); <span class="comment">// 弹出数字栈最顶上的数字作为运算的第一个数字</span></div><div class="line">		Double computeResult = operStack.pop().compute(</div><div class="line">				num1, num2); <span class="comment">// 弹出操作栈最顶上的运算符进行计算</span></div><div class="line">		numStack.push(computeResult); <span class="comment">// 把计算结果重新放到队列的末端</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 运算符</div><div class="line">	 */</div><div class="line">	<span class="keyword">private</span> <span class="keyword">enum</span> Operator &#123;</div><div class="line">		<span class="comment">/**</span></div><div class="line">		 * 加</div><div class="line">		 */</div><div class="line">		PLUS &#123;</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">priority</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">return</span> <span class="number">1</span>; </div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">compute</span><span class="params">(<span class="keyword">double</span> num1, <span class="keyword">double</span> num2)</span> </span>&#123;</div><div class="line">				<span class="keyword">return</span> num1 + num2; </div><div class="line">			&#125;</div><div class="line">		&#125;,</div><div class="line">		<span class="comment">/**</span></div><div class="line">		 * 减</div><div class="line">		 */</div><div class="line">		MINUS &#123;</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">priority</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">return</span> <span class="number">1</span>; </div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">compute</span><span class="params">(<span class="keyword">double</span> num1, <span class="keyword">double</span> num2)</span> </span>&#123;</div><div class="line">				<span class="keyword">return</span> num1 - num2; </div><div class="line">			&#125;</div><div class="line">		&#125;,</div><div class="line">		<span class="comment">/**</span></div><div class="line">		 * 乘</div><div class="line">		 */</div><div class="line">		MULTIPLY &#123;</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">priority</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">return</span> <span class="number">2</span>; </div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">compute</span><span class="params">(<span class="keyword">double</span> num1, <span class="keyword">double</span> num2)</span> </span>&#123;</div><div class="line">				<span class="keyword">return</span> num1 * num2; </div><div class="line">			&#125;</div><div class="line">		&#125;,</div><div class="line">		<span class="comment">/**</span></div><div class="line">		 * 除</div><div class="line">		 */</div><div class="line">		DIVIDE &#123;</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">priority</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">return</span> <span class="number">2</span>; </div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">compute</span><span class="params">(<span class="keyword">double</span> num1, <span class="keyword">double</span> num2)</span> </span>&#123;</div><div class="line">				<span class="keyword">return</span> num1 / num2; </div><div class="line">			&#125;</div><div class="line">		&#125;,</div><div class="line">		<span class="comment">/**</span></div><div class="line">		 * 括号</div><div class="line">		 */</div><div class="line">		BRACKETS &#123;</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">priority</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">compute</span><span class="params">(<span class="keyword">double</span> num1, <span class="keyword">double</span> num2)</span> </span>&#123;</div><div class="line">				<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">			&#125;</div><div class="line">		&#125;;</div><div class="line">		<span class="comment">/**</span></div><div class="line">		 * 对应的优先级</div><div class="line">		 * <span class="doctag">@return</span></div><div class="line">		 */</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">priority</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">		<span class="comment">/**</span></div><div class="line">		 * 计算两个数对应的运算结果</div><div class="line">		 * <span class="doctag">@param</span> num1  第一个运算数</div><div class="line">		 * <span class="doctag">@param</span> num2  第二个运算数</div><div class="line">		 * <span class="doctag">@return</span></div><div class="line">		 */</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">compute</span><span class="params">(<span class="keyword">double</span> num1, <span class="keyword">double</span> num2)</span></span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+          
         
       
     </div>
@@ -1556,19 +1677,22 @@ k近邻算法可以用来做分类
       
         
           
-          漫谈“推荐系统”
+            <h1>漫谈“推荐系统”</h1>
+<blockquote>
+<p>本文转自<a href="http://weibo.com/libin82cn" target="_blank" rel="external">@复旦李斌</a>的博客，非常白话的review了推荐系统领域的一些研究内容以及存在的挑战，mark一下。</p>
+</blockquote>
+<p>由于需要准备一月底与三月中两个关于“推荐系统”的短期课程（前者在阿卜杜拉国王科技大学，没错就是那个传说中沙特的土豪大学！后者在悉尼科技大学），期间二月份还夹带了一个推荐系统相关的讨论班，所以从去年十二月开始我几乎每个周末至少得抽出一天的时间来做幻灯片。推荐技术是我个人研究兴趣并不是我日常工作内容，无法利用上班时间准备，再加上我有强迫症（必须要让累加起来多达二百多页的幻灯片风格色调字体公式图例都保持视觉上的审美愉悦与逻辑上的高度统一），所以在画图敲公式上花了很长时间。幻灯片做烦了，突然很想写点东西聊聊我对推荐系统的见解。此文不会出现公式，尽量用白话说清楚目前主流推荐技术的直观原理。</p>
+<p>先谈谈问题背景，故事是这样的：互联网出现后，随着网上内容的增加，好学的小伙伴们发现很多他们不懂的姿势网上都有，可互联网不像图书馆搞个书目索引就行，于是出现了搜索引擎帮助小伙伴们在茫茫互联网上找到他们感兴趣的东西，但条件是你必须知道你想要什么，然后提取成关键字去搜，所谓信息检索（Information Retrieval）。十年过去了，信息爆炸了，问题出现了，搜索引擎动辄返回几十万个结果，或者有些想要的信息却根本不知道它的存在，甚至根本不知道如何用关键词描述你想要的东西，这时推荐系统应运而生——小伙伴们不用自己去找，推荐系统就会根据小伙伴们的个人资料历史纪录从海量信息中自动筛选符合小伙伴们口味的内容进行推荐，所谓推荐系统（Recommender Systems）。如今，推荐系统已经无处不在，几乎所有的网络服务都集成了推荐系统。在此我就不提那些学术圈老掉牙的例子什么Netflix电影推荐啊Google新闻推荐啊Yahoo!广告推荐啊什么的了；我瞄了下自己的手机举几个例子吧：微博朋友推荐、虾米音乐推荐、LinkedIn工作推荐、YouTube视频推荐、大众点评餐馆推荐、等等。</p>
+<p>既然要谈的是推荐“技术”，那么我得先把推荐问题用数学语言形式化了。淡定淡定，推荐问题形式化后非常简单干净——就三个矩阵（从这里往下得有一丢丢想像力，能在脑海里想象简单的矩阵操作）。最重要的一个矩阵是评分或偏好矩阵（Rating/Preference Matrix），其每一行对应一个用户，每一列对应一件物品，矩阵中的任一元素就是某用户对某物品的感兴趣程度（评分可以用正整数表示，点赞神马的可以用0/1表示），不失一般性，下面我们仅基于评分矩阵讨论。这个评分矩阵是极其稀疏的，因为每个用户只可能对很少一部分物品打分。第二个矩阵是用户信息矩阵，每一行对应一个用户，每一列对应一个用户属性（如年龄、职业、地区、标签等）。第三个矩阵是物品信息矩阵，每一行对应一件物品，每一列对应一个物品属性（如电影的流派、导演、演员等）。推荐问题的目标就是：基于给定的三个矩阵，把评分矩阵中缺失元素的评分预测出来，并基于预测出来的评分把得分高的物品推荐给相应用户。这里值得注意的是，只有评分矩阵是所有推荐技术所必需的，用户信息矩阵与物品信息矩阵这两者是可选的。真实推荐系统面临最大的挑战是评分矩阵的大规模与稀疏性。</p>
+<p>接下来我把一些当前常用的推荐技术分门别类。推荐技术可先分为三大类：基于人口统计的推荐技术（Demography-based）、基于物品内容的推荐技术（Content-based）、以及基于协同过滤的推荐技术（Collaborative Filtering，简称CF）。基于人口的又包括基于用户资料的（User Profile）和基于信任关系的（社交网络上的好友关系）等。基于物品内容的又可细分为基于元数据的（即Metadata，比如电影的流派、导演、演员等）和基于内容数据的（比如视频数据、音频数据）等——真实应用大多是基于元数据的，基于内容数据的推荐系统由于语义鸿沟（Semantic Gap）和效率问题，做了几十年，一直未突破（深度学习能突破么，拭目以待呵呵）。虽然基于人口和基于内容的两大类推荐技术在实际中的应用极广而且效果在某些应用场景下不比第三类技术协同过滤差，那为什么协同过滤技术一跃成为当今主流的推荐技术了呢？有以下几方面原因：1）协同过滤问题相当干净，只需要一个评分矩阵，不需要用户信息与物品信息，这解决了用户物品信息缺失场景下的推荐问题。2）协同过滤问题的本质是矩阵补全问题（Matrix Completion），也就是把一个稀疏矩阵的缺失元素给估计出来，这是机器学习中一个经典问题，除了推荐之外还有无数的应用都可归结为矩阵补全问题，所以机器学习的高速发展也促进了协同过滤技术。3）2006年Netflix发起的那个百万美元大奖功不可没，直接上演了持续多年相关研究领域全民做推荐的激情岁月，虽然吧这个竞赛使用了一个完全误导的评价指标来判断推荐算法的优劣（使用的是RMSE指标，这是一个评价回归的指标，而推荐问题事实上是一个排序问题）。跑题了，接着分类。协同过滤技术可以继续分为基于记忆的（Memory-based）和基于模型的（Model-based）。基于记忆的继续可分为基于用户的（User-based）和基于物品的（Item-based）；而基于模型的可以继续分为基于矩阵分解的（Matrix Factorization）和基于联合聚类的（Co-clustering）。基于记忆的协同过滤技术使用的是K-近邻（K-Nearest Neighbors）的思想，而基于模型的协同过滤技术使用的是机器学习方法。分类结束。</p>
+<p>真实系统都是使用的混合策略（Hybrid Strategy），多为基于人口、基于元数据、以及基于用户或物品的协同过滤推荐技术的各种组合。基于模型的协同过滤虽然使用了高端大气上档次的机器学习方法，但做过真实应用的同学都懂的，简单粗暴才是王道，提出并改进一个模型连发三篇顶级机器学习会议论文提高了一个百分点，往往不如真实系统中屌丝程序员在哪疙瘩加个莫名的阈值来得有效。那为什么顶尖互联网企业都在搞机器学习呢？这么说吧，五百的衣服和五万的衣服功能都是一样的，但是地位高到一定程度，除了衣服的基本功能外我们还会追求一些其它的东西。但是如果只是想基于推荐技术做一个网络服务神马的，就没必要搞那么玄的机器学习花样了，反而大规模计算的效率问题和推荐应用本身是否有市场前景是更应该考虑的，有了这些，最基本的基于人口统计与基于记忆的推荐技术就能搞定大多数应用。貌似跑题了，接着说混合策略。有些混合策略是对不同推荐技术的结果加权相加（Weighting）；有些是根据场景不同在不同技术间跳转（Switching），比如新用户基于人口统计老用户基于协同过滤；有些是一个网页上不同区域同时显示不同推荐技术的结果（Mixing）；有些是用一个推荐技术对另一个推荐技术输出的结果进行提升（Cascading）。</p>
+<p>除了基于模型的协同过滤技术外，其它的推荐技术在原理上都相对简单，使用一些相关查询和启发式算法就能解决。这段就把除基于模型的协同过滤以外的推荐技术都简单介绍下。首先是基于人口统计学的，该类推荐技术需要基于用户信息矩阵和评分矩阵。原理很简单，就是查找用户信息矩阵中背景类似的用户，然后把对应评分矩阵中打高分的物品推荐给背景类似的用户。举个例子，用户信息上显示两个人年龄相仿居于湾区互联网从业者，于是系统就会认为这两人相关性强会有共同爱好，把其中一人打高分的电影推荐给另一个。这种推荐技术的优点是简单，一些相关性查询操作就能搞定，而且没有“冷启动（Cold-start）”问题（即用户缺失历史评分纪录）；缺点是无法个性化推荐，基于人口统计相似度的假设太强，比如同为IT男，一个技术宅，一个伪文青，你把技术宅喜欢的东西推荐给伪文青肯定是不靠谱的，比如我排斥一切XX侠的电影。接下来是基于物品内容的推荐技术，该类推荐技术需要基于物品信息矩阵和评分矩阵（这里只讨论基于元数据的，基于真实内容的开门课都讲不完）。该类推荐技术的原理也很简单，基于元数据计算物品之间的相关性，然后把与该用户以前打高分的物品最相关的物品推荐给他。这类推荐技术比前一种靠谱，因为用户在同类物品上一般会表现出相同的兴趣程度。举个例子，我如果对《巴黎我爱你》打了个高分，那么推荐系统就会向我推荐强关联的《纽约我爱你》，而我也会对同一血统的电影很感兴趣。因此，该类技术的优点就是对偏好的建模较为精细与准确；缺点是依赖于物品元数据包含的信息量，以及存在冷启动问题（需要用户的历史评分）。接下来介绍基于记忆的协同过滤技术，该类推荐技术的标准问题设置仅需要评分矩阵，当然近年来学术界有些关于迁移学习（Transfer Learning）在推荐系统中的研究会使用到用户与物品的信息矩阵、甚至使用另一个域的评分矩阵（我以前在推荐系统中的工作主要在这块，感兴趣的同学可以用谷歌百度下一个二页纸的小文“Cross-Domain Collaborative Filtering: A Brief Survey”），但这里我们只讨论标准的协同过滤问题设置。基于用户的协同过滤分为两步：第一步是计算用户之间的相关度，这里的相关度是评分矩阵行向量间的相关度，其直观意义就是如果两个用户在相同物品上打的分越接近，那么这两个用户的偏好也越接近。如果评分矩阵是一个没有缺失项的满矩阵，那么行向量之间的相似度直接可以用欧式距离或者夹角余弦计算；由于评分矩阵是稀疏矩阵，因此计算相关性首先要把两个行向量之间的交集（打过分的物品）找出来，并只在该交集上计算一个类似夹角余弦的值，叫作皮尔森相关系数（Pearson Correlation Coefficients）。在取得了与所有用户两两之间的相关性后，第二步就是预测该用户的缺失评分。给定一个待预测用户，找到他的K-近邻用户集合，他的缺失评分就是用其K-近邻用户对应物品上的历史评分用相关性加权平均得到。基于物品的协同过滤和基于用户的是对称的，一个是对行操作，一个是对列操作，方法和原理都是一样的。</p>
+<p>从这里往后的内容主要将介绍基于模型的协同过滤技术。在大多数推荐系统的介绍中一般直接就把基于模型与矩阵分解等同起来了，因为应用到实际推荐系统中的基于模型的推荐技术一般都是基于矩阵分解的，比如Netflix百万大奖得主提出的(Time)SVD++方法（但事实上前几名所用的方法都是很多种算法集成的结果，所以说研究归研究，在实际应用中干净优美的模型很难超越东拼西凑再加点人脑规则的四不像，这个道理我早在八年前做TRECvid的时候就总结出来了，当时直接导致我放弃多媒体研究直到现在一直对计算机视觉抱有悲观态度）。又跑题了，继续说基于模型的推荐技术。除了矩阵分解，这里我还要额外介绍一种基于联合聚类的技术，所谓联合聚类，就是对用户与物品（即评分矩阵的行与列）同时聚类，聚类的方法可以是简单的K-Means，但更优美的建模方法是双向混合模型——我个人非常喜欢这种建模方式，虽然对于评分预测的性能没有基于矩阵分解的好（因为矩阵分解的目标就是拟合评分而混合模型的目标是估计用户与物品在潜在类型上的分布）。</p>
+<p>先说基于矩阵分解的方法吧。给定一个评分矩阵（大小为N<em>M），把该矩阵分解为两个矩阵的乘积，一个是用户特征矩阵（大小为N</em>K），一个是物品特征矩阵（大小为M*K），其中潜在特征（latent features）的维度远小于用户数与物品数；目标函数就是两个特征矩阵的重构与给定评分矩阵在那些可见评分上的值尽可能接近，一般使用矩阵范数（Frobenius norm），即两个矩阵相减所有元素上残差平方和；再加上对两个特征矩阵的矩阵范数作为正则化项。改优化问题常用两种方法解决：一种是交替最小二乘（Alternative Least Squares），交替优化用户特征矩阵与物品特征矩阵，在优化其一的时候固定另一个的值视其为已知，这样就相当于每轮解决一个标准的最小二乘问题，最后收敛到局部最优解。该方法的优点是收敛速度快，缺点是需要对用户数与物品数大小的方正求逆，难以规模化。另一种是随机梯度下降（Stochastic Gradient Descent），对每个用户与每个物品（评分矩阵的行与列）分别求偏导建立牛顿迭代公式，然后用可见评分顺序对这些迭代公式进行更新。该方法的优点是可以并行化、效率高，目前大规模矩阵分解都是用的这种优化算法；缺点可能是收敛速度没有第一种快（这点我不是很确定）。最后说说这种形式矩阵分解的物理含义。这样分解成两部分后，就相当于用户和物品都被放置到一个潜在的K维特征空间，只要拥有相似潜在特征的用户与物品，他们的夹角就小乘积就大得到的预测评分也就相应更高。那么凭什么我们能指定一个“潜在的K维特征空间”呢？拿Pandora的音乐推荐举例子，每个音乐有几百条“音乐基因”就是音乐的显式特征（不知道音乐基因的可以去古歌百度一下Music Gene Project）。如果不降维的话，那么音乐特征矩阵和用户特征矩阵的纬度就是其真实的特征纬度。假设我们基于主成分分析（PCA）用相同的一套基分别对这两个矩阵进行线性变换，那么得到的两个矩阵就可以认为是投影到潜在特征空间的两个矩阵，而这两个矩阵的乘积和原来的两个矩阵是一样的（因为当中两个投影矩阵的乘积是单位矩阵）。那么假如我们只用前K个基投影呢？那我们就得到了只有K维潜在特征空间的低秩矩阵。所以在实际问题中，我们都不需要知道真实的特征空间，只需要人为指定一个K维潜在特征空间就可以了，得出的结果可以认为是真实特征经过某个线性变化后投影到一个低维潜在特征空间。</p>
+<p>最后介绍基于联合聚类的方法。这类方法的物理意义更直观，其实也能表示成为矩阵分解的形式，但不同的是联合聚类把评分矩阵（大小为N<em>M）分解为三部分，一个是用户隶属度矩阵（N</em>K），表示每个用户在K个潜在用户组上的分布情况，所有元素为正每行加起来为1；一个是物品隶属度矩阵（M<em>L），表示每个物品在L个潜在物品组上的分布情况，所有元素为正每行加起来为1；还有一个是压缩评分矩阵（K</em>L），表示某个用户组对某个物品组给的评分。使用这三个矩阵的乘积重构评分矩阵可以对缺失评分进行预测。解决该问题最简单的方法是分别对行与列进行K-Means聚类，然后用户与物品隶属度矩阵就根据聚类结果把对应的组设为1其它为0（硬聚类），而压缩评分矩阵是每个联合聚类中评分的平均值。更一般性的建模方法是令两个隶属度矩阵为在潜在组别上的分布（软聚类），这需要使用期望最大（Expectation-Maximization）算法解决；进一步地考虑贝叶斯，由于隶属度就是Dirichlet分布，那么其实该联合聚类问题可以使用Latent Dirichlet Allocation的变种建模，叫作Bi-LDA，使用吉布斯采样解决。这类方法的具体细节就不介绍了。</p>
+<p>至此为止，基本的推荐技术大体都过了一遍了。剩下的就是解决协同过滤技术中的各种挑战，比如兴趣随时间与环境变化问题、矩阵稀疏问题、冷启动问题、噪声问题、大规模矩阵分解问题等等，这些“挑战”也是近年来学术界写论文的切入点。但其实在工业界，这些所谓的挑战大多都不是问题，或是可以用替代方案解决、或是对结果真正的影响不大。我个人觉得无论是学术界还是工业界，当前最重要的问题还是大规模矩阵分解问题（我也无法免俗大数据啊），各路神仙也从不同的突破点去解决这个问题，有使用分布式计算的、有提出加速优化算法的、有使用近似哈希算法的等等。在我的短期课程中，针对这些挑战的一些解决方案也占了很大的比重，但是这里就不一一累述了，用纯文字描述个问题都得花半页纸。其实我本来还想谈一下在线推荐系统，也是如今精准广告投放背后的核心技术，但是也因为问题的设置和协同过滤有很大的不同，技术上也几乎没有什么交集，就不展开了。在线推荐系统的主要技术是一大类被称为Multi-Armed Bandits（MAB）的方法——没错就是老虎机！广告投放就像赌博，你选哪个广告投放出去都会有不同的回报，随着一次又一次的尝试，从失败中吸取教训，慢慢学习到背后隐含的规律，之后就可以保持大概率的赢面。MAB的在线学习策略遵循的是“开采（Exploitation）”与“探索（Exploration）”，一边尽量投注之前赢面较大的广告，一边又不停尝试其它未知底细的广告以发现更高的赢面——这不就像是人生么？有些人觉得现状不错就一直保持着开采状态，而有些人则时不时探索一下，也许会走一些弯路，可或许在一段弯路过后会发现比以前更好的一条路；更何况，人生并不只是用最后累积到的财富来论成败，沿途的风景，妙不可言的或是痛彻心扉的，都是人生独一无二的财富。</p>
 
-本文转自@复旦李斌的博客，非常白话的review了推荐系统领域的一些研究内容以及存在的挑战，mark一下。
-
-由于需要准备一月底与三月中两个关于“推荐系统”的短期课程（前者在阿卜杜拉国王科技大学，没错就是那个传说中沙特的土豪大学！后者在悉尼科技大学），期间二月份还夹带了一个推荐系
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/09/05/RecSys/漫谈推荐系统/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -1720,32 +1844,231 @@ k近邻算法可以用来做分类
       
         
           
+            <blockquote>
+<p>author: sheng junhui</p>
+</blockquote>
+<blockquote>
+<p>weibo: @armysheng</p>
+</blockquote>
+<blockquote>
+<p>blog: youngfor.me</p>
+</blockquote>
+<blockquote>
+<p>email: armysheng@Gmail.com</p>
+</blockquote>
+<blockquote>
+<p>转载请注明出处</p>
+</blockquote>
+<hr>
+<h2>0.  基本概念的介绍</h2>
+<p>在搭建开发环境know how的步骤前，最好是先做一些konw what的学习，这里先简单介绍一下一些基本的概念。</p>
+<h3>0.1 什么是Mahout？</h3>
+<blockquote>
+<p><strong>Apache Mahout</strong> 翻译成中文是骑大象的人，或驯象师。这里是指Apache开源社区维护的一个可伸缩(Scable)的机器学习库。Mahout机器学习库*<a href="https://mahout.apache.org/users/basics/algorithms.html" target="_blank" rel="external">目前实现的算法</a>*包括协同滤波，分类，聚类，特征降维等等。我们知道Hadoop的logo是一头大象，而Mahout要做的就是驯服这头大象。Mahout致力于提供可支持超大数据集，支持商业使用的开源机器学习库，并且构建充满活力的开源社区。---<a href="http://mahout.apache.org/" target="_blank" rel="external">Mahout 主页</a>
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/hadoop.jpg" alt="Hadoop">          <img src="/2014/08/27/RecSys/Apache Mahout 入门篇/mahout.png" alt="Mahout"></p>
+</blockquote>
+<h3>0.2 Mahout又是一个Maven项目,Maven又是什么呢？</h3>
+<blockquote>
+<p><strong>Apache Maven</strong>，是一个软件（特别是Java软件）项目管理及自动构建工具，由Apache软件基金会所提供。基于项目对象模型（缩写：POM）概念，Maven利用一个中央信息片断能管理一个项目的构建、报告和文档等步骤。项目对象模型存储在命名为 pom.xml 的文件中。POM 文件中包含了它的配置信息，依赖信息等等。---<a href="http://zh.wikipedia.org/zh/Apache_Maven" target="_blank" rel="external">Maven wiki</a></p>
+<blockquote>
+<p>所以，Mahout是一个用java语言开发的，Maven管理工具管理的Maven project，因此整个过程也需要安装Maven。事实上，安装完<strong>java</strong>, <strong>Maven</strong>, <strong>Mahout</strong> 以后，不需要eclipse，整个Mahout机器学习库已经可以被完整的调用，也可以在此基础上进行开发。而eclipse是一个业界广泛使用的IDE，在eclipse上让人得心应手，而且eclipse对Maven项目也有很好的支持，只需要装上M2E插件便可以非常方便的使用。</p>
+</blockquote>
+</blockquote>
+<hr>
+<h2>1. 安装</h2>
+<p>首先介绍一下开发环境：Win7 32位系统
+需要安装的软件:	<code>jdk1.7.0_60</code> +<code>apache-maven-3.2.1</code>+<code>TortoiseSVN 1.8.7</code>+<code>mahout-distribution-0.9(源码&amp;&amp;包)</code>
+由于我们公司内部走的是代理网络，所以部分工具安装完成使用前，都会介绍如何配置代理信息，如果你使用的是直连网络，请忽视这些段落。</p>
+<h3>1.1 Java环境的安装</h3>
+<p>我们选择的java版本是<code>jdk1.7.0_60</code>，可以在oracle主页<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank" rel="external">下载</a>，这里不建议使用java8，在编译过程中可能会出现一些不必要的问题。java安装比较简单，直接下载二进制文件进行安装。我们安装在<code>D:\Program Files\Java\jdk1.7.0_60</code>,安装完成后在控制命令行中输入:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">C:\Users\shengjh&gt;java -version</div><div class="line">java version <span class="string">"1.7.0_60"</span></div><div class="line">Java(TM) SE Runtime Environment (build 1.7.0_60-b19)</div><div class="line">Java HotSpot(TM) Client VM (build 24.60-b09, mixed mode, sharing)</div></pre></td></tr></table></figure></p>
+<p>看似java已经可以运行，其实java的环境变量尚未加入，而是在安装过程中，将<code>java.exe,javaw.exe,javawc.exe</code> 三个文件copy到了<code>system32</code>目录下。所以我们需要手动添加环境变量:
+<em>右键计算机-&gt;属性-&gt;高级系统设置-&gt;环境变量-&gt;系统变量-&gt;新建</em>
+<code>变量名</code>:<code>JAVA_HOME</code>
+<code>变量值</code>:<code>D:\Program Files\Java\jdk1.7.0_60</code>
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/2.png" alt="Path">
+<strong>这一步非常重要，不做的话再Maven的安装上,会出现JAVA_HOME找不到的错误</strong>，至此我们完成了JAVA环境的配置。</p>
+<h3>1.2 Maven环境搭建</h3>
+<p>Maven 是一个项目管理和构建自动化工具。但是对于我们程序员来说，我们最关心的是它的项目构建功能。所以这里我们介绍的就是怎样用 maven 来满足我们项目的日常需要。
+Maven 使用惯例优于配置的原则 。它要求在没有定制之前，所有的项目都有如下的结构：</p>
+<table>
+<thead>
+<tr>
+<th><strong>目录</strong></th>
+<th><strong>目的</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>${basedir}</td>
+<td>存放 pom.xml和所有的子目录</td>
+</tr>
+<tr>
+<td>${basedir}/src/main/java</td>
+<td>项目的 java源代码</td>
+</tr>
+<tr>
+<td>${basedir}/src/main/resources</td>
+<td>项目的资源，比如说 property文件</td>
+</tr>
+<tr>
+<td>${basedir}/src/test/java</td>
+<td>项目的测试类，比如说 JUnit代码</td>
+</tr>
+<tr>
+<td>${basedir}/src/test/resources</td>
+<td>测试使用的资源</td>
+</tr>
+</tbody>
+</table>
+<p>一个 maven 项目在默认情况下会产生 JAR 文件，另外 ，编译后 的 classes 会放在 ${basedir}/target/classes 下面， JAR 文件会放在 ${basedir}/target 下面。
+在确保JAVA环境已经搭建好的情况下我们开始安装Maven，可以从<a href="http://maven.apache.org/download.cgi" target="_blank" rel="external">Maven的主页</a>下载二进制文件，这里我们选择的是Maven 3.2.1，并解压到你常用的软件路径，这里我们安装在<code>D:\Program Files\apache-maven-3.2.1\</code>。该页的最后也该处了Maven的安装方法。这里我们使用最简单的将Maven的bin路径<code>D:\Program Files\apache-maven-3.2.1\bin</code>加入到系统变量Path中:
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/3.png" alt="Path">
+完成后在命令行中输入<code>mvn --version</code> 查看maven的版本:
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/4.png" alt="Path"></p>
+<blockquote>
+<h4>代理配置</h4>
+</blockquote>
+<p>之前介绍了代理的问题，因为后续的操作，maven会自动联网搜索依赖包，这里在继续操作之前先介绍Maven的代理配置。
+在Maven的配置文件都在它的安装目录下的\config\setting.xml文件中<code>&lt;proxies&gt;</code>字段定义了代理的设置。根据代理情况修改Host，port，username，password等等。这里我们只修改了host和port。
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/5.png" alt="Path"></p>
+<p>接下来我们用 maven 来建立最著名的“Hello World!”程序，来更好的了解Maven。
+**注意：**如果你是第一次运行 maven，你需要 Internet 连接，因为 maven 需要从网上下载需要的插件。<br>
+我们要做的第一步是建立一个 maven 项目。在 maven 中，我们是执行 maven 目标 (goal) 来做事情的。
+maven 目标和 ant 的 target 差不多。在命令行中执行下面的命令来建立我们的 hello world 项目</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn archetype:create -DgroupId=com.`mycompany.app -DartifactId=my-app</div></pre></td></tr></table></figure></p>
+<p><img src="/2014/08/27/RecSys/Apache Mahout 入门篇/6.png" alt="Path">
+命令执行完后你将看到maven生成了一个名为my-app的目录，这个名字就是你在命令中指定的artifactId,进入该目录，你将发现以下标准的项目结构：
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/7.png" alt="Path">
+其中:src/main/java 目录包含了项目的源代码，src/test/java 目录包含了项目的测试代码，pom.xml是项目的项目对象模型（Project Object Model or POM）。
+之后我们输入<code>cd my-app</code>进入该项目
+再输入<code>mvn package</code> 回车来build这个项目，得到，折后target目录下回生成该项目的类文件和包：
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/8.png" alt="Path">
+接着你可以使用以下的命令来测试新编译和打包出来的jar包，</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App</div></pre></td></tr></table></figure></p>
+<p><img src="/2014/08/27/RecSys/Apache Mahout 入门篇/9.png" alt="Path">
+至此Maven的安装和介绍就到这里，这一章节主要参考了<a href="http://www.oracle.com/technetwork/cn/community/java/apache-maven-getting-started-1-406235-zhs.html" target="_blank" rel="external">Apache Maven 入门篇 ( 上 )</a>和<a href="http://wentao365.iteye.com/blog/903396" target="_blank" rel="external">maven 教程一 入门</a>，以及Maven主页，阅读原文获得更多的了解。</p>
+<h3>1.3 Mahout源码的编译</h3>
+<p>Mahout的源码和编译后的包可以从<a href="http://mahout.apache.org/general/downloads.html" target="_blank" rel="external">Mahout官网</a>上获得,然而在使用这里下载的0.9发行版源码时，somehow遇到了一些错误。
+这里我们选择用SVN获得它最新的源码。Tortoise	SVN是大家常用的代码托管工具，可以从它的<a href="http://tortoisesvn.net/downloads.html" target="_blank" rel="external">主页</a>上下载到。
+安装完成后，在使用之前，我们还要对他做一下代理配置。</p>
+<blockquote>
+<h4>代理配置</h4>
+</blockquote>
+<p>SVN的代理配置只需要打开，在开始按钮-&gt;程序-&gt;Tortoise	SVN-&gt;settings,找到Network项进行如下配置：
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/10.png" alt="Path"></p>
+<p>接着我们就可以开始编译源码了
+首先得到源码，在命令行输入：
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">svn co http://svn.apache.org/repos/asf/mahout/trunk</div></pre></td></tr></table></figure></p>
+<p><code>cd trunk</code>并编译：</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># With hadoop-1.2.1 dependency</span></div><div class="line">mvn clean install</div><div class="line"></div><div class="line"><span class="comment"># With hadoop-2.2.0 dependency</span></div><div class="line">mvn -Dhadoop2.version=2.2.0 clean install</div></pre></td></tr></table></figure></p>
+<p>这里可以选择Hadoop依赖版本，在没有hadoop的情况下，也可以编译。
+编译时经常会遇见<strong>Test failure的error</strong>而卡住，关于这个问题，是由于mahout中有大量的测试例子，test failure是遇到了broken unit test.遇到这种问题要么需要自己去定位修复这个broken test，要么可以等待官方发行并update svn 进行修复。关于这个问题参加<a href="http://stackoverflow.com/questions/17351177/maven-build-failure-when-installing-mahout-on-ubuntu" target="_blank" rel="external">这里</a>，一般的解决方法是使用：
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># With hadoop-1.2.1 dependency</span></div><div class="line">mvn -DskipTests clean install		</div><div class="line"></div><div class="line"><span class="comment"># With hadoop-2.2.0 dependency</span></div><div class="line">mvn -Dhadoop2.version=2.2.0 -DskipTests clean install</div></pre></td></tr></table></figure></p>
+<p>这里我们选的是	
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn -DskipTests clean install</div></pre></td></tr></table></figure></p>
+<p>最后得到结果：
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/11.png" alt="Path"></p>
+<p>至此，Mahout的源码就编译完毕，我们可以看到每个Mahout源码的目录下都生成了相应的target文件,包含对应的类和.jar包。
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/12.png" alt="Path"></p>
+<h3>1.4 如何在Eclipse上使用Mahout？</h3>
+<p>编译完后的mahout还是不能在eclipse上使用，下面我们介绍一下如何在eclipse下开发Maven project。</p>
+<p>首先Eclipse版本选择，关于eclipse的版本代号问题请参考<a href="http://stackoverflow.com/questions/4008976/difference-between-eclipse-europa-helios-galileo" target="_blank" rel="external">这里</a>。
+我们选择的是Eclipse IDE for Java EE Developers(JUNO)，它包含了Maven所需的一些依赖包。Eclipse standard (Indigo)由于缺乏依赖包，在安装上Maven插件上会有问题。eclipse安装包可以在<a href="http://www.eclipse.org/downloads/" target="_blank" rel="external">官网</a>下载。</p>
+<blockquote>
+<h4>代理配置</h4>
+</blockquote>
+<p>eclipse安装完成后，启动会自动检测本机的代理设置，将本机的代理设置填到软件设置界面。但是如果你想修改的话可以在下面找到:
+<em>eclipse-&gt;windows-&gt;perferences-&gt;general-&gt;Network Connection</em>
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/13.png" alt="Path"></p>
+<p>接着我们介绍一下m2eclipse插件和它的安装方法。<a href="https://www.eclipse.org/m2e/" target="_blank" rel="external">m2eclipse</a>插件是一款一流的支持Apache Maven的eclipse插件。用户可以用它更方便的编辑Maven的pom.xml文件，可以在IDE上build一个Maven工程。</p>
+<p>启动eclipse定位到 <code>Help -&gt; Install New Software…</code>
+点击<code>Add</code>，分别填入:</p>
+<p><code>Name</code>:m2e</p>
+<p><code>Location</code>:http://download.eclipse.org/technology/m2e/releases
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/17.png" alt="Path">
+点击<code>next</code>，同意协议，确认warning后安装。安装完成后，eclipse会提示你重启。</p>
+<p>安装完成后我们还需要做一些设置
+定位到
+<code>eclipse -&gt; windows -&gt; preference -&gt; Maven -&gt;Installations</code>
+将本地的Maven路径<code>Add</code>进来。
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/19.png" alt="Path">
+将<code>User-setting</code> 定位到Maven安装路径下的<code>.\conf\setting.xml</code>文件。
+这样我们就完成了插件的安装，我们便可以Import我们之前已经编译好的Mahout源码，在eclipse下方便的查看Mahout的类文件。
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/18.png" alt="Path">
+导入时可能会遇到Maven-scala-plugin缺失的情况，点击<code>finish</code> 会自动找到缺失的plugin并且安装（需重启eclipse）。
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/14.png" alt="Path">
+导入buliding workspace 后，提示了有错误：</p>
+<pre><code>error：Plugin execution not covered by lifecycle configuration: org.scala-tools:maven-scala-plugin:2.15.2:testCompile (execution: default, phase: test-compile)
+</code></pre>
+<p><img src="/2014/08/27/RecSys/Apache Mahout 入门篇/21.png" alt="Path"></p>
+<p>这是由于m2eclipse-scala插件的缺失，<code>The default maven plugin does not support Scala out of the box, so you need to install the m2eclipse-scala connector.</code> 即m2eclipse-scala connector 的缺失。所以我们需要再次安装这个插件,方法和上面的类似。
+<code>Add</code>:
+<code>Name</code>: <code>Maven for Scala</code>
+<code>Location</code>:<code>http://alchim31.free.fr/m2e-scala/update-site/</code>
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/23.png" alt="Path">
+(若错误持续，则右键改project-&gt; Maven -&gt; Update Project)</p>
+<p>最后我们成功的导入Mahout源码到了eclipse中。
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/24.png" alt="Path"></p>
+<hr>
+<h2>2. 简单推荐算法的实现</h2>
+<p>接着我们介绍如何用Mahout来建立简单的推荐算法，大部分过程我们follow了官方的这个<a href="http://mahout.apache.org/users/recommender/userbased-5-minutes.html" target="_blank" rel="external">quick guide</a></p>
+<p>Step 0:创建数据集，命名为Dataset.csv，内容如下：</p>
+<pre><code>1,10,1.0
+1,11,2.0
+1,12,5.0
+1,13,5.0
+1,14,5.0
+1,15,4.0
+1,16,5.0
+1,17,1.0
+1,18,5.0
+2,10,1.0
+2,11,2.0
+2,15,5.0
+2,16,4.5
+2,17,1.0
+2,18,5.0
+3,11,2.5
+3,12,4.5
+3,13,4.0
+3,14,3.0
+3,15,3.5
+3,16,4.5
+3,17,4.0
+3,18,5.0
+4,10,5.0
+4,11,5.0
+4,12,5.0
+4,13,0.0
+4,14,2.0
+4,15,3.0
+4,16,1.0
+4,17,4.0
+4,18,1.0
+</code></pre>
+<p>Step 1: 新建一个Maven Project，选择simple project
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/25.png" alt="Path"></p>
+<p>Step 2: 命名为<code>UBrecommender</code>
+<img src="/2014/08/27/RecSys/Apache Mahout 入门篇/26.png" alt="Path"></p>
+<p>Step 3:打开<code>pom.xml</code>文件，加入Mahout的依赖配置,并将<em>Dataset.csv</em>放到工程目录下
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line"> 	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line"> 		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.mahout<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line"> 		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mahout-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"> 		<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"> 	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"> 	<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><img src="/2014/08/27/RecSys/Apache Mahout 入门篇/27.png" alt="Path"></p>
+<p>Step 4: 在<code>src\main\java\</code>下新建<code>SampleRecommender.java</code>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.model.file.FileDataModel;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.neighborhood.ThresholdUserNeighborhood;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.model.DataModel;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.recommender.RecommendedItem;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.recommender.UserBasedRecommender;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.similarity.UserSimilarity;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleRecommender</span></span></div><div class="line">&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, Exception</span>&#123;</div><div class="line">		</div><div class="line">		DataModel model = <span class="keyword">new</span> FileDataModel (<span class="keyword">new</span> File(<span class="string">"dataset.csv"</span>));</div><div class="line">		</div><div class="line">		UserSimilarity similarity = <span class="keyword">new</span> PearsonCorrelationSimilarity(model);</div><div class="line">		</div><div class="line">		UserNeighborhood neighborhood = <span class="keyword">new</span> ThresholdUserNeighborhood(<span class="number">0.1</span>, similarity, model);</div><div class="line">		</div><div class="line">		UserBasedRecommender recommender = <span class="keyword">new</span> GenericUserBasedRecommender(model, neighborhood, similarity);</div><div class="line">		</div><div class="line">		List&lt;RecommendedItem&gt;  recommendations =  recommender.recommend(<span class="number">2</span>,<span class="number">3</span>);</div><div class="line">		</div><div class="line">		<span class="keyword">for</span> (RecommendedItem recommendation : recommendations) &#123;</div><div class="line">		  System.out.println(recommendation);</div><div class="line">		&#125;</div><div class="line">	&#125;	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Step 5: 运行项目，<code>run as java application</code> 我们便得到推荐结果：</p>
+<pre><code>RecommendedItem[item:12, value:4.8328104]
+RecommendedItem[item:13, value:4.6656213]
+RecommendedItem[item:14, value:4.331242]
+</code></pre>
+<p>至此我们便完成了简单的一个推荐算法。</p>
+<h2>总结</h2>
+<p>总结来说我们安装了jdk，安装了Maven，安装了Eclipse以及在eclipse上使用Maven所需的一些插件，最后我们能够顺利地查看和修改Mahout的源码。</p>
+<blockquote>
+<p>**Tips：**环境配置中会遇到许多问题，请多谷歌，国内如果访问不够顺畅，请直接使用<a href="http://apps.farbox.com/post/google-quan-qiu-ip-di-zhi-ku" target="_blank" rel="external">一些谷歌的服务器IP</a>来流畅访问，你也可以将浏览器的默认搜索改为这个地址。</p>
+</blockquote>
+
           
-author: sheng junhui
-
-
-weibo: @armysheng
-
-
-blog: youngfor.me
-
-
-email: armysheng@Gmail.com
-
-
-转载请注明出处
-
-
-0.  基本概念的介绍
-在搭建开发环境know how的步骤前，最好是先做一些konw wha
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/08/27/RecSys/Apache Mahout 入门篇/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1897,16 +2220,31 @@ email: armysheng@Gmail.com
       
         
           
-          Problem:
-There are two sorted arrays A and B of size m and n respectively. Find the median of the two sorted arrays. The overall run time complexity s
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/08/27/Data structure and Algorithms/Leetcode 刷题记之Median of Two Sorted Arrays Problem/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1>Problem:</h1>
+<p>There are two sorted arrays A and B of size m and n respectively. Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).</p>
+<h1>分析</h1>
+<p>这个题目还是比较难,看了<a href="http://blog.csdn.net/yutianzuijin/article/details/11477603" target="_blank" rel="external">leetcode难度及面试频率</a>才发现，该问题是难度为5的问题。</p>
+<ol>
+<li>需要考虑m+n是奇数还是偶数，奇数情况{1} {2,3}的中间值为2，而偶数情况{1,2}{3,4}的中间值为(2+3)/2=2.5；</li>
+<li>算法复杂度必须在O(log(m+n)),严格来讲就比较麻烦了。一开始想到方法是先将数组合并，排序，再取中间数，这样合并为O(min(m,n)),排序为O((m+n)log(m+n)),取值为O(1),这样的话理论上应该是不符合要求的，但是leetcode居然通过了，程序间code1；</li>
+<li>更好的方法是将这个问题转化为求第K大值的问题，这里的K即为(m+n)/2；
+这个问题的解法很多：
+a.利用选择排序或交互排序，K次选择后即可得到第k大的数。总的时间复杂度为O(n<em>k)。（思考：与解法1的时间复杂度比较，这取决于k和n的值，k值越大，n越小，这种方法越不适合；k越小，比如是说是1或2，就很适合，时间复杂度为线性）
+b.利用快速排序的思想，时间复杂度近似为O(n)。
+	使用partition函数，将数组分为两组。partition函数是快速排序中用来把数组分成两部分的函数。
+(1)分为两个组，sa和sb。
+(2)若sa组的个数大于K，则继续在sa分组中找取最大的K个数字。
+(3)若sa组中的数字小于K，其个数为T，则继续在sb中找取 K-T个数字。但是这个方法的复杂度也太高了近似O(n)
+4.二分[Smin,Smax]查找结果X，统计X在数组中出现，且整个数组中比X大的数目为k-1的数即为第k大数。时间复杂度平均情况为O(n</em>logn)，查找mid用logn；</li>
+</ol>
+<p>首先查找 max和 min，然后计算出 mid = (max + min) / 2
+该算法的实质是寻找最大的K个数中最小的一个。Code2</p>
+<h1>code1</h1>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">findMedianSortedArrays</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">findMedianSortedArrays</span><span class="params">(<span class="keyword">int</span>[] A,<span class="keyword">int</span>[] B )</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> N=A.length;</div><div class="line">        <span class="keyword">int</span> M=B.length;</div><div class="line">        <span class="keyword">int</span>[] temp=<span class="keyword">new</span> <span class="keyword">int</span>[M+N];</div><div class="line">        <span class="comment">//merge array A and B to array temp</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++)</div><div class="line">            temp[i]=A[i];</div><div class="line">            </div><div class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;M;j++) </div><div class="line">           temp[N+j]=B[j];</div><div class="line">       </div><div class="line">       Arrays.sort(temp);</div><div class="line">       <span class="keyword">return</span> (((M+N)%<span class="number">2</span>!=<span class="number">0</span>)? (temp[(M+N)/<span class="number">2</span>]):((temp[(M+N)/<span class="number">2</span>]+temp[(M+N)/<span class="number">2</span>-<span class="number">1</span>])/<span class="number">2.0</span>));</div><div class="line"></div><div class="line">&#125;</div><div class="line">   	<span class="comment">//测试</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span>[] A =&#123;<span class="number">1</span>,<span class="number">4</span>&#125;;</div><div class="line">        <span class="keyword">int</span>[] B =&#123;<span class="number">2</span>,<span class="number">3</span>&#125;;</div><div class="line">        <span class="keyword">double</span> reslut=findMedianSortedArrays(A,B);</div><div class="line">        System.out.println(reslut);</div><div class="line">    &#125;   </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1>Code2</h1>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">findMedianSortedArrays2</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">findMedianSortedArrays</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> B[])</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (A.length == <span class="number">0</span> &amp;&amp; B.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line">        <span class="keyword">int</span> len = A.length + B.length;</div><div class="line">        <span class="keyword">if</span> (len % <span class="number">2</span> == <span class="number">1</span>) &#123;</div><div class="line">            <span class="keyword">return</span> find(A, B, (len + <span class="number">1</span>) /<span class="number">2</span>);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">double</span> sum = find(A, B, len / <span class="number">2</span>) +</div><div class="line">                         find(A, B, (len + <span class="number">2</span>)/<span class="number">2</span>);</div><div class="line">            <span class="keyword">return</span> sum / <span class="number">2</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">double</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span>[] B, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (A.length == <span class="number">0</span>) <span class="keyword">return</span> B[k - <span class="number">1</span>];</div><div class="line">        <span class="keyword">if</span> (B.length == <span class="number">0</span>) <span class="keyword">return</span> A[k - <span class="number">1</span>];</div><div class="line">        <span class="keyword">if</span> (k == <span class="number">1</span>) <span class="keyword">return</span> Math.min(A[<span class="number">0</span>], B[<span class="number">0</span>]);</div><div class="line">        <span class="comment">//永远假设A的长度小于B，这样就可以仅检查A的长度了</span></div><div class="line">        <span class="comment">//因为对于K，它们之间总有一个的长度绰绰有余</span></div><div class="line">        <span class="keyword">if</span> (A.length &gt; B.length) <span class="keyword">return</span> find(B, A, k);</div><div class="line"></div><div class="line">        <span class="keyword">int</span> a = Math.min(A.length,k/<span class="number">2</span>);</div><div class="line">        <span class="keyword">int</span> b = k - a;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (A[a-<span class="number">1</span>] &lt; B[b-<span class="number">1</span>]) &#123;</div><div class="line">            <span class="keyword">return</span> find(Arrays.copyOfRange(A, a, A.length), B, k - a);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (A[a-<span class="number">1</span>] &gt; B[b-<span class="number">1</span>]) &#123;</div><div class="line">            <span class="keyword">return</span> find(A, Arrays.copyOfRange(B, b, B.length), k - b);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> A[a-<span class="number">1</span>];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+          
         
       
     </div>
