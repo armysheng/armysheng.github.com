@@ -276,9 +276,43 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -293,6 +327,167 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2013/09/02/Data structure and Algorithms/2013-09-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eirc Sheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eric's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2013/09/02/Data structure and Algorithms/2013-09-02/" itemprop="url">矩阵按列按行归一化到L2范数的原理和最精简Matlab代码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-09-02T00:00:00+08:00">
+                2013-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2013/09/02/Data structure and Algorithms/2013-09-02/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2013/09/02/Data structure and Algorithms/2013-09-02/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  363
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          矩阵按列按行归一化到L2范数的原理和最精简Matlab代码
+在模式识别和机器学习的数据预处理过程中，对数据集按行或者按列进行L2范数归一化是一种常见的归一化方式，因此本文将介绍对向量进行L2范数归一化的原理和方法，并给出相关的Matlab源代码，供后学者作为基础知识参考使用。
+由此，我们可以很块的写
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2013/09/02/Data structure and Algorithms/2013-09-02/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
     
       
 
@@ -381,7 +576,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  
+                  0
                 </span>
               
 
@@ -397,12 +592,12 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  
+                  1
                 </span>
               
             </div>
           
-
+          
           
 
         </div>
@@ -417,8 +612,15 @@
       
         
           
-            
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2013/07/01/links/2013-07-01/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -448,7 +650,6 @@
       
     </footer>
   </article>
-
 
     
       
@@ -538,7 +739,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  
+                  0
                 </span>
               
 
@@ -554,12 +755,12 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  
+                  1
                 </span>
               
             </div>
           
-
+          
           
 
         </div>
@@ -574,8 +775,15 @@
       
         
           
-            
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2013/06/15/links/2013-06-15/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -605,7 +813,6 @@
       
     </footer>
   </article>
-
 
     
       
@@ -695,7 +902,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  
+                  0
                 </span>
               
 
@@ -711,12 +918,12 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  
+                  1
                 </span>
               
             </div>
           
-
+          
           
 
         </div>
@@ -731,8 +938,15 @@
       
         
           
-            
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2013/05/17/links/2013-05-17-1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -762,7 +976,6 @@
       
     </footer>
   </article>
-
 
     
       
@@ -852,7 +1065,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  
+                  0
                 </span>
               
 
@@ -868,12 +1081,12 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  
+                  1
                 </span>
               
             </div>
           
-
+          
           
 
         </div>
@@ -888,8 +1101,15 @@
       
         
           
-            
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2013/05/09/links/2013-05-09-3/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -919,7 +1139,6 @@
       
     </footer>
   </article>
-
 
     
       
@@ -1005,7 +1224,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  
+                  1,516
                 </span>
               
 
@@ -1021,12 +1240,12 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  
+                  5
                 </span>
               
             </div>
           
-
+          
           
 
         </div>
@@ -1041,44 +1260,17 @@
       
         
           
-            <h1>MSER笔记</h1>
-<h2>宽基线和窄基线：</h2>
-<p>基线的本意是指立体视觉系统中两摄像机光心之间的距离。依据拍摄两幅图 像的视点位置关系可将对应点匹配问题分为宽基线(Wide Baseline)和窄基线匹配(Short Baseline)。宽基线一词用于匹配时，泛指两幅图像有明显不同的情况下的匹配。产生这种情况的原因有可能为摄像机之间的位置相差很大，也有可能由于摄像机旋转或焦距的变化等因素产生的。</p>
-<p>宽基线匹配和窄基线匹配的分界不是很严格，但是在窄基线匹配中存在如下假设：摄像机焦距及其它内参数变化不大：摄像机位置不会相差很远，不会有大的转动，对应点的邻域是相似的。</p>
-<p>宽基线匹配中则存在如下假设：对图像上的任意点，在另一图像上的对应点可以为任意位置；摄像机可以任意移动，且摄像机的焦距及其它内参数可以有较大的变化；一幅图像上的景物在另一幅图像上可能被遮挡；对应点的邻域有相似的地方，但由于摄像机位置的变化及光照的变化，单依靠邻域的相似不能得到正确的对应。</p>
-<p>窄基线匹配中典型方法是利用邻域的互相关(Neighborhood Cross-Correlation)方法．但在宽基线的情况下，图像之间拍摄距离较远，成像条件存在较大差异，即使是空间同一特征，在图像中所表示出来的光学特性(灰度值，颜色值等)、几何特性(外形，大小等)及空间位置(图像中的位置，方向等)都有很大的不同，再加上噪声、遮挡等因素的存在，此时基于邻域互相关的匹配方法就失效了。在宽基线匹配中，仅仅使用特征本身的信息(比如边缘、角点的位置信息)是难以正确匹配的，研究学者将多个特征尤其是结构性特征予以组合，以形成稳定的特征向量(称为特征描述符)。这种对于图像的几何变形、光照变化等因素保持一定稳定性的特征向量称为不变量(Invariarlt)．不变量技术是宽基线匹配应用中的重要技术。
-选自赵辉硕士论文。
-<img src="/2013/05/09/Tech/MSER笔记/09-55-06.jpg" alt="Image Title"></p>
-<h2>仿射和投影：（affine and project）：</h2>
-<ul>
-<li>
-<p>投影：在线性代数和泛函分析中，投影是从向量空间映射到自身的一种线性变换，是日常生活中“平行投影”概念的形式化和一般化。同现实中阳光将事物投影到地面上一样，投影变换将整个向量空间映射到一个它的一个子空间，并且在这个子空间中是恒等变换</p>
-</li>
-<li>
-<p>仿射：在几何上，仿射几何是不涉及任何原点、长度或者角度概念的几何，但是有两点相减得到一个向量的概念。
-它位于欧氏几何和射影几何之间。它是在域K上任意维仿射空间的几何。K为实数域的情况所包含的内容足够使人了解其大部分思想。</p>
-</li>
-<li>
-<p>仿射变换：仿射变换，又称仿射映射，是指在几何中，一个向量空间进行一次线性变换并接上一个平移，变换为另一个向量空间。
-一个对向量  平移 ，与旋转放大缩小  的仿射映射为</p>
-</li>
-</ul>
-<p><img src="/2013/05/09/Tech/MSER笔记/09-54-27.jpg" alt="Image Title">
-上式在 齐次坐标上，等价于下面的式子</p>
-<p><img src="/2013/05/09/Tech/MSER笔记/09-54-35.jpg" alt="Image Title">
-在分形的研究里，收缩平移放射映射可以制造制具有自相似性的分形</p>
-<h2>极几何：</h2>
-<pre><code>极几何：epipolar geometry，又称核面几何。
-极几何是机器视觉中摄像机标定中的技术名词，在世界坐标系，观察坐标系，像素坐标系等坐标系转换中是很重要的一个概念。
-对于双目视觉系统，即有两个摄像机，定义两个摄像机的光学中心点为 C、C‘，在三维空间中存在一个场景点X，这个点与两个摄像机光学中心点共同构成的平面就是极平面π（epipolar plane），每个摄像机都有一个图像平面，分别为Image1和Image2，CX交Image1于x点，C'X交Image2于x'点，而CC'连线分别交两个图像平面于e和e'，这两个点称为极点（epipoles），CC'称为基线（baseline）。极平面与图像平面相交于两条极线（epipolar line）l和l'，这两条极线的关系是对应的（correspondence），而x、e、x'、e'分别位于l和l'上。
-随着三维场景点的移动，极平面将绕着基线转动，这些极平面共同构成一个极平面束（an epipolar pencil），这些极平面与图像平面所交汇成的极线族分别都交于两个极点e和e'。
-假如我们只知道X投射在图像平面Image1上的投射点x，我们如何去   获知在另一个图像平面上（也就是Image2）x的相应点x'呢，这个相应点x'符合什么样一种几何规则呢？我们知道，极平面是由基线和xX共同构成的，从上面的介绍我们知道了这个相应点（现在还是未知点）也一定位于极平面π上，因此可以得出x'点位于极平面π与另一个图像平面Image2的交线l'上，也即l'是投射点x的反向投影在第二个视角（第二个图像平面）上的图像。这种关系在立体对应算（stereo correspondence algorithm）中有很大的好处，那就是不需要在整幅图像上寻找x的对应点（correspondence points），而只需要把范围限定在极线l'上即可。
-</code></pre>
-<h2>图形说明</h2>
-<p><img src="/2013/05/09/Tech/MSER笔记/09-54-49.jpg" alt="Image Title"></p>
-<p><img src="/2013/05/09/Tech/MSER笔记/09-55-00.jpg" alt="Image Title"></p>
-
-          
+          MSER笔记
+宽基线和窄基线：
+基线的本意是指立体视觉系统中两摄像机光心之间的距离。依据拍摄两幅图 像的视点位置关系可将对应点匹配问题分为宽基线(Wide Baseline)和窄基线匹配(Short Baseline)。宽基线一词用于匹配时，泛指两幅图像有明显不同的情况下的匹配。产生这种情况的原因有
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2013/05/09/Tech/MSER笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1108,7 +1300,6 @@
       
     </footer>
   </article>
-
 
     
       
@@ -1194,7 +1385,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  
+                  3,382
                 </span>
               
 
@@ -1210,12 +1401,12 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  
+                  11
                 </span>
               
             </div>
           
-
+          
           
 
         </div>
@@ -1230,50 +1421,18 @@
       
         
           
-            <h1>Robust wide-baseline stereo from maximally stable extremal regions 译文</h1>
-<p>最近一直在研究MSER的区域特征提取方法，翻译了提出这种方法的文章，闲着没事发出来，有些地方翻的不好，就在这几天完善一下吧。
-原文参见：<a href="cmp.felk.cvut.cz/~matas/papers/matas-bmvc02.pdf"><em>这里</em></a>
-译文的pdf请参见：<a href="https://www.dropbox.com/s/9p274w9sep2yvp4/%E5%88%A9%E7%94%A8MSER%E8%BF%9B%E8%A1%8C%E9%B2%81%E6%A3%92%E7%9A%84%E5%AE%BD%E5%9F%BA%E7%BA%BF%E5%8C%B9%E9%85%8D.pdf" target="_blank" rel="external"><em>这里</em></a></p>
-<h3>摘要：</h3>
-<p>本文研究了宽基线立体问题，即在不同视角对同一对象拍摄的一组图片如何建立匹配。
-同时引入了一种新的图像元素集到图像匹配中，即所谓的极值区域。极值区域拥有非常有用的一些特性：这个集合在图像原点坐标的连续变换和图像强度的单调变换的情况下都是封闭的。并提出了一种针对仿射不变的极值区域稳定子集的高效（接近线性复杂度）和快速的检测算法（接近帧频），即最大稳定极值区域法(MSER)。
-进而本文提出了一种新的鲁棒的建立试探性匹配的相似性测量方法。该方法的鲁棒性保证了多测量区域（这些区域都由极值区域的不变结构获得）的仿射不变性。其中一些区域远大于MSER区域，因此更加有辨识度，可以用于建立试探性匹配。
-我们通过对室内和室外的场景所获取的图片组进行宽基带试验，选择了多测量区域，验证了MSERs的高实用性和算法的鲁棒性。在测试过程实现了尺度强烈变化（3.5X），光照条件变化，平面外旋转，闭塞情况，局部非均值尺度变换和拍摄视角的3D变换。最终在核面几何上获得了良好的估计（极线上的匹配点的平均距离低于像元间距离的0.09）。</p>
-<h3>关键词：宽基线匹配；显著边缘；最大稳定极值区域；MSER；鲁棒度量</h3>
-<h2>1.	引言</h2>
-<pre><code>在全自动的三维场景重建的过程中，用不同的摄像机在不同的光照条件下在任意的视角对同一个场景拍摄得到的两张照片进行比对，来寻找可靠的特征匹配是个非常困难又关键的步骤。这个过程至关重要的问题是对于已经寻找到匹配的元素的选择。在宽基线成像过程中，局部图像变形不能够通过变换或者旋转变化被现实的近似，因此需要一个全仿射模型。由于在欧式几何中一些固定的形状比如说长方形或者圆等，他们的形状经过仿射变换后将改变。因此特征匹配不能够通过比较这些固定形状区域的边缘来获得。
-大多数图像都有可以都会有一些一些区域可以检测出高重复性，因为这些区域有一些区别，不变性和稳定的特性。在本文中，我们把这些通常是数据依赖的区域称为显著区域（DRs），作为将要被放入到立体匹配或者目标识别的匹配当中的元素。
-</code></pre>
-<p>本文的第一件事是介绍了一个新的显著区域集合，即所谓的极值区域，极值区域拥有两个非常好的特性。一是在一对一图像坐标的连续变换中，集合是封闭的，二是在图像强度单调变换时，集合也是封闭的。并提出了一种针对仿射不变的极值区域稳定子集的高效（接近线性复杂度）和快速的检测算法（接近帧频），即最大稳定极值区域法(MSER)。对于某一特定累心的显著区域，它的鲁棒性依赖于图像数据，而且需要经过试验来测试。第四章将介绍了我们对于室内和室外的场景图进行的宽基带试验，试验的成功说明了MSERs非常有潜力。
-在宽基线匹配中，对于一些为数不多的潜在匹配点，可靠的提取是一个匹配成功的必要但是不充分的条件。当有两个显著区域集市，匹配问题可以归结为匹配空间的搜索。形成一幅完整的限制区域两偶图，寻找匹配点的全局一致性子集显然对于计算来说是轻而易举的。最近的该领域的研究提出了一整套具有共同结构的立体匹配和目标识别算法。这些方法利用了局部的不变特征子，来减少试探性特征点的数量。这个步骤重要的设计决策包括：(1) 测量区域的选择，即在选在图像的哪部分进行不变性计算。(2)根据不变性描述如何选取试探匹配点和（3）不变量的选择。
-通常，作为测量区域和试探匹配的特征区域或者它们的缩放版本，是通过利用马氏距离比较不变性后得到的。本文所做的第二件事是提出了一种鲁棒的相似性测量方法，来建立试探性的匹配，替代了原来的马氏距离测量方法。这种相似性测量方法允许我们可以使用一系列测量区域的不变性，有些区域甚至远大于相关的显著区域，非常具有鲁棒性。大区域的测量要么是非常容易识别（因为两个图片的大区域完全相同时非常不可能的）要么是完全错误的（比如如果区域的方向和深度不连续）。前者帮助建立了可靠的试探性匹配而由于该方法具有较强的鲁棒性，后者的影响很小。利用大多数的试探性匹配来寻找极几何一致性是 这整个宽基线算法的最后一步。就目前看来，RANSAC法是最被广泛采用的方法。而我们提出的算法采取了新奇的不走来增加匹配区域的数量，以及极几何的精度。为了更多的获取到区域匹配，依照试探性匹配进行了粗略的极几何预估。这样约束了极线的位置，预估了匹配区域之间的仿射映像。这个映像使得相关性过滤掉了不匹配。这个步骤显著的增加了极几何估计的精度。最后的平均内层窗极线间距离小于0.1像素。详情参见第三章。
-相关工作：自从Schmid和Mohr发表的有影响的论文依赖，许多图像匹配和宽基线算法被提了出来。许多通常使用Harris特征点来做为显著区域。Tell和Carlsson提出了一种方法将Harris特征点 用线段与测量区域相连。这个测量因为尺度不变傅里叶系数而非常有特点Harris特征点检测法在一定范围的尺度内是稳定的，但是没有定义尺度或者仿射不变的测量区域。
-本文余下的文章的组织结构是这样的。第二章定义了MSER，描述了MSER的检测算法。第三章给出新颖的鲁棒检测算法的细节。第四章这介绍了用未校准的摄像机拍摄的室内室外的图片的实验结果，第五种对实验进行了总结，在复述了本文所做的贡献。</p>
-<p>##	MSER
-这章我们介绍了一种在宽基线匹配中非常有用的新的图像元素，及最大稳定机制区域。这些区域是单独通过区域内合外围边界的强度函数的极值特性定义的。</p>
-<blockquote>
-<p>MSER的可以这样来解释：对于一副灰度图像I假设所有可能的阈值进行阈值化。我们认为像素点低于阈值的为黑色，高于或者等于阈值的为白色。如果我们把阈值为t的阈值化后的图像记作It并且以动画的形式一帧帧播放。那么我们第一眼看到的将是一张全白图像。然后对应于局部强度最小值的黑点将逐渐出现并且增长。在某一时刻，对应于两个局部灰度极小值的区域将会合并。最终，最末的一张图片将变成全黑。所有这些动画的帧中的连接元件集合就是所有极大区域的集合；极小值区域的获得方法则是将图像灰度进行翻转后，做同样的过程。MSER概念的正式定义以及必要的辅助定义见表1
-在许多图片中，特定区域的大范围局部二值化是稳定的。这些区域因为他们有如下的特性使得我们对它比较感兴趣：</p>
-</blockquote>
-<ul>
-<li>图像强度仿射不变</li>
-<li>邻域的方差保持（连续）在D-〉D的转换中</li>
-<li>稳定，因为只有在一系列阈值内框架几乎没有变化的极值区域被选了出来。</li>
-<li>多尺度检测，因为整个过程中没有进行平滑，所以被检测的区域框架非常完整，非常大</li>
-<li>这些所有极值区域的的集合的算法复杂度是O（n log log n）其中n是图像的像点个数。</li>
-</ul>
-<p>##	提出的鲁棒宽基线算法
-显著区域检测。第一步，检测显著区域，通过对于灰度图像的计算我们获得MSER+
-在通过对其反转图像的计算获得MSER-。
-	测量区域。如果构造过程是仿射协变的，每个显著区域都要和任意大小的测量区域相联系。更小的测量区域更可能满足平面条件，同时在深度和方向上不会出现不连续。另一方面，小区域更加没有辨识力，也就是说，他们更加不可能唯一。增加测量区域的大小又会有把两幅图片中完全不同的部分背景包括进去。所以显而易见。最优的测量区域是场景内来确定的，而且每个显著区域的测量区域是不同的。在参考文献[21]中Tuyetlaars 和Van Cool将椭圆的显著区域面积增加了一倍来增加辨别力。同时能够保证区域跨过对象边界的可能性在可接受范围内。
-在我们的算法中。我们选用了多尺度的策略区域，包括1倍、1.5倍、2倍、3倍的DR多边形。因为我们的方法是非常的鲁邦，我们增加区域面积获得了更高的分辨力，同时没有被显著区域的杂乱或者不平面而严重的影响，所以这是我们的算法的新奇之处。一般来说，在测量区域匹配中使用的是马氏距离。然而，这种测法的不鲁棒性是的，一个单独的错误测量就会使整个匹配过程失败。
-不变性描述。在所有试验中，在对显著区域的协方差矩阵应用了对角化变换后，都使用了基于复数矩的方向不变性。同时这还是一个仿射不变的过程。由于方向和仿射的不变性相结合，使得该方法在彩色模型下也有相似的结果。由于本身的原因，仿射不变在大尺寸变化的问题下不能够成功。
-鲁棒匹配。在几近平面的场景用稳定的不变描述来进行的测量称作是“好的测量”。不稳定、在非平面上计算的或者在深度和方向上不连续的策略被称作“差的测量”。
-	鲁棒相似点是专业计算的。我们把区域A的测量记作MAi .对于另一张图片上离MAi最近的k个区域B1,…,Bk，对应 的测量记作MB1i,…MBki. 我们对B1,…,Bk做一个投票，看谁和A的匹配性最强。在所有测量完成后再对投票进行求和。
-	投票最多的显著区域将被用来做试探性匹配。实验中，我们发现把k设成区域数量的1%时，会有较好的实验结果。而去预定数量一般都在100~1000的范围内，因此，k的值一般都在1到10之间。在当前的实现中，每个尺寸都有216个不变量。也就是说，一共有864次测量。216转动不变量在参考文献8中有详细描述，4个尺度的选择是通过试差法获得的，是运行速度和性能的一个折中。
-	由于每幅图像的不变量的权重以及对应的噪声都不一样，改过程成功的可能性的概率预测是比较复杂的。所以我们只能假设，错误的测量产生的投票是随即的，而不是共谋产生高的分数，好的测量更可能为正确的匹配投票。</p>
-
-          
+          Robust wide-baseline stereo from maximally stable extremal regions 译文
+最近一直在研究MSER的区域特征提取方法，翻译了提出这种方法的文章，闲着没事发出来，有些地方翻的不好，就在这几天完善一下吧。
+原文参见：这里
+译文的pdf请参见
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2013/05/09/Tech/2013-05-09/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1303,7 +1462,6 @@
       
     </footer>
   </article>
-
 
     
       
@@ -1389,7 +1547,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  
+                  52
                 </span>
               
 
@@ -1405,12 +1563,12 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  
+                  1
                 </span>
               
             </div>
           
-
+          
           
 
         </div>
@@ -1425,11 +1583,18 @@
       
         
           
-            <h1>第一篇日志，看看自己能坚持写多久</h1>
-<p>记录生活也好，技术转载也罢，我博客一个接一个，不知道自己能坚持多久。发张图爽快爽快！
-<img src="/2013/05/07/life/2013-05-07/Costa-Rican-Frog.jpg" alt="Image Title"></p>
+          第一篇日志，看看自己能坚持写多久
+记录生活也好，技术转载也罢，我博客一个接一个，不知道自己能坚持多久。发张图爽快爽快！
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2013/05/07/life/2013-05-07/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1459,7 +1624,6 @@
       
     </footer>
   </article>
-
 
     
   </section>
@@ -1511,12 +1675,21 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
           
 
           
@@ -1524,7 +1697,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1770,6 +1943,323 @@
 
 
   
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
 
 
 

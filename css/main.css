@@ -1790,7 +1790,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d6b34e;
+  background: #34ff24;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2962,4 +2962,22 @@ pre .javascript .function {
   .post-body {
     text-align: justify;
   }
+}
+.out-img-topic {
+  margin-top: 20px;
+  display: block;
+  max-height: 400px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+img.img-topic {
+  display: block;
+  margin-left: 0.7em;
+  margin-right: 0.7em;
+  padding: 0;
+  float: right;
+  clear: right;
+}
+p {
+  text-indent: 2em; /*首行缩进*/
 }
