@@ -1,0 +1,1382 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="blog, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="用Scrapy爬网易新闻简易教程 最近在研究爬虫相关的东东，经过上一篇文章的一系列调研比较后，收敛到scarpy这个Python的开源框架。它的好处和简单介绍可以参见上一篇文章。 Scrapy的安装和最简单的入门也可以参见官方文档tutorial,同时readthedocs上也挂有完整翻译的Scrapy中文文档,也有几篇中文的博客将该文档翻译了过来，这些都是非常好的入门材料。如果想完全弄懂爬虫的一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Scrapy爬网易新闻简易教程">
+<meta property="og:url" content="http://yoursite.com/2014/08/13/Spider/用Scrapy爬网易新闻简易教程/index.html">
+<meta property="og:site_name" content="Eric&#39;s Blog">
+<meta property="og:description" content="用Scrapy爬网易新闻简易教程 最近在研究爬虫相关的东东，经过上一篇文章的一系列调研比较后，收敛到scarpy这个Python的开源框架。它的好处和简单介绍可以参见上一篇文章。 Scrapy的安装和最简单的入门也可以参见官方文档tutorial,同时readthedocs上也挂有完整翻译的Scrapy中文文档,也有几篇中文的博客将该文档翻译了过来，这些都是非常好的入门材料。如果想完全弄懂爬虫的一">
+<meta property="og:updated_time" content="2017-07-19T16:48:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用Scrapy爬网易新闻简易教程">
+<meta name="twitter:description" content="用Scrapy爬网易新闻简易教程 最近在研究爬虫相关的东东，经过上一篇文章的一系列调研比较后，收敛到scarpy这个Python的开源框架。它的好处和简单介绍可以参见上一篇文章。 Scrapy的安装和最简单的入门也可以参见官方文档tutorial,同时readthedocs上也挂有完整翻译的Scrapy中文文档,也有几篇中文的博客将该文档翻译了过来，这些都是非常好的入门材料。如果想完全弄懂爬虫的一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":true,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2014/08/13/Spider/用Scrapy爬网易新闻简易教程/"/>
+
+
+
+
+
+  <title>用Scrapy爬网易新闻简易教程 | Eric's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-101950574-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Eric's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A place to log memory</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/08/13/Spider/用Scrapy爬网易新闻简易教程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eirc Sheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eric's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用Scrapy爬网易新闻简易教程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-08-13T13:55:00+08:00">
+                2014-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/RecSys/" itemprop="url" rel="index">
+                    <span itemprop="name">RecSys</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2014/08/13/Spider/用Scrapy爬网易新闻简易教程/" class="leancloud_visitors" data-flag-title="用Scrapy爬网易新闻简易教程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,709
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1>用Scrapy爬网易新闻简易教程</h1>
+<p>最近在研究爬虫相关的东东，经过<a href="">上一篇文章</a>的一系列调研比较后，收敛到scarpy这个Python的开源框架。它的好处和简单介绍可以参见上一篇文章。
+Scrapy的安装和最简单的入门也可以参见官方文档<a href="http://doc.scrapy.org/en/latest/intro/tutorial.html" target="_blank" rel="external">tutorial</a>,同时readthedocs上也挂有完整翻译的<a href="http://scrapy-chs.readthedocs.org/zh_CN/latest/intro/overview.html" target="_blank" rel="external">Scrapy中文文档</a>,也有几篇中文的<a href="http://www.cnblogs.com/txw1958/archive/2012/07/16/scrapy-tutorial.html" target="_blank" rel="external">博客</a>将该文档翻译了过来，这些都是非常好的入门材料。如果想完全弄懂爬虫的一些更加高阶的功能，比如分布式，缓存技术，并发等等问题，那么就必须好好研究下文档了。</p>
+<p>这里我们直接举一个简单的用Scrapy来爬去网易科技新闻的例子。爬虫之前我们先应该把我们的大体思路理清楚，我们爬虫的对象是<a href="tech.163.com">网易科技新闻</a>。这个网页上会有很多信息，有导航，有专栏，有新闻，还有一些广告，我们的目的则很明确——爬新闻，细分一下主要可以包括新闻的标题，正文，来源，时间等等。同时为了简单起见，我们对于新闻里的图片，视频等等一系列多媒体元素也不做处理。同时我们还要考虑到如何把爬到内容用数据库存储起来。好，那我们开始吧。</p>
+<h2>创建项目</h2>
+<p>使用命令创建项目：
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scrapy startproject tech163</div></pre></td></tr></table></figure></p>
+<p>我们可以看到新建的项目目录结构如下：</p>
+<pre><code>tech163/
+├── scrapy.cfg
+└── tech163
+    ├── __init__.py
+    ├── items.py
+    ├── pipelines.py
+    ├── settings.py
+    └── spiders
+        └── __init__.py
+</code></pre>
+<p>其中<code>scrapy.cfg</code>定义的是项目的配置文件，一般里面的内容只是做了一个指向，将配置指向到了<code>settings.py</code>这个文件，这才是我们对项目进行配置的地方，包括对pipeline，download middleware，useragent。</p>
+<h2>定义要爬的内容</h2>
+<p>在scrapy框架中 要爬的内容都被定义在<code>items.py</code>文件中，定义也非常简单，代码如下：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># Define here the models for your scraped items</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># See documentation in:</span></div><div class="line"><span class="comment"># http://doc.scrapy.org/en/latest/topics/items.html</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tech163Item</span><span class="params">(scrapy.Item)</span>:</span></div><div class="line">    <span class="comment"># define the fields for your item here like:</span></div><div class="line">    <span class="comment"># name = scrapy.Field()</span></div><div class="line">    news_thread=scrapy.Field()</div><div class="line">    news_title = scrapy.Field()</div><div class="line">    news_url = scrapy.Field()</div><div class="line">    news_time=scrapy.Field()</div><div class="line">    news_from=scrapy.Field()</div><div class="line">    from_url=scrapy.Field()</div><div class="line">    news_body=scrapy.Field()</div></pre></td></tr></table></figure></p>
+<p>其中，<code>news_thread</code>是从每条新闻的url中提取特有的一个字符串，比如<a href="http://tech.163.com/14/0813/10/A3H72TD4000915BF.html" target="_blank" rel="external">这条新闻</a>,它的地址是：<code>http://tech.163.com/14/0813/10/A3H72TD4000915BF.html</code>， 那么它的thread就是：<code>A3H72TD4000915BF</code>，个人感觉它应该是随机产生的新闻的识别号，<code>14</code>和<code>0813</code>是年份份和日期，<code>10</code>是一个两位的数字。<code>news_title</code>，<code>news_url</code>，<code>news_time</code>，<code>news_from</code>，<code>from_url</code>，<code>news_body</code>这些定义的是之前提到新闻的属性。</p>
+<h2>开始写爬虫蜘蛛</h2>
+<p>定义完要爬的内容，我们再开始来写我们的爬虫蜘蛛——spider，我们在目录<code>tech163/spiders/</code>下，创建我们的spider文件叫做<code>news_spider.py</code>。
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#encoding: utf-8</span></div><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">from</span> scrapy.selector <span class="keyword">import</span> Selector</div><div class="line"><span class="keyword">from</span> tech163.items <span class="keyword">import</span> Tech163Item</div><div class="line"><span class="keyword">from</span> scrapy.contrib.linkextractors <span class="keyword">import</span> LinkExtractor</div><div class="line"><span class="keyword">from</span> scrapy.contrib.spiders <span class="keyword">import</span> CrawlSpider,Rule</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleSpider</span><span class="params">(CrawlSpider)</span>:</span></div><div class="line">	name = <span class="string">"news"</span></div><div class="line">	allowed_domains = [<span class="string">"tech.163.com"</span>]</div><div class="line">	start_urls = [<span class="string">'http://tech.163.com/'</span>]</div><div class="line">	rules=(</div><div class="line">		Rule(LinkExtractor(allow=<span class="string">r"/14/08\d+/\d+/*"</span>),</div><div class="line">		callback=<span class="string">"parse_news"</span>,follow=<span class="keyword">True</span>),</div><div class="line">	)</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">printcn</span><span class="params">(suni)</span>:</span></div><div class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> uni:</div><div class="line">			<span class="keyword">print</span> uni.encode(<span class="string">'utf-8'</span>)</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">parse_news</span><span class="params">(self,response)</span>:</span></div><div class="line">		item = Tech163Item()</div><div class="line">		item[<span class="string">'news_thread'</span>]=response.url.strip().split(<span class="string">'/'</span>)[<span class="number">-1</span>][:<span class="number">-5</span>]</div><div class="line">		<span class="comment"># self.get_thread(response,item)</span></div><div class="line">		self.get_title(response,item)</div><div class="line">		self.get_source(response,item)</div><div class="line">		self.get_url(response,item)</div><div class="line">		self.get_news_from(response,item)</div><div class="line">		self.get_from_url(response,item)</div><div class="line">		self.get_text(response,item)</div><div class="line">		<span class="comment">#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!remenber to Retrun Item after parse</span></div><div class="line">		<span class="keyword">return</span> item </div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">get_title</span><span class="params">(self,response,item)</span>:</span></div><div class="line">		title=response.xpath(<span class="string">"/html/head/title/text()"</span>).extract()</div><div class="line">		<span class="keyword">if</span> title:</div><div class="line">			<span class="comment"># print 'title:'+title[0][:-5].encode('utf-8')</span></div><div class="line">			item[<span class="string">'news_title'</span>]=title[<span class="number">0</span>][:<span class="number">-5</span>]</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">get_source</span><span class="params">(self,response,item)</span>:</span></div><div class="line">		source=response.xpath(<span class="string">"//div[@class='left']/text()"</span>).extract()</div><div class="line">		<span class="keyword">if</span> source:</div><div class="line">			<span class="comment"># print 'source'+source[0][:-5].encode('utf-8')</span></div><div class="line">			item[<span class="string">'news_time'</span>]=source[<span class="number">0</span>][:<span class="number">-5</span>]</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">get_news_from</span><span class="params">(self,response,item)</span>:</span></div><div class="line">		news_from=response.xpath(<span class="string">"//div[@class='left']/a/text()"</span>).extract()</div><div class="line">		<span class="keyword">if</span> news_from:</div><div class="line">			<span class="comment"># print 'from'+news_from[0].encode('utf-8')		</span></div><div class="line">			item[<span class="string">'news_from'</span>]=news_from[<span class="number">0</span>]</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">get_from_url</span><span class="params">(self,response,item)</span>:</span></div><div class="line">		from_url=response.xpath(<span class="string">"//div[@class='left']/a/@href"</span>).extract()</div><div class="line">		<span class="keyword">if</span> from_url:</div><div class="line">			<span class="comment"># print 'url'+from_url[0].encode('utf-8')		</span></div><div class="line">			item[<span class="string">'from_url'</span>]=from_url[<span class="number">0</span>]	</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">def</span>  <span class="title">get_text</span><span class="params">(self,response,item)</span>:</span></div><div class="line">		news_body=response.xpath(<span class="string">"//div[@id='endText']/p/text()"</span>).extract()</div><div class="line">		<span class="keyword">if</span> news_body:</div><div class="line">			<span class="comment"># for  entry in news_body:</span></div><div class="line">			<span class="comment"># 	print entry.encode('utf-8')</span></div><div class="line">			item[<span class="string">'news_body'</span>]=news_body	</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">get_url</span><span class="params">(self,response,item)</span>:</span></div><div class="line">		news_url=response.url</div><div class="line">		<span class="keyword">if</span> news_url:</div><div class="line">			<span class="comment">#print news_url	</span></div><div class="line">		item[<span class="string">'news_url'</span>]=news_url</div></pre></td></tr></table></figure></p>
+<p>代码非常简单,大部分都是对网页做解析，解析的地方，大部分是用xpath对内容进行提取，这部分还是得参考文档。这些解析只实现了对单张新闻网页的解析，那么是什么能够让它不停的爬取科技频道的新闻呢？scrapy的方便之处就是。这个机制只用一行代码就实现了
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rules=(</div><div class="line">Rule(LinkExtractor(allow=<span class="string">r"/14/08\d+/\d+/*"</span>),</div><div class="line">callback=<span class="string">"parse_news"</span>,follow=<span class="keyword">True</span>),</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>这行代码，设置了整个爬虫的规则，通过LinkExtractor这个元件从response提取到所有的链接，再通过设置allow来设置需要再递归往下爬的新闻。这里使用正则表达式，将新闻的url做了约束。我们可以回顾下，正常的url的格式是这样的<code>http://tech.163.com/14/0813/10/A3H72TD4000915BF.html</code> ，代码中的正则<code>/14/08\d+/\d+/*</code>的含义是大概是爬去<code>/14/08</code>开头并且后面是<code>数字/数字/任何格式/</code>的新闻，可以说是14年8月份的新闻。通过这个正则我们便可以很好的对递归爬去做出筛选。<code>follow=ture</code>定义了是否再爬到的结果上继续往后爬。</p>
+<h2>定义数据的处理管道</h2>
+<p>scrapy通过在pipeline来对每次爬去到的items值进行处理，这里我们使用mongodb数据库来存储我们爬到的数据，新建的数据库为NewsDB。我们先在<code>tech163</code>目下单独使用文件，新建一个文件<code>store.py</code>来配置数据库存储，这里需要mongodb的依赖，以及pymongo依赖。
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#encoding: utf-8</span></div><div class="line"><span class="keyword">import</span> pymongo</div><div class="line"><span class="keyword">import</span> random</div><div class="line">HOST = <span class="string">"127.0.0.1"</span></div><div class="line">PORT = <span class="number">27017</span></div><div class="line">client = pymongo.MongoClient(HOST, PORT)</div><div class="line">NewsDB = client.NewsDB</div></pre></td></tr></table></figure></p>
+<p>然后我们的pipeline文件这么写：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># Define your item pipelines here</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Don't forget to add your pipeline to the ITEM_PIPELINES setting</span></div><div class="line"><span class="comment"># See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html</span></div><div class="line"><span class="comment">#encoding: utf-8</span></div><div class="line"><span class="keyword">from</span> store <span class="keyword">import</span> NewsDB</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tech163Pipeline</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></div><div class="line">        <span class="keyword">if</span> spider.name != <span class="string">"news"</span>:  <span class="keyword">return</span> item</div><div class="line">        <span class="keyword">if</span> item.get(<span class="string">"news_thread"</span>, <span class="keyword">None</span>) <span class="keyword">is</span> <span class="keyword">None</span>: <span class="keyword">return</span> item</div><div class="line"></div><div class="line">        spec = &#123; <span class="string">"news_thread"</span>: item[<span class="string">"news_thread"</span>] &#125;</div><div class="line">        NewsDB.news.update(spec, &#123;<span class="string">'$set'</span>: dict(item)&#125;, upsert=<span class="keyword">True</span>)</div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div></pre></td></tr></table></figure></p>
+<p>最后我们在setting.py 文件中做一些设置，主要是定义pipeline：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="comment"># Scrapy settings for tech163 project</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># For simplicity, this file contains only the most important settings by</span></div><div class="line"><span class="comment"># default. All the other settings are documented here:</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment">#     http://doc.scrapy.org/en/latest/topics/settings.html</span></div><div class="line"><span class="comment">#</span></div><div class="line"></div><div class="line">BOT_NAME = <span class="string">'tech163'</span></div><div class="line"></div><div class="line">SPIDER_MODULES = [<span class="string">'tech163.spiders'</span>]</div><div class="line">NEWSPIDER_MODULE = <span class="string">'tech163.spiders'</span></div><div class="line">ITEM_PIPELINES = [<span class="string">'tech163.pipelines.Tech163Pipeline'</span>,</div><div class="line">			]</div><div class="line"></div><div class="line"><span class="comment"># Crawl responsibly by identifying yourself (and your website) on the user-agent</span></div><div class="line"><span class="comment">#USER_AGENT = 'tech163 (+http://www.yourdomain.com)'</span></div><div class="line">USER_AGENT = <span class="string">'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.7'</span></div><div class="line"></div><div class="line">DOWNLOAD_TIMEOUT = <span class="number">15</span></div><div class="line"><span class="comment"># DOWNLOAD_DELAY = 0.1</span></div><div class="line"><span class="comment"># LOG_LEVEL = "INFO"</span></div><div class="line"><span class="comment"># LOG_STDOUT = True</span></div><div class="line"><span class="comment"># LOG_FILE = "log/newsSpider.log"</span></div></pre></td></tr></table></figure></p>
+<p>这样我们就完成了整个项目的配置，我们便可以在命令行中敲入：</p>
+<pre><code>scrapy crawl news
+</code></pre>
+<p>来开始爬去新闻。整个项目的源代码传到了<a href="https://github.com/armysheng/tech163newsSpider" target="_blank" rel="external">github</a>上供大家参考，完成这个以后可以学习图片爬取，分布式处理，以及缓存技术等等问题。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>请我喝杯咖啡吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weixin.jpg" alt="Eirc Sheng WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Eirc Sheng Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/12/Data structure and Algorithms/Data Structure--Binary search trees/" rel="next" title="Data Structure--Binary search trees">
+                <i class="fa fa-chevron-left"></i> Data Structure--Binary search trees
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/08/14/RecSys/安装CDH5 step by step/" rel="prev" title="安装CDH5 step by step">
+                安装CDH5 step by step <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTYxOC82MTg2"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Eirc Sheng" />
+          <p class="site-author-name" itemprop="name">Eirc Sheng</p>
+           
+              <p class="site-description motion-element" itemprop="description">happy coding, happy hacking</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/armysheng" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/armysheng" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/armysheng" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/armysheng" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/armysheng" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">用Scrapy爬网易新闻简易教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">定义要爬的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">开始写爬虫蜘蛛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">定义数据的处理管道</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eirc Sheng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+        <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("s4IrIeBOhnah5phT89nXwGeQ-gzGzoHsz", "iCaxYx3IL2nsopddR0gMa8X9");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script>
+
+
+  
+
+</body>
+</html>
