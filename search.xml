@@ -110,6 +110,14 @@
       </categories>
   </entry>
   <entry>
+    <title><![CDATA[Clean Code 笔记（3）Function Structure]]></title>
+    <url>%2F2015%2F12%2F27%2FTech%2FClean%20Code%20%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89Function%20Structure%2F</url>
+    <content type="text"><![CDATA[Introduction Do you know why swith statement casuse such harm to software structure,did you know if statement have same problem.In this episode we are going to talk about how to get rid of most of them, and how to deal with the rest of them.Did you know assagnment staement also harmful.Have you ever seen a function full of error checks ,null checks that you couldn't tell what it was doing.Or how about try catch. Fusion sun metaphor. Arguments How many arguments should a function have.They are hard to read,hard to understand.we should treat them as a liabilty not a asset Three arguments Max. as fewer as prossiable. one is ok, two is ok, three is usaully too many. remenber order.why aren't they a object No boolean arguments write two function, one for ture , other for false.passing two boolean is even worse,do four things.]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[Clean Code 笔记 (2) Function]]></title>
     <url>%2F2015%2F12%2F27%2FTech%2FClean%20Code%20%E7%AC%94%E8%AE%B0%20(2)%20Function%2F</url>
     <content type="text"><![CDATA[Introduction function is what we do.fisrt container put codes in. how long ?20,30lines? there is a simple rule to follow. how to find classes by getting your function at right size. do one thing , do it well, do it only. but what does onething mean? what makes sun shine the first rule of funtions They should be smaller.The second rule of functions that should small than that. How big should a funtion be? Back in the 1990s, we have a simple rule, a function should be a screen full.(about 20 lines.) original the screen full is out of date,doesn't apply anymore. &quot;Four lines is ok, maybe five, six? ok,ten is way too big.&quot; sound insame. In a four line function ,how many indent how many if else statement,try catch blocks your can see.there is not enough room for indenting. small functions have nice long descriptive names, what's more, you will extrat the pridicts of your if statements and while loop into even more nice small named boolean functions. example: before: 123456789public String invoke() throws Exception&#123; if(pageData.hasAttribute("Test"))&#123; content+= includeSetups(); content+=page.getContent()+"\n"; content+=includeTeardowns(); pageData.setContent(content.toString()); &#125; return page.getHtml();&#125; after 123456789101112public String invoke() throws Exception&#123; if(isTestPage())&#123; content+= includeSetups(); content+=page.getContent()+"\n"; content+=includeTeardowns(); pageData.setContent(content.toString()); &#125; return page.getHtml(); &#125; private boolean isTestPage() throw Exception&#123; return pageData.hasAttribute("Test"); &#125; Are you out of mind you are thinking,you will lost in a sea of funtions where do classes go to hide a long function is where the classes go to hide long funtion could always refactor to a class one thing The old rule that &quot;the function should do one thing, do it well and do it only.&quot; But what does onething mean? it could be any thing. at same level extract untill your drop extract till you can not extract conculsion the fisrt rule of funtion is small; making functions smaller will save your and everybody time. the class hide in long functions. funtions do one thing. extract till you drop.]]></content>
@@ -119,14 +127,6 @@
       <tags>
         <tag>cleancode</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Clean Code 笔记（3）Function Structure]]></title>
-    <url>%2F2015%2F12%2F27%2FTech%2FClean%20Code%20%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89Function%20Structure%2F</url>
-    <content type="text"><![CDATA[Introduction Do you know why swith statement casuse such harm to software structure,did you know if statement have same problem.In this episode we are going to talk about how to get rid of most of them, and how to deal with the rest of them.Did you know assagnment staement also harmful.Have you ever seen a function full of error checks ,null checks that you couldn't tell what it was doing.Or how about try catch. Fusion sun metaphor. Arguments How many arguments should a function have.They are hard to read,hard to understand.we should treat them as a liabilty not a asset Three arguments Max. as fewer as prossiable. one is ok, two is ok, three is usaully too many. remenber order.why aren't they a object No boolean arguments write two function, one for ture , other for false.passing two boolean is even worse,do four things.]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
   </entry>
   <entry>
     <title><![CDATA[Clean Code 笔记（1）Name]]></title>
