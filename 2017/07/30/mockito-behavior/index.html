@@ -95,7 +95,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Data Structure," />
+  <meta name="keywords" content="Mockito," />
 
 
 
@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="Array char c[];//引用一个任意长度的字符数组 c=new char[4]; c[0]=&apos;b&apos;; c[1]=&apos;l&apos;; c[2]=&apos;u&apos;; c[3]=&apos;e&apos;; c[4]=&apos;s&apos;;//runtime error 编译时没有问题运行时出现问题 int l= c.length//获得数组的长度，这里.length是一个域，如果为string.length 则一个为方法。filed和metho">
-<meta name="keywords" content="Data Structure">
+<meta name="description" content="概述 本文用大量的例子和用例来阐述如何用Mockito来配置一些调用行为，本文的组织形式偏向于用法的举例与实践，将不对额外的细节做介绍。  如果你想查看其它的使用Mockito测试的文章，请参见Mockito  首先我们仍然要和上一篇文章一样Mock一个简单的list： 1234567891011public class MyList extends AbstractList&amp;lt;String&amp;">
+<meta name="keywords" content="Mockito">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Data Structure of Berkeley（0）">
-<meta property="og:url" content="http://youngfor.me/2014/04/26/Data structure and Algorithms/2013-05-17/index.html">
+<meta property="og:title" content="Mokito When&#x2F;Then 用法">
+<meta property="og:url" content="http://youngfor.me/2017/07/30/mockito-behavior/index.html">
 <meta property="og:site_name" content="Eric&#39;s Blog">
-<meta property="og:description" content="Array char c[];//引用一个任意长度的字符数组 c=new char[4]; c[0]=&apos;b&apos;; c[1]=&apos;l&apos;; c[2]=&apos;u&apos;; c[3]=&apos;e&apos;; c[4]=&apos;s&apos;;//runtime error 编译时没有问题运行时出现问题 int l= c.length//获得数组的长度，这里.length是一个域，如果为string.length 则一个为方法。filed和metho">
+<meta property="og:description" content="概述 本文用大量的例子和用例来阐述如何用Mockito来配置一些调用行为，本文的组织形式偏向于用法的举例与实践，将不对额外的细节做介绍。  如果你想查看其它的使用Mockito测试的文章，请参见Mockito  首先我们仍然要和上一篇文章一样Mock一个简单的list： 1234567891011public class MyList extends AbstractList&amp;lt;String&amp;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-19T16:45:11.000Z">
+<meta property="og:updated_time" content="2017-07-30T14:35:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Data Structure of Berkeley（0）">
-<meta name="twitter:description" content="Array char c[];//引用一个任意长度的字符数组 c=new char[4]; c[0]=&apos;b&apos;; c[1]=&apos;l&apos;; c[2]=&apos;u&apos;; c[3]=&apos;e&apos;; c[4]=&apos;s&apos;;//runtime error 编译时没有问题运行时出现问题 int l= c.length//获得数组的长度，这里.length是一个域，如果为string.length 则一个为方法。filed和metho">
+<meta name="twitter:title" content="Mokito When&#x2F;Then 用法">
+<meta name="twitter:description" content="概述 本文用大量的例子和用例来阐述如何用Mockito来配置一些调用行为，本文的组织形式偏向于用法的举例与实践，将不对额外的细节做介绍。  如果你想查看其它的使用Mockito测试的文章，请参见Mockito  首先我们仍然要和上一篇文章一样Mock一个简单的list： 1234567891011public class MyList extends AbstractList&amp;lt;String&amp;">
 
 
 
@@ -150,13 +150,13 @@
 
 
 
-  <link rel="canonical" href="http://youngfor.me/2014/04/26/Data structure and Algorithms/2013-05-17/"/>
+  <link rel="canonical" href="http://youngfor.me/2017/07/30/mockito-behavior/"/>
 
 
 
 
 
-  <title>Data Structure of Berkeley（0） | Eric's Blog</title>
+  <title>Mokito When/Then 用法 | Eric's Blog</title>
   
 
 
@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://youngfor.me/2014/04/26/Data structure and Algorithms/2013-05-17/">
+    <link itemprop="mainEntityOfPage" href="http://youngfor.me/2017/07/30/mockito-behavior/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eirc Sheng">
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Data Structure of Berkeley（0）</h1>
+          <h1 class="post-title" itemprop="name headline">Mokito When/Then 用法</h1>
         
 
         <div class="post-meta">
@@ -333,8 +333,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-04-26T23:30:36+08:00">
-                2014-04-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-30T19:16:18+08:00">
+                2017-07-30
               </time>
             
 
@@ -356,8 +356,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Data-Struture-and-algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">Data Struture and algorithm</span>
+                  <a href="/categories/tech/" itemprop="url" rel="index">
+                    <span itemprop="name">tech</span>
                   </a>
                 </span>
 
@@ -373,7 +373,7 @@
 
           
           
-             <span id="/2014/04/26/Data structure and Algorithms/2013-05-17/" class="leancloud_visitors" data-flag-title="Data Structure of Berkeley（0）">
+             <span id="/2017/07/30/mockito-behavior/" class="leancloud_visitors" data-flag-title="Mokito When/Then 用法">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  388
+                  488
                 </span>
               
 
@@ -420,6 +420,10 @@
             </div>
           
           
+              <div class="out-img-topic">
+                  <img src=https://cdn.dribbble.com/users/1751513/screenshots/3693795/gesture-800-600-4-2.png class="img-topic">
+              </div>
+          
           
 
         </div>
@@ -432,52 +436,32 @@
       
 
       
-        <h3 id="array">Array</h3>
-<pre><code>char c[];//引用一个任意长度的字符数组
-c=new char[4];
-c[0]='b';
-c[1]='l';
-c[2]='u';
-c[3]='e';
-c[4]='s';//runtime error 编译时没有问题运行时出现问题
-int l= c.length//获得数组的长度，这里.length是一个域，如果为string.length 则一个为方法。filed和method的区别，method为一段代码函数，filed为存储在某一位置的一个变量。
-</code></pre>
-<h3 id="primes-revisited-素数遍历">Primes Revisited 素数遍历</h3>
-<p>程序分三步，主要算法为古老的<a href="http://zh.wikipedia.org/wiki/%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC%E7%AD%9B%E6%B3%95" target="_blank" rel="external">sieve of eratosthenes（埃拉托斯特尼筛法）</a>,第一步假设所有的数都为素数，第二部，用2~根号n的除子去除这个数。第三步打印.</p>
-<h1 id=""></h1>
-<pre><code>//Part1
-public static void printPrimes[int n]{
-    boolean[] prome = new boolean[n+1];  //Number 0~n 为何不用n-1为了是下标对应数值 
-    int i ;
-    for (i=2;i&lt;=n ;i ++)
-    prime[i]= true;
-    
-//Part2        
-for(int divisor =2 ;divisor *divisor &lt;=n; divisor++)//divisor从0~根号N递增
-if prime(divisor){                                           //省去前面除子已经遍历出的非素数除子
-    for (i=2*divisor;i&lt;=n;i=i+divisor) //从两倍非素数除子开始，没遍历一次除子加一倍，并判断是否已超出范围
-    prime[i]=false;
-}
-
-//Part3
-for(i=2;i&lt;=n;i++){
-if(prime[i]){
-    System.out.print(“”+i)；
-    }
-}
-}
-</code></pre>
-<h3 id="pascal-triangle">Pascal Triangle</h3>
-<pre><code>/*返回一个三角
-            1
-          1  1
-       1   2   1
-     1   3   3   1
-   1   4   6   4   1
- 1  5   10  10  5   1
- */
-</code></pre>
-<p><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> [][] pascalTriangle(<span class="keyword">int</span> n)&#123;</div><div class="line">    <span class="keyword">int</span> [][] pt = <span class="keyword">new</span> <span class="keyword">int</span> [n][];</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i= <span class="number">0</span>;i&lt;n;i++)&#123;</div><div class="line">    pt[i]= <span class="keyword">new</span> <span class="keyword">int</span> [i+<span class="number">1</span>];</div><div class="line">    pt[i][<span class="number">0</span>]=<span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j&lt;i;j++)&#123;</div><div class="line">    pt[i][j]=pt[i<span class="number">-1</span>][j<span class="number">-1</span>]+pt[i<span class="number">-1</span>][j];</div><div class="line">    &#125;</div><div class="line">    pt[i][i]=<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> pt;</div><div class="line">    &#125;</div><div class="line">                  </div><div class="line"></div><div class="line">    </div><div class="line">    &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <h2 id="概述">概述</h2>
+<p>本文用大量的例子和用例来阐述如何用Mockito来配置一些<strong>调用行为</strong>，本文的组织形式偏向于用法的举例与实践，将不对额外的细节做介绍。</p>
+<blockquote>
+<p>如果你想查看其它的使用Mockito测试的文章，请参见<a href="/tags/Mockito/">Mockito</a></p>
+</blockquote>
+<p>首先我们仍然要和上一篇文章一样Mock一个简单的list：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyList</span> <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">String</span>&gt; </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">get</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="用法">用法</h2>
+<h3 id="为mock对象配置简单的返回值">为Mock对象配置简单的返回值</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">whenMockReturnBehaviorIsConfigured_thenBehaviorIsVerified</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> MyList listMock = Mockito.mock(MyList.class);</div><div class="line">    when(listMock.add(anyString())).thenReturn(<span class="keyword">false</span>);</div><div class="line"></div><div class="line">    <span class="keyword">final</span> <span class="keyword">boolean</span> added = listMock.add(randomAlphabetic(<span class="number">6</span>));</div><div class="line">    assertThat(added, is(<span class="keyword">false</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="另一种配置返回值的方法">另一种配置返回值的方法</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">whenMockReturnBehaviorIsConfigured2_thenBehaviorIsVerified</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> MyList listMock = Mockito.mock(MyList.class);</div><div class="line">    doReturn(<span class="keyword">false</span>).when(listMock).add(anyString());</div><div class="line"></div><div class="line">    <span class="keyword">final</span> <span class="keyword">boolean</span> added = listMock.add(randomAlphabetic(<span class="number">6</span>));</div><div class="line">    assertThat(added, is(<span class="keyword">false</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="为mock对象的指定方法配置抛出异常">为mock对象的指定方法配置抛出异常</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span>(expected = IllegalStateException.class)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">givenMethodIsConfiguredToThrowException_whenCallingMethod_thenExceptionIsThrown</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">final</span> MyList listMock = Mockito.mock(MyList.class);</div><div class="line">        when(listMock.add(anyString())).thenThrow(IllegalStateException.class);</div><div class="line"></div><div class="line">        listMock.add(randomAlphabetic(<span class="number">6</span>));</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="为返回值为空的方法配置行为抛出异常">为返回值为空的方法配置行为（抛出异常）</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span>(expected = NullPointerException.class)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">whenMethodHasNoReturnType_whenConfiguringBehaviorOfMethod_thenPossible</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> MyList listMock = Mockito.mock(MyList.class);</div><div class="line">    doThrow(NullPointerException.class).when(listMock).clear();</div><div class="line"></div><div class="line">    listMock.clear();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="为多次调用配置行为第一次调用不抛出异常">为多次调用配置行为，第一次调用不抛出异常</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">givenBehaviorIsConfiguredToThrowExceptionOnSecondCall_whenCallingOnlyOnce_thenNoExceptionIsThrown</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> MyList listMock = Mockito.mock(MyList.class);</div><div class="line">    when(listMock.add(anyString())).thenReturn(<span class="keyword">false</span>).thenThrow(IllegalStateException.class);</div><div class="line"></div><div class="line">    listMock.add(randomAlphabetic(<span class="number">6</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="第二次调用时抛出异常">第二次调用时抛出异常</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span>(expected = IllegalStateException.class)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">givenBehaviorIsConfiguredToThrowExceptionOnSecondCall_whenCallingTwice_thenExceptionIsThrown</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> MyList listMock = Mockito.mock(MyList.class);</div><div class="line">    when(listMock.add(anyString())).thenReturn(<span class="keyword">false</span>).thenThrow(IllegalStateException.class);</div><div class="line"></div><div class="line">    listMock.add(randomAlphabetic(<span class="number">6</span>));</div><div class="line">    listMock.add(randomAlphabetic(<span class="number">6</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="配置mock对象调用真实的方法">配置mock对象调用真实的方法</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">whenMockMethodCallIsConfiguredToCallTheRealMethod_thenRealMethodIsCalled</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> MyList listMock = Mockito.mock(MyList.class);</div><div class="line">    when(listMock.size()).thenCallRealMethod();</div><div class="line"></div><div class="line">    assertThat(listMock.size(), equalTo(<span class="number">1</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="为mock方法配置自定义的回答">为mock方法配置自定义的回答</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">whenMockMethodCallIsConfiguredWithCustomAnswer_thenRealMethodIsCalled</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> MyList listMock = Mockito.mock(MyList.class);</div><div class="line">    doAnswer(invocation -&gt; <span class="string">"Always the same"</span>).when(listMock).get(anyInt());</div><div class="line"></div><div class="line">    <span class="keyword">final</span> String element = listMock.get(<span class="number">1</span>);</div><div class="line">    assertThat(element, is(equalTo(<span class="string">"Always the same"</span>)));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="总结">总结</h2>
+<p>目前列举这些例子，如果有用到新的场景会继续添加，例子的代码可以参见<a href="https://github.com/eugenp/tutorials/tree/master/mockito#readme" target="_blank" rel="external">github</a></p>
 
       
     </div>
@@ -528,7 +512,7 @@ if(prime[i]){
       
         <div class="post-tags">
           
-            <a href="/tags/Data-Structure/" rel="tag"># Data Structure</a>
+            <a href="/tags/Mockito/" rel="tag"># Mockito</a>
           
         </div>
       
@@ -541,8 +525,8 @@ if(prime[i]){
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/04/26/links/献给写作者的 Markdown 新手指南(转)/" rel="next" title="献给写作者的 Markdown 新手指南">
-                <i class="fa fa-chevron-left"></i> 献给写作者的 Markdown 新手指南
+              <a href="/2017/07/25/Mockito-Verify-Cookbook/" rel="next" title="Mockito Verify 用法">
+                <i class="fa fa-chevron-left"></i> Mockito Verify 用法
               </a>
             
           </div>
@@ -551,8 +535,8 @@ if(prime[i]){
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/04/26/links/2013-05-25-1/" rel="prev" title="我的数学之美（一）——RANSAC算法详解">
-                我的数学之美（一）——RANSAC算法详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/30/mockito-spy/" rel="prev" title="Mockito Spy 用法">
+                Mockito Spy 用法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -721,7 +705,7 @@ if(prime[i]){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#array"><span class="nav-number">1.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#primes-revisited-素数遍历"><span class="nav-number">2.</span> <span class="nav-text">Primes Revisited 素数遍历</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number"></span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pascal-triangle"><span class="nav-number">1.</span> <span class="nav-text">Pascal Triangle</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">2.</span> <span class="nav-text">用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为mock对象配置简单的返回值"><span class="nav-number">2.1.</span> <span class="nav-text">为Mock对象配置简单的返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#另一种配置返回值的方法"><span class="nav-number">2.2.</span> <span class="nav-text">另一种配置返回值的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为mock对象的指定方法配置抛出异常"><span class="nav-number">2.3.</span> <span class="nav-text">为mock对象的指定方法配置抛出异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为返回值为空的方法配置行为抛出异常"><span class="nav-number">2.4.</span> <span class="nav-text">为返回值为空的方法配置行为（抛出异常）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为多次调用配置行为第一次调用不抛出异常"><span class="nav-number">2.5.</span> <span class="nav-text">为多次调用配置行为，第一次调用不抛出异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二次调用时抛出异常"><span class="nav-number">2.6.</span> <span class="nav-text">第二次调用时抛出异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置mock对象调用真实的方法"><span class="nav-number">2.7.</span> <span class="nav-text">配置mock对象调用真实的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为mock方法配置自定义的回答"><span class="nav-number">2.8.</span> <span class="nav-text">为mock方法配置自定义的回答</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

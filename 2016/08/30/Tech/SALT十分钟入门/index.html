@@ -114,9 +114,10 @@
 <meta name="description" content="SALT 十分钟入门  2016年8月29日13:59:12  最近快要成为为运维了，各种在服务器集群上部署应用，最早以为写一个shell脚本，在每台服务器上运行一下就够了。但是服务器涨到30台、50台时，每次部署，每次做一些修改，就显得非常头疼了。如果有一个工具可以让你们在一台主机机子上完成对所有其他服务器的配置，那真是一件非常爽的事情。 Salt就是这么一个工具！ Salt Salt 是一种新">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SALT十分钟入门">
-<meta property="og:url" content="http://yoursite.com/2016/08/30/Tech/SALT十分钟入门/index.html">
+<meta property="og:url" content="http://youngfor.me/2016/08/30/Tech/SALT十分钟入门/index.html">
 <meta property="og:site_name" content="Eric&#39;s Blog">
 <meta property="og:description" content="SALT 十分钟入门  2016年8月29日13:59:12  最近快要成为为运维了，各种在服务器集群上部署应用，最早以为写一个shell脚本，在每台服务器上运行一下就够了。但是服务器涨到30台、50台时，每次部署，每次做一些修改，就显得非常头疼了。如果有一个工具可以让你们在一台主机机子上完成对所有其他服务器的配置，那真是一件非常爽的事情。 Salt就是这么一个工具！ Salt Salt 是一种新">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-07-19T16:50:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SALT十分钟入门">
@@ -148,7 +149,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/30/Tech/SALT十分钟入门/"/>
+  <link rel="canonical" href="http://youngfor.me/2016/08/30/Tech/SALT十分钟入门/"/>
 
 
 
@@ -275,43 +276,9 @@
       
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
   
 </nav>
 
@@ -336,7 +303,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/30/Tech/SALT十分钟入门/">
+    <link itemprop="mainEntityOfPage" href="http://youngfor.me/2016/08/30/Tech/SALT十分钟入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eirc Sheng">
@@ -468,16 +435,16 @@
       
 
       
-        <h1>SALT 十分钟入门</h1>
+        <h1 id="salt-十分钟入门">SALT 十分钟入门</h1>
 <blockquote>
 <p>2016年8月29日13:59:12</p>
 </blockquote>
 <p>最近快要成为为运维了，各种在服务器集群上部署应用，最早以为写一个shell脚本，在每台服务器上运行一下就够了。但是服务器涨到30台、50台时，每次部署，每次做一些修改，就显得非常头疼了。如果有一个工具可以让你们在一台主机机子上完成对所有其他服务器的配置，那真是一件非常爽的事情。
 Salt就是这么一个工具！</p>
-<h2>Salt</h2>
+<h2 id="salt">Salt</h2>
 <p>Salt 是一种新的基础设备管理方法.用几秒中就能过把环境打起来,可以拓展管理成百上前台服务器,并且与这些服务器保持毫秒级通信.</p>
 <p>Saltstack使用Python开发的，非常简单易用和轻量级的管理工具。由Master和Minion构成，通过ZeroMQ进行通信。可能是由于Python开发的原因,Salt的配置也是超级简单方便.基本能够在几分钟内就可以配置完成.</p>
-<h2>安装</h2>
+<h2 id="安装">安装</h2>
 <p>Salt 以来与epel,如果你的集群上没有安装则需要:
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch.rpm</div></pre></td></tr></table></figure></p>
 <p>或者</p>
@@ -488,7 +455,7 @@ Salt就是这么一个工具！</p>
 <p>客户端安装salt-minion
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install salt-minion -y</div></pre></td></tr></table></figure></p>
 <p>这里的<code>minion</code>是被salt中的被控制的从机的意思.</p>
-<h2>启动服务</h2>
+<h2 id="启动服务">启动服务</h2>
 <p>service salt-master start
 同时salt-master也支持命令行启动
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt-master -d</div></pre></td></tr></table></figure></p>
@@ -502,7 +469,7 @@ Salt就是这么一个工具！</p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">master: 10.101.10.10</div></pre></td></tr></table></figure></p>
 <p>同理,启动minion:
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt-minion -d</div></pre></td></tr></table></figure></p>
-<h2>使用SALT-KEY</h2>
+<h2 id="使用salt-key">使用SALT-KEY</h2>
 <p>SALY使用SALT-KEY来进行认证交互,所以对于minion要想收到master的命名,必须让master接受自己的key.
 <code>slat-key</code>命令就是用来管理master机子上的keys的.
 列出master机子上的所有keys:
@@ -518,7 +485,7 @@ Salt就是这么一个工具！</p>
 <p>minion上运行:
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># salt-call key.finger --local</div><div class="line">local:</div><div class="line">    39:f9:e4:8a:aa:74:8d:52:1a:ec:92:03:82:09:c8:f9</div></pre></td></tr></table></figure></p>
 <p>如果两者匹配则在master上运行<code>salt-key -a foo.domain.com</code>来接受这台minion.</p>
-<h2>发送第一个命令</h2>
+<h2 id="发送第一个命令">发送第一个命令</h2>
 <p>连接成功后,就可以从master对minion发送命令了,一个简单的向所有minon发送ping的命令:
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt '*' test.ping</div></pre></td></tr></table></figure></p>
 <p>其中<code>*</code>表示命令执行的对象.
@@ -527,27 +494,27 @@ Salt就是这么一个工具！</p>
 <blockquote>
 <p>更多的执行模块可以参见:(执行模块)[https://docs.saltstack.com/en/latest/ref/modules/index.html]</p>
 </blockquote>
-<h2>查看磁盘信息</h2>
+<h2 id="查看磁盘信息">查看磁盘信息</h2>
 <p><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt '*' disk.usage</div></pre></td></tr></table></figure></p>
-<h2>了解salt函数</h2>
+<h2 id="了解salt函数">了解salt函数</h2>
 <p>salt自带了一系列的库函数,可以通过下列命令查看minions上可以执行的函数:
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt '*' sys.doc</div></pre></td></tr></table></figure></p>
 <p>当然你也可以在<a href="https://docs.saltstack.com/en/latest/ref/modules/all/index.html" target="_blank" rel="external">web</a>上找到这些文档</p>
-<h2>一些常用的函数</h2>
-<h3>执行shell脚本</h3>
+<h2 id="一些常用的函数">一些常用的函数</h2>
+<h3 id="执行shell脚本">执行shell脚本</h3>
 <p><code>cmd</code>的模块可以帮助你在master上对minion执行shell操作
 比如说,<code>cmd.run</code>和<code>cmd.run_all</code>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt '*' cmd.run 'ls -l /etc'</div></pre></td></tr></table></figure></p>
-<h3>安装软件包</h3>
+<h3 id="安装软件包">安装软件包</h3>
 <p><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt '*' pkg.install vim</div></pre></td></tr></table></figure></p>
-<h3>列出所有网络接口</h3>
+<h3 id="列出所有网络接口">列出所有网络接口</h3>
 <p><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt '*' network.interfaces</div></pre></td></tr></table></figure></p>
-<h3>拷贝文件</h3>
+<h3 id="拷贝文件">拷贝文件</h3>
 <p>方便的向minion发送配置文件
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">salt-cp '*' /source/path /target/path</div></pre></td></tr></table></figure></p>
-<h3>自定义函数</h3>
+<h3 id="自定义函数">自定义函数</h3>
 <p>如果自带的函数模块和插件还不能满足你的需求的话,那你还以自己写sls文件,这里就不在叙述</p>
-<h2>参考</h2>
+<h2 id="参考">参考</h2>
 <p><a href="https://docs.saltstack.com/en/latest/topics/tutorials/walkthrough.html" target="_blank" rel="external">Salt in 10 Minutes</a></p>
 
       
@@ -691,7 +658,7 @@ Salt就是这么一个工具！</p>
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -702,7 +669,7 @@ Salt就是这么一个工具！</p>
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -713,7 +680,7 @@ Salt就是这么一个工具！</p>
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -786,7 +753,7 @@ Salt就是这么一个工具！</p>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">SALT 十分钟入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Salt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">启动服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">使用SALT-KEY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.</span> <span class="nav-text">发送第一个命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.6.</span> <span class="nav-text">查看磁盘信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.7.</span> <span class="nav-text">了解salt函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.8.</span> <span class="nav-text">一些常用的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.8.1.</span> <span class="nav-text">执行shell脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.8.2.</span> <span class="nav-text">安装软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.8.3.</span> <span class="nav-text">列出所有网络接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.8.4.</span> <span class="nav-text">拷贝文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.8.5.</span> <span class="nav-text">自定义函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.9.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#salt-十分钟入门"><span class="nav-number">1.</span> <span class="nav-text">SALT 十分钟入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#salt"><span class="nav-number">1.1.</span> <span class="nav-text">Salt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动服务"><span class="nav-number">1.3.</span> <span class="nav-text">启动服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用salt-key"><span class="nav-number">1.4.</span> <span class="nav-text">使用SALT-KEY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送第一个命令"><span class="nav-number">1.5.</span> <span class="nav-text">发送第一个命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看磁盘信息"><span class="nav-number">1.6.</span> <span class="nav-text">查看磁盘信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#了解salt函数"><span class="nav-number">1.7.</span> <span class="nav-text">了解salt函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些常用的函数"><span class="nav-number">1.8.</span> <span class="nav-text">一些常用的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#执行shell脚本"><span class="nav-number">1.8.1.</span> <span class="nav-text">执行shell脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装软件包"><span class="nav-number">1.8.2.</span> <span class="nav-text">安装软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列出所有网络接口"><span class="nav-number">1.8.3.</span> <span class="nav-text">列出所有网络接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝文件"><span class="nav-number">1.8.4.</span> <span class="nav-text">拷贝文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义函数"><span class="nav-number">1.8.5.</span> <span class="nav-text">自定义函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.9.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -970,323 +937,6 @@ Salt就是这么一个工具！</p>
 
 
   
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 

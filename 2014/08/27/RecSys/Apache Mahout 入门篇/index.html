@@ -115,38 +115,39 @@
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Apache Mahout 入门篇">
-<meta property="og:url" content="http://yoursite.com/2014/08/27/RecSys/Apache Mahout 入门篇/index.html">
+<meta property="og:url" content="http://youngfor.me/2014/08/27/RecSys/Apache Mahout 入门篇/index.html">
 <meta property="og:site_name" content="Eric&#39;s Blog">
 <meta property="og:description" content="author: sheng junhui   weibo: @armysheng   blog: youngfor.me   email: armysheng@Gmail.com   转载请注明出处   0.  基本概念的介绍 在搭建开发环境know how的步骤前，最好是先做一些konw what的学习，这里先简单介绍一下一些基本的概念。 0.1 什么是Mahout？  Apache Maho">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/hadoop.jpg">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/mahout.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/2.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/3.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/4.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/5.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/6.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/7.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/8.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/9.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/10.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/11.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/12.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/13.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/17.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/19.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/18.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/14.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/21.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/23.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/24.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/25.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/26.png">
-<meta property="og:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/27.png">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/hadoop.jpg">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/mahout.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/2.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/3.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/4.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/5.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/6.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/7.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/8.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/9.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/10.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/11.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/12.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/13.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/17.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/19.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/18.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/14.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/21.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/23.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/24.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/25.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/26.png">
+<meta property="og:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/27.png">
 <meta property="og:updated_time" content="2017-07-19T16:48:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache Mahout 入门篇">
 <meta name="twitter:description" content="author: sheng junhui   weibo: @armysheng   blog: youngfor.me   email: armysheng@Gmail.com   转载请注明出处   0.  基本概念的介绍 在搭建开发环境know how的步骤前，最好是先做一些konw what的学习，这里先简单介绍一下一些基本的概念。 0.1 什么是Mahout？  Apache Maho">
-<meta name="twitter:image" content="http://yoursite.com/2014/08/27/RecSys/Apache%20Mahout%20入门篇/hadoop.jpg">
+<meta name="twitter:image" content="http://youngfor.me/2014/08/27/RecSys/Apache%20Mahout%20入门篇/hadoop.jpg">
 
 
 
@@ -174,7 +175,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2014/08/27/RecSys/Apache Mahout 入门篇/"/>
+  <link rel="canonical" href="http://youngfor.me/2014/08/27/RecSys/Apache Mahout 入门篇/"/>
 
 
 
@@ -301,43 +302,9 @@
       
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
   
 </nav>
 
@@ -362,7 +329,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/08/27/RecSys/Apache Mahout 入门篇/">
+    <link itemprop="mainEntityOfPage" href="http://youngfor.me/2014/08/27/RecSys/Apache Mahout 入门篇/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eirc Sheng">
@@ -506,14 +473,14 @@
 <p>转载请注明出处</p>
 </blockquote>
 <hr>
-<h2>0.  基本概念的介绍</h2>
+<h2 id="0-基本概念的介绍">0.  基本概念的介绍</h2>
 <p>在搭建开发环境know how的步骤前，最好是先做一些konw what的学习，这里先简单介绍一下一些基本的概念。</p>
-<h3>0.1 什么是Mahout？</h3>
+<h3 id="01-什么是mahout">0.1 什么是Mahout？</h3>
 <blockquote>
 <p><strong>Apache Mahout</strong> 翻译成中文是骑大象的人，或驯象师。这里是指Apache开源社区维护的一个可伸缩(Scable)的机器学习库。Mahout机器学习库*<a href="https://mahout.apache.org/users/basics/algorithms.html" target="_blank" rel="external">目前实现的算法</a>*包括协同滤波，分类，聚类，特征降维等等。我们知道Hadoop的logo是一头大象，而Mahout要做的就是驯服这头大象。Mahout致力于提供可支持超大数据集，支持商业使用的开源机器学习库，并且构建充满活力的开源社区。---<a href="http://mahout.apache.org/" target="_blank" rel="external">Mahout 主页</a>
 <img src="/2014/08/27/RecSys/Apache Mahout 入门篇/hadoop.jpg" alt="Hadoop">          <img src="/2014/08/27/RecSys/Apache Mahout 入门篇/mahout.png" alt="Mahout"></p>
 </blockquote>
-<h3>0.2 Mahout又是一个Maven项目,Maven又是什么呢？</h3>
+<h3 id="02-mahout又是一个maven项目maven又是什么呢">0.2 Mahout又是一个Maven项目,Maven又是什么呢？</h3>
 <blockquote>
 <p><strong>Apache Maven</strong>，是一个软件（特别是Java软件）项目管理及自动构建工具，由Apache软件基金会所提供。基于项目对象模型（缩写：POM）概念，Maven利用一个中央信息片断能管理一个项目的构建、报告和文档等步骤。项目对象模型存储在命名为 pom.xml 的文件中。POM 文件中包含了它的配置信息，依赖信息等等。---<a href="http://zh.wikipedia.org/zh/Apache_Maven" target="_blank" rel="external">Maven wiki</a></p>
 <blockquote>
@@ -521,11 +488,11 @@
 </blockquote>
 </blockquote>
 <hr>
-<h2>1. 安装</h2>
+<h2 id="1-安装">1. 安装</h2>
 <p>首先介绍一下开发环境：Win7 32位系统
 需要安装的软件:	<code>jdk1.7.0_60</code> +<code>apache-maven-3.2.1</code>+<code>TortoiseSVN 1.8.7</code>+<code>mahout-distribution-0.9(源码&amp;&amp;包)</code>
 由于我们公司内部走的是代理网络，所以部分工具安装完成使用前，都会介绍如何配置代理信息，如果你使用的是直连网络，请忽视这些段落。</p>
-<h3>1.1 Java环境的安装</h3>
+<h3 id="11-java环境的安装">1.1 Java环境的安装</h3>
 <p>我们选择的java版本是<code>jdk1.7.0_60</code>，可以在oracle主页<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank" rel="external">下载</a>，这里不建议使用java8，在编译过程中可能会出现一些不必要的问题。java安装比较简单，直接下载二进制文件进行安装。我们安装在<code>D:\Program Files\Java\jdk1.7.0_60</code>,安装完成后在控制命令行中输入:</p>
 <p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">C:\Users\shengjh&gt;java -version</div><div class="line">java version <span class="string">"1.7.0_60"</span></div><div class="line">Java(TM) SE Runtime Environment (build 1.7.0_60-b19)</div><div class="line">Java HotSpot(TM) Client VM (build 24.60-b09, mixed mode, sharing)</div></pre></td></tr></table></figure></p>
 <p>看似java已经可以运行，其实java的环境变量尚未加入，而是在安装过程中，将<code>java.exe,javaw.exe,javawc.exe</code> 三个文件copy到了<code>system32</code>目录下。所以我们需要手动添加环境变量:
@@ -534,7 +501,7 @@
 <code>变量值</code>:<code>D:\Program Files\Java\jdk1.7.0_60</code>
 <img src="/2014/08/27/RecSys/Apache Mahout 入门篇/2.png" alt="Path">
 <strong>这一步非常重要，不做的话再Maven的安装上,会出现JAVA_HOME找不到的错误</strong>，至此我们完成了JAVA环境的配置。</p>
-<h3>1.2 Maven环境搭建</h3>
+<h3 id="12-maven环境搭建">1.2 Maven环境搭建</h3>
 <p>Maven 是一个项目管理和构建自动化工具。但是对于我们程序员来说，我们最关心的是它的项目构建功能。所以这里我们介绍的就是怎样用 maven 来满足我们项目的日常需要。
 Maven 使用惯例优于配置的原则 。它要求在没有定制之前，所有的项目都有如下的结构：</p>
 <table>
@@ -573,7 +540,7 @@ Maven 使用惯例优于配置的原则 。它要求在没有定制之前，所�
 完成后在命令行中输入<code>mvn --version</code> 查看maven的版本:
 <img src="/2014/08/27/RecSys/Apache Mahout 入门篇/4.png" alt="Path"></p>
 <blockquote>
-<h4>代理配置</h4>
+<h4 id="代理配置">代理配置</h4>
 </blockquote>
 <p>之前介绍了代理的问题，因为后续的操作，maven会自动联网搜索依赖包，这里在继续操作之前先介绍Maven的代理配置。
 在Maven的配置文件都在它的安装目录下的\config\setting.xml文件中<code>&lt;proxies&gt;</code>字段定义了代理的设置。根据代理情况修改Host，port，username，password等等。这里我们只修改了host和port。
@@ -594,12 +561,12 @@ maven 目标和 ant 的 target 差不多。在命令行中执行下面的命令�
 <p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App</div></pre></td></tr></table></figure></p>
 <p><img src="/2014/08/27/RecSys/Apache Mahout 入门篇/9.png" alt="Path">
 至此Maven的安装和介绍就到这里，这一章节主要参考了<a href="http://www.oracle.com/technetwork/cn/community/java/apache-maven-getting-started-1-406235-zhs.html" target="_blank" rel="external">Apache Maven 入门篇 ( 上 )</a>和<a href="http://wentao365.iteye.com/blog/903396" target="_blank" rel="external">maven 教程一 入门</a>，以及Maven主页，阅读原文获得更多的了解。</p>
-<h3>1.3 Mahout源码的编译</h3>
+<h3 id="13-mahout源码的编译">1.3 Mahout源码的编译</h3>
 <p>Mahout的源码和编译后的包可以从<a href="http://mahout.apache.org/general/downloads.html" target="_blank" rel="external">Mahout官网</a>上获得,然而在使用这里下载的0.9发行版源码时，somehow遇到了一些错误。
 这里我们选择用SVN获得它最新的源码。Tortoise	SVN是大家常用的代码托管工具，可以从它的<a href="http://tortoisesvn.net/downloads.html" target="_blank" rel="external">主页</a>上下载到。
 安装完成后，在使用之前，我们还要对他做一下代理配置。</p>
 <blockquote>
-<h4>代理配置</h4>
+<h4 id="代理配置">代理配置</h4>
 </blockquote>
 <p>SVN的代理配置只需要打开，在开始按钮-&gt;程序-&gt;Tortoise	SVN-&gt;settings,找到Network项进行如下配置：
 <img src="/2014/08/27/RecSys/Apache Mahout 入门篇/10.png" alt="Path"></p>
@@ -617,12 +584,12 @@ maven 目标和 ant 的 target 差不多。在命令行中执行下面的命令�
 <img src="/2014/08/27/RecSys/Apache Mahout 入门篇/11.png" alt="Path"></p>
 <p>至此，Mahout的源码就编译完毕，我们可以看到每个Mahout源码的目录下都生成了相应的target文件,包含对应的类和.jar包。
 <img src="/2014/08/27/RecSys/Apache Mahout 入门篇/12.png" alt="Path"></p>
-<h3>1.4 如何在Eclipse上使用Mahout？</h3>
+<h3 id="14-如何在eclipse上使用mahout">1.4 如何在Eclipse上使用Mahout？</h3>
 <p>编译完后的mahout还是不能在eclipse上使用，下面我们介绍一下如何在eclipse下开发Maven project。</p>
 <p>首先Eclipse版本选择，关于eclipse的版本代号问题请参考<a href="http://stackoverflow.com/questions/4008976/difference-between-eclipse-europa-helios-galileo" target="_blank" rel="external">这里</a>。
 我们选择的是Eclipse IDE for Java EE Developers(JUNO)，它包含了Maven所需的一些依赖包。Eclipse standard (Indigo)由于缺乏依赖包，在安装上Maven插件上会有问题。eclipse安装包可以在<a href="http://www.eclipse.org/downloads/" target="_blank" rel="external">官网</a>下载。</p>
 <blockquote>
-<h4>代理配置</h4>
+<h4 id="代理配置">代理配置</h4>
 </blockquote>
 <p>eclipse安装完成后，启动会自动检测本机的代理设置，将本机的代理设置填到软件设置界面。但是如果你想修改的话可以在下面找到:
 <em>eclipse-&gt;windows-&gt;perferences-&gt;general-&gt;Network Connection</em>
@@ -657,7 +624,7 @@ maven 目标和 ant 的 target 差不多。在命令行中执行下面的命令�
 <p>最后我们成功的导入Mahout源码到了eclipse中。
 <img src="/2014/08/27/RecSys/Apache Mahout 入门篇/24.png" alt="Path"></p>
 <hr>
-<h2>2. 简单推荐算法的实现</h2>
+<h2 id="2-简单推荐算法的实现">2. 简单推荐算法的实现</h2>
 <p>接着我们介绍如何用Mahout来建立简单的推荐算法，大部分过程我们follow了官方的这个<a href="http://mahout.apache.org/users/recommender/userbased-5-minutes.html" target="_blank" rel="external">quick guide</a></p>
 <p>Step 0:创建数据集，命名为Dataset.csv，内容如下：</p>
 <pre><code>1,10,1.0
@@ -701,14 +668,14 @@ maven 目标和 ant 的 target 差不多。在命令行中执行下面的命令�
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line"> 	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line"> 		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.mahout<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line"> 		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mahout-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"> 		<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"> 	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"> 	<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p><img src="/2014/08/27/RecSys/Apache Mahout 入门篇/27.png" alt="Path"></p>
 <p>Step 4: 在<code>src\main\java\</code>下新建<code>SampleRecommender.java</code>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.model.file.FileDataModel;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.neighborhood.ThresholdUserNeighborhood;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.model.DataModel;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.recommender.RecommendedItem;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.recommender.UserBasedRecommender;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.similarity.UserSimilarity;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleRecommender</span></span></div><div class="line">&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, Exception</span>&#123;</div><div class="line">		</div><div class="line">		DataModel model = <span class="keyword">new</span> FileDataModel (<span class="keyword">new</span> File(<span class="string">"dataset.csv"</span>));</div><div class="line">		</div><div class="line">		UserSimilarity similarity = <span class="keyword">new</span> PearsonCorrelationSimilarity(model);</div><div class="line">		</div><div class="line">		UserNeighborhood neighborhood = <span class="keyword">new</span> ThresholdUserNeighborhood(<span class="number">0.1</span>, similarity, model);</div><div class="line">		</div><div class="line">		UserBasedRecommender recommender = <span class="keyword">new</span> GenericUserBasedRecommender(model, neighborhood, similarity);</div><div class="line">		</div><div class="line">		List&lt;RecommendedItem&gt;  recommendations =  recommender.recommend(<span class="number">2</span>,<span class="number">3</span>);</div><div class="line">		</div><div class="line">		<span class="keyword">for</span> (RecommendedItem recommendation : recommendations) &#123;</div><div class="line">		  System.out.println(recommendation);</div><div class="line">		&#125;</div><div class="line">	&#125;	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.model.file.FileDataModel;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.neighborhood.ThresholdUserNeighborhood;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.model.DataModel;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.recommender.RecommendedItem;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.recommender.UserBasedRecommender;</div><div class="line"><span class="keyword">import</span> org.apache.mahout.cf.taste.similarity.UserSimilarity;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleRecommender</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, Exception</span>&#123;</div><div class="line">		</div><div class="line">		DataModel model = <span class="keyword">new</span> FileDataModel (<span class="keyword">new</span> File(<span class="string">"dataset.csv"</span>));</div><div class="line">		</div><div class="line">		UserSimilarity similarity = <span class="keyword">new</span> PearsonCorrelationSimilarity(model);</div><div class="line">		</div><div class="line">		UserNeighborhood neighborhood = <span class="keyword">new</span> ThresholdUserNeighborhood(<span class="number">0.1</span>, similarity, model);</div><div class="line">		</div><div class="line">		UserBasedRecommender recommender = <span class="keyword">new</span> GenericUserBasedRecommender(model, neighborhood, similarity);</div><div class="line">		</div><div class="line">		List&lt;RecommendedItem&gt;  recommendations =  recommender.recommend(<span class="number">2</span>,<span class="number">3</span>);</div><div class="line">		</div><div class="line">		<span class="keyword">for</span> (RecommendedItem recommendation : recommendations) &#123;</div><div class="line">		  System.out.println(recommendation);</div><div class="line">		&#125;</div><div class="line">	&#125;	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>Step 5: 运行项目，<code>run as java application</code> 我们便得到推荐结果：</p>
 <pre><code>RecommendedItem[item:12, value:4.8328104]
 RecommendedItem[item:13, value:4.6656213]
 RecommendedItem[item:14, value:4.331242]
 </code></pre>
 <p>至此我们便完成了简单的一个推荐算法。</p>
-<h2>总结</h2>
+<h2 id="总结">总结</h2>
 <p>总结来说我们安装了jdk，安装了Maven，安装了Eclipse以及在eclipse上使用Maven所需的一些插件，最后我们能够顺利地查看和修改Mahout的源码。</p>
 <blockquote>
 <p>**Tips：**环境配置中会遇到许多问题，请多谷歌，国内如果访问不够顺畅，请直接使用<a href="http://apps.farbox.com/post/google-quan-qiu-ip-di-zhi-ku" target="_blank" rel="external">一些谷歌的服务器IP</a>来流畅访问，你也可以将浏览器的默认搜索改为这个地址。</p>
@@ -861,7 +828,7 @@ RecommendedItem[item:14, value:4.331242]
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -872,7 +839,7 @@ RecommendedItem[item:14, value:4.331242]
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -883,7 +850,7 @@ RecommendedItem[item:14, value:4.331242]
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -956,7 +923,7 @@ RecommendedItem[item:14, value:4.331242]
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">0.  基本概念的介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">0.1 什么是Mahout？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">0.2 Mahout又是一个Maven项目,Maven又是什么呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">1. 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 Java环境的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 Maven环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">代理配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 Mahout源码的编译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.1.</span> <span class="nav-text">代理配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 如何在Eclipse上使用Mahout？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.1.</span> <span class="nav-text">代理配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">2. 简单推荐算法的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-基本概念的介绍"><span class="nav-number">1.</span> <span class="nav-text">0.  基本概念的介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-什么是mahout"><span class="nav-number">1.1.</span> <span class="nav-text">0.1 什么是Mahout？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-mahout又是一个maven项目maven又是什么呢"><span class="nav-number">1.2.</span> <span class="nav-text">0.2 Mahout又是一个Maven项目,Maven又是什么呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装"><span class="nav-number">2.</span> <span class="nav-text">1. 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#11-java环境的安装"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 Java环境的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-maven环境搭建"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 Maven环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代理配置"><span class="nav-number">2.2.1.</span> <span class="nav-text">代理配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-mahout源码的编译"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 Mahout源码的编译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代理配置"><span class="nav-number">2.3.1.</span> <span class="nav-text">代理配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-如何在eclipse上使用mahout"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 如何在Eclipse上使用Mahout？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代理配置"><span class="nav-number">2.4.1.</span> <span class="nav-text">代理配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-简单推荐算法的实现"><span class="nav-number">3.</span> <span class="nav-text">2. 简单推荐算法的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -1140,323 +1107,6 @@ RecommendedItem[item:14, value:4.331242]
 
 
   
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 

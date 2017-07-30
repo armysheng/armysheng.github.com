@@ -115,15 +115,16 @@
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式-观察者模式（高效的发声）">
-<meta property="og:url" content="http://yoursite.com/2016/12/06/Tech/设计模式-观察者模式/index.html">
+<meta property="og:url" content="http://youngfor.me/2016/12/06/Tech/设计模式-观察者模式/index.html">
 <meta property="og:site_name" content="Eric&#39;s Blog">
 <meta property="og:description" content="观察者模式  2016-12-8 11:08:06  观察者模式又叫发布-订阅模式，它定义了一种一对多的依赖关系，多个观察者对象可同时监听某一主题对象，当该主题对象状态发生变化时，相应的所有观察者对象都可收到通知。这是一个非常好理解的模式，简单介绍如下： 场景 假设我们有这样一个需求，我们的新闻博客写的不错，有几个读者向订阅我们的新闻。这样以便于我们的博客一有新闻更新，就可以推送到用户了。简单的我">
-<meta property="og:image" content="http://yoursite.com/2016/12/06/Tech/设计模式-观察者模式/10-57-52.jpg">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://youngfor.me/2016/12/06/Tech/设计模式-观察者模式/10-57-52.jpg">
 <meta property="og:updated_time" content="2017-07-19T16:49:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式-观察者模式（高效的发声）">
 <meta name="twitter:description" content="观察者模式  2016-12-8 11:08:06  观察者模式又叫发布-订阅模式，它定义了一种一对多的依赖关系，多个观察者对象可同时监听某一主题对象，当该主题对象状态发生变化时，相应的所有观察者对象都可收到通知。这是一个非常好理解的模式，简单介绍如下： 场景 假设我们有这样一个需求，我们的新闻博客写的不错，有几个读者向订阅我们的新闻。这样以便于我们的博客一有新闻更新，就可以推送到用户了。简单的我">
-<meta name="twitter:image" content="http://yoursite.com/2016/12/06/Tech/设计模式-观察者模式/10-57-52.jpg">
+<meta name="twitter:image" content="http://youngfor.me/2016/12/06/Tech/设计模式-观察者模式/10-57-52.jpg">
 
 
 
@@ -151,7 +152,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/12/06/Tech/设计模式-观察者模式/"/>
+  <link rel="canonical" href="http://youngfor.me/2016/12/06/Tech/设计模式-观察者模式/"/>
 
 
 
@@ -278,43 +279,9 @@
       
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
   
 </nav>
 
@@ -339,7 +306,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/06/Tech/设计模式-观察者模式/">
+    <link itemprop="mainEntityOfPage" href="http://youngfor.me/2016/12/06/Tech/设计模式-观察者模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eirc Sheng">
@@ -471,12 +438,12 @@
       
 
       
-        <h1>观察者模式</h1>
+        <h1 id="观察者模式">观察者模式</h1>
 <blockquote>
 <p>2016-12-8 11:08:06</p>
 </blockquote>
 <p>观察者模式又叫发布-订阅模式，它定义了一种一对多的依赖关系，多个观察者对象可同时监听某一主题对象，当该主题对象状态发生变化时，相应的所有观察者对象都可收到通知。这是一个非常好理解的模式，简单介绍如下：</p>
-<h2>场景</h2>
+<h2 id="场景">场景</h2>
 <p>假设我们有这样一个需求，我们的新闻博客写的不错，有几个读者向订阅我们的新闻。这样以便于我们的博客一有新闻更新，就可以推送到用户了。简单的我们可以这么写</p>
 <p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DisgraceNewsPublisher</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">newsPublished</span><span class="params">()</span> </span>&#123;</div><div class="line">        News news = getLatestNews();</div><div class="line">        jack.update(news);</div><div class="line">        amy.update(news);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>但是我们发现如果我们的用户<code>Amy</code>对新闻内容不满意，想退订新闻的话，我们的发布新闻代码得更改，同时我们的新用户<code>Eric</code>想要订阅，代码又得重新改，这显然违背了开闭原则。这样做的问题有：</p>
@@ -487,7 +454,7 @@
 <li>用户没有实现一个公共的接口。所有用户都是update方法</li>
 <li>我们尚未封装改变的部分。</li>
 </ul>
-<h2>观察者模式</h2>
+<h2 id="观察者模式">观察者模式</h2>
 <p>这个时候我们的观察者模式就登场了，观察者模式定义了对象之间的一对多依赖，这样一来，当一个对象改变状态时，它的所有依赖者都会受到通知并自动更新。观察者模式一般会有如下角色：</p>
 <p><strong>抽象主题角色</strong>：把所有对观察者对象的引用保存在一个集合中，每个抽象主题角色都可以有任意数量的观察者。抽象主题提供一个接口，可以增加和删除观察者角色。一般用一个抽象类和接口来实现。</p>
 <p><strong>抽象观察者角色</strong>：为所有具体的观察者定义一个接口，在得到主题的通知时更新自己。</p>
@@ -495,12 +462,12 @@
 <p><strong>具体观察者角色</strong>：该角色实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态相协调。通常用一个子类实现。如果需要，具体观察者角色可以保存一个指向具体主题角色的引用。
 它的类图如下：</p>
 <p><img src="/2016/12/06/Tech/设计模式-观察者模式/10-57-52.jpg" alt=""></p>
-<h3>松耦合的威力</h3>
+<h3 id="松耦合的威力">松耦合的威力</h3>
 <p>观察者模式实现了松耦合，就如上文的例子，新闻的发布者和用户之间会有交互，但他们不需要清楚彼此的细节。
 当两个对象之间松耦合，他们依然可以互交，但是不太清楚彼此的细节。
 观察者模式提供了一种对象设计，让主题和观察者之间<strong>松耦合</strong>。
 关于观察者的一切，主题只知道观察者实现了某个接口（也就是Observer接口）。主题不需要知道观察者的具体类是谁，做了些什么或者其他任何细节。任何时候我们都可以增加新的观察者。因为主题唯一依赖的东西是一个实现Observer接口的对象列表，所以我们可以<strong>随时增加观察者</strong>。事实上，在运行时我们可以用心的观察者取代现有的观察者，主题不会受到任何影响。同样的，也可以在<strong>任何时候删除某些观察者</strong>。有新类型的观察者出现时，主题的代码不需要修改，假如我们有个新的具体类需要当观察者，我们不需要为了兼容新类型而修改主题的代码，所有要做的就是在新的类里实现此观察者接口，人后注册为观察者即可，主题不在乎别的，它只会发送通知给所有实现了观察者接口的对象。</p>
-<h3>新闻发布代码实现</h3>
+<h3 id="新闻发布代码实现">新闻发布代码实现</h3>
 <p><code>Subject.java</code> 主题的抽象接口
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Subject</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer observer)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer observer)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p><code>Observer.java</code> 观察者的抽象接口
@@ -515,18 +482,18 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ObserverTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Subject subject = <span class="keyword">new</span> NewsPublisher();</div><div class="line">        Observer jack = <span class="keyword">new</span> NewsRegisterJack();</div><div class="line">        Observer amy = <span class="keyword">new</span> NewsRegisterAmy();</div><div class="line"><span class="comment">//        notify when nobody is subscribed.</span></div><div class="line">        subject.notifyObservers();</div><div class="line"><span class="comment">//        notify when both user is subscribed.</span></div><div class="line">        subject.registerObserver(jack);</div><div class="line">        subject.registerObserver(amy);</div><div class="line">        subject.notifyObservers();</div><div class="line"><span class="comment">//        notify when amy is unsubscribed.</span></div><div class="line">        subject.removeObserver(amy);</div><div class="line">        subject.notifyObservers();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>输出如下
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Jack is getting the news ...this is latest news</div><div class="line">Amy is getting the news ...this is latest news</div><div class="line">Jack is getting the news ...this is latest news</div><div class="line"></div><div class="line">Process finished with exit code 0</div></pre></td></tr></table></figure></p>
-<h3>观察者模式优缺点</h3>
-<h4>观察者模式优点</h4>
+<h3 id="观察者模式优缺点">观察者模式优缺点</h3>
+<h4 id="观察者模式优点">观察者模式优点</h4>
 <ul>
 <li>抽象主题只依赖于抽象观察者</li>
 <li>观察者模式支持广播通信</li>
 <li>观察者模式使信息产生层和响应层分离</li>
 </ul>
-<h4>观察者模式缺点</h4>
+<h4 id="观察者模式缺点">观察者模式缺点</h4>
 <p>如一个主题被大量观察者注册，则通知所有观察者会花费较高代价
 如果某些观察者的响应方法被阻塞，整个通知过程即被阻塞，其它观察者不能及时被通知</p>
-<h3>观察者模式与OOP原则</h3>
-<h4>已遵循的原则</h4>
+<h3 id="观察者模式与oop原则">观察者模式与OOP原则</h3>
+<h4 id="已遵循的原则">已遵循的原则</h4>
 <ul>
 <li>依赖倒置原则（主题类依赖于抽象观察者而非具体观察者）</li>
 <li>迪米特法则</li>
@@ -535,7 +502,7 @@
 <li>单一职责原则</li>
 <li>开闭原则</li>
 </ul>
-<h3>参考</h3>
+<h3 id="参考">参考</h3>
 <p><a href="http://www.imooc.com/article/11579" target="_blank" rel="external">Head First设计模式读书总结——观察者模式</a>
 <a href="https://my.oschina.net/visionit/blog/758673" target="_blank" rel="external">设计模式——观察者模式：天气推送的两种实现</a>
 <a href="http://www.raychase.net/244" target="_blank" rel="external">观察者模式中，消息采用推和拉方式来传递的比较</a></p>
@@ -687,7 +654,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -698,7 +665,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -709,7 +676,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -782,7 +749,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">观察者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">观察者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.1.</span> <span class="nav-text">松耦合的威力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.2.</span> <span class="nav-text">新闻发布代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.3.</span> <span class="nav-text">观察者模式优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">观察者模式优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">观察者模式缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.4.</span> <span class="nav-text">观察者模式与OOP原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">已遵循的原则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.5.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#观察者模式"><span class="nav-number">1.</span> <span class="nav-text">观察者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#场景"><span class="nav-number">1.1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#观察者模式"><span class="nav-number">1.2.</span> <span class="nav-text">观察者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#松耦合的威力"><span class="nav-number">1.2.1.</span> <span class="nav-text">松耦合的威力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新闻发布代码实现"><span class="nav-number">1.2.2.</span> <span class="nav-text">新闻发布代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式优缺点"><span class="nav-number">1.2.3.</span> <span class="nav-text">观察者模式优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#观察者模式优点"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">观察者模式优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#观察者模式缺点"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">观察者模式缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式与oop原则"><span class="nav-number">1.2.4.</span> <span class="nav-text">观察者模式与OOP原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#已遵循的原则"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">已遵循的原则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">1.2.5.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -966,323 +933,6 @@
 
 
   
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 

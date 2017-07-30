@@ -114,16 +114,17 @@
 <meta name="description" content="如果你也不是太理解Hibernate 什么时候要save，什么时候要用update，merge，什么时候可以直接set一下字段就能够将实体类存储到数据库中，这篇文章或许能解开你的迷雾。本文翻译自《A beginner’s guide to JPA/Hibernate entity state transitions 》  引言 Hibernate帮助开发者的将SQL语句的转变成了实体类的状态转变">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hibernate之实体类状态入门（entity state transitions）">
-<meta property="og:url" content="http://yoursite.com/2016/12/22/Tech/Hibernate  and JPA 实体类状态转变入门/index.html">
+<meta property="og:url" content="http://youngfor.me/2016/12/22/Tech/Hibernate  and JPA 实体类状态转变入门/index.html">
 <meta property="og:site_name" content="Eric&#39;s Blog">
 <meta property="og:description" content="如果你也不是太理解Hibernate 什么时候要save，什么时候要用update，merge，什么时候可以直接set一下字段就能够将实体类存储到数据库中，这篇文章或许能解开你的迷雾。本文翻译自《A beginner’s guide to JPA/Hibernate entity state transitions 》  引言 Hibernate帮助开发者的将SQL语句的转变成了实体类的状态转变">
-<meta property="og:image" content="http://yoursite.com/2016/12/22/Tech/Hibernate%20%20and%20JPA%20实体类状态转变入门/23-03-04.jpg">
-<meta property="og:image" content="http://yoursite.com/2016/12/22/Tech/Hibernate%20%20and%20JPA%20实体类状态转变入门/23-02-46.jpg">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://youngfor.me/2016/12/22/Tech/Hibernate%20%20and%20JPA%20实体类状态转变入门/23-03-04.jpg">
+<meta property="og:image" content="http://youngfor.me/2016/12/22/Tech/Hibernate%20%20and%20JPA%20实体类状态转变入门/23-02-46.jpg">
 <meta property="og:updated_time" content="2017-07-19T16:49:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hibernate之实体类状态入门（entity state transitions）">
 <meta name="twitter:description" content="如果你也不是太理解Hibernate 什么时候要save，什么时候要用update，merge，什么时候可以直接set一下字段就能够将实体类存储到数据库中，这篇文章或许能解开你的迷雾。本文翻译自《A beginner’s guide to JPA/Hibernate entity state transitions 》  引言 Hibernate帮助开发者的将SQL语句的转变成了实体类的状态转变">
-<meta name="twitter:image" content="http://yoursite.com/2016/12/22/Tech/Hibernate%20%20and%20JPA%20实体类状态转变入门/23-03-04.jpg">
+<meta name="twitter:image" content="http://youngfor.me/2016/12/22/Tech/Hibernate%20%20and%20JPA%20实体类状态转变入门/23-03-04.jpg">
 
 
 
@@ -151,7 +152,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/12/22/Tech/Hibernate  and JPA 实体类状态转变入门/"/>
+  <link rel="canonical" href="http://youngfor.me/2016/12/22/Tech/Hibernate  and JPA 实体类状态转变入门/"/>
 
 
 
@@ -278,43 +279,9 @@
       
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
   
 </nav>
 
@@ -339,7 +306,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/22/Tech/Hibernate  and JPA 实体类状态转变入门/">
+    <link itemprop="mainEntityOfPage" href="http://youngfor.me/2016/12/22/Tech/Hibernate  and JPA 实体类状态转变入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eirc Sheng">
@@ -471,19 +438,19 @@
 <p>如果你也不是太理解Hibernate 什么时候要save，什么时候要用update，merge，什么时候可以直接set一下字段就能够将实体类存储到数据库中，这篇文章或许能解开你的迷雾。本文翻译自<a href="https://vladmihalcea.com/2014/07/30/a-beginners-guide-to-jpahibernate-entity-state-transitions/" target="_blank" rel="external">《A beginner’s guide to JPA/Hibernate entity state transitions
 》</a></p>
 </blockquote>
-<h2>引言</h2>
+<h2 id="引言">引言</h2>
 <p>Hibernate帮助开发者的将SQL语句的转变成了实体类的状态转变。一旦Hibernate存储了一个实体类，它的所有变化都将会自动传播到数据库中。
 管理领域模型实体类以及他们的关联关系比写SQL语句管理SQL语句来说简单多了。如果没有Hibernate这样的ORM工具，增加一个字段会需要改写所有关联的 <strong>INSERT/UPDATE</strong>语句。
 但是Hibernate也并不是银弹。Hibernate也不能让我们完全不关心所最终执行的SQL语句。完全的掌握Hibernate也不是我们所想的那么简单直接，我们有时候也需要亲自检查所产生的SQL语句。</p>
-<h2>实体类状态</h2>
+<h2 id="实体类状态">实体类状态</h2>
 <p>如之前所说，Hibernate监管了当前存储着的实体类。但是在一个实体类要被存储下来，我们需要知道它处于什么状态。
 首先我们必须定义所有实体类状态:</p>
-<h3>New(Transient)瞬态</h3>
+<h3 id="newtransient瞬态">New(Transient)瞬态</h3>
 <p>一个新创建的对象，在还没有进入<em>Hibernate Session</em>(也即持久化上下文)，同时没有域数据库表中的行对应起来时的状态称为瞬态。
 想要对处于这个状态的对象进行持久化，我们需要明确的执行<em>EnittyManager</em>的persist或者使用是实体类持久化的传播机制（CasCade）。</p>
-<h3>Persistent（Managed）持久态</h3>
+<h3 id="persistentmanaged持久态">Persistent（Managed）持久态</h3>
 <p>持久态的实体类已经和数据表中的行关联起来，并且被当前的持久化上下文所管理。所有该实体类的变化都会被检测到然后在事务flush的时候，将这些变化存储到数据库中。有了Hibernate，我们就不在需要执行增删改查的SQL语句。Hibernate使用了Transactional write-behind的工作方式。在当前事务flush时间的最后一个将实体类的改变同步到数据库中。</p>
-<h3>detached 分离态</h3>
+<h3 id="detached-分离态">detached 分离态</h3>
 <p>一旦当前的跑着的事务关闭，所有当前状态下管理着的实体类就编程了分离太。后续的实体类中的变化将不会被检测到，并且也不会和自动和数据库去同步。
 如果想在一个当前事务关联一个将分离态的实体类，你可以选着下面的几种方式：</p>
 <ul>
@@ -493,9 +460,9 @@ Hibernate支持通过Session的update方法来重新关联实体类。</li>
 合并操作会将分离态的实体类（源头）拷贝一份给到持久太的实体类（目标）。如果持久化的实体类在当前事务中不存在，那么就回去数据库中查一份。
 但是分类态的实体类（源头人就会保持分离态）。</li>
 </ul>
-<h3>removed 删除态</h3>
+<h3 id="removed-删除态">removed 删除态</h3>
 <p>尽管JPA需要只有持久态的实体类才能够被删除，hibernate通用可以通过Session的delete方法删除分离态的实体类。</p>
-<h2>实体类状态转换</h2>
+<h2 id="实体类状态转换">实体类状态转换</h2>
 <p>想要改变一个实体类的状态，我们需要使用下面之中的实体类管理接口：</p>
 <ul>
 <li>EntityManager</li>
@@ -503,7 +470,7 @@ Hibernate支持通过Session的update方法来重新关联实体类。</li>
 <p><img src="/2016/12/22/Tech/Hibernate  and JPA 实体类状态转变入门/23-03-04.jpg" alt="">
 *Session
 <img src="/2016/12/22/Tech/Hibernate  and JPA 实体类状态转变入门/23-02-46.jpg" alt=""></p>
-<h2>总结</h2>
+<h2 id="总结">总结</h2>
 <p>以上这些接口是我们在实体类状态转变时候需要明确调用的，这些调用通知hibernate在事务刷新的时候将这些变换转换成SQL语句，最终去操作数据库。</p>
 
       
@@ -647,7 +614,7 @@ Hibernate支持通过Session的update方法来重新关联实体类。</li>
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -658,7 +625,7 @@ Hibernate支持通过Session的update方法来重新关联实体类。</li>
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -669,7 +636,7 @@ Hibernate支持通过Session的update方法来重新关联实体类。</li>
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -742,7 +709,7 @@ Hibernate支持通过Session的update方法来重新关联实体类。</li>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">实体类状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">New(Transient)瞬态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">Persistent（Managed）持久态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">detached 分离态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">removed 删除态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">实体类状态转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实体类状态"><span class="nav-number">2.</span> <span class="nav-text">实体类状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#newtransient瞬态"><span class="nav-number">2.1.</span> <span class="nav-text">New(Transient)瞬态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#persistentmanaged持久态"><span class="nav-number">2.2.</span> <span class="nav-text">Persistent（Managed）持久态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#detached-分离态"><span class="nav-number">2.3.</span> <span class="nav-text">detached 分离态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#removed-删除态"><span class="nav-number">2.4.</span> <span class="nav-text">removed 删除态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实体类状态转换"><span class="nav-number">3.</span> <span class="nav-text">实体类状态转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -926,323 +893,6 @@ Hibernate支持通过Session的update方法来重新关联实体类。</li>
 
 
   
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
