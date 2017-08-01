@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="happy coding, happy hacking">
+<meta name="description" content="概述 本文将详细阐述如何充分利用Mockito中的Spy，我们将讨论@Spy注解，如何给spy打桩，以及最后我们介绍了Mock和SPy之间的区别。  想了解更多的Mockito用法，参看这一系列，Mockito。  简单的使用Spy例子 首先我们通过一个例子来学习下如何使用spy。 我们只需要简单的对一个真实的对象调用API，Mokito.spy()。我们便可以在把持该对象的所有正常方法调用的同时">
 <meta name="keywords" content="mockito">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mockito Spy 用法">
 <meta property="og:url" content="http://youngfor.me/2017/07/30/mockito-spy/index.html">
 <meta property="og:site_name" content="Eric&#39;s Blog">
-<meta property="og:description" content="happy coding, happy hacking">
+<meta property="og:description" content="概述 本文将详细阐述如何充分利用Mockito中的Spy，我们将讨论@Spy注解，如何给spy打桩，以及最后我们介绍了Mock和SPy之间的区别。  想了解更多的Mockito用法，参看这一系列，Mockito。  简单的使用Spy例子 首先我们通过一个例子来学习下如何使用spy。 我们只需要简单的对一个真实的对象调用API，Mokito.spy()。我们便可以在把持该对象的所有正常方法调用的同时">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-30T14:50:34.000Z">
+<meta property="og:updated_time" content="2017-07-30T15:36:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mockito Spy 用法">
-<meta name="twitter:description" content="happy coding, happy hacking">
+<meta name="twitter:description" content="概述 本文将详细阐述如何充分利用Mockito中的Spy，我们将讨论@Spy注解，如何给spy打桩，以及最后我们介绍了Mock和SPy之间的区别。  想了解更多的Mockito用法，参看这一系列，Mockito。  简单的使用Spy例子 首先我们通过一个例子来学习下如何使用spy。 我们只需要简单的对一个真实的对象调用API，Mokito.spy()。我们便可以在把持该对象的所有正常方法调用的同时">
 
 
 
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  0
+                  786
                 </span>
               
 
@@ -414,14 +414,14 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
           
           
               <div class="out-img-topic">
-                  <img src=/images/excerpt/ class="img-topic">
+                  <img src=https://cdn.dribbble.com/users/391028/screenshots/1623343/hider_final_video.gif class="img-topic">
               </div>
           
           
@@ -436,7 +436,40 @@
       
 
       
-        
+        <h2 id="概述">概述</h2>
+<p>本文将详细阐述如何充分利用Mockito中的Spy，我们将讨论<code>@Spy</code>注解，如何给spy打桩，以及最后我们介绍了Mock和SPy之间的区别。</p>
+<blockquote>
+<p>想了解更多的Mockito用法，参看这一系列，<a href="/tag/mockito">Mockito</a>。</p>
+</blockquote>
+<h2 id="简单的使用spy例子">简单的使用Spy例子</h2>
+<p>首先我们通过一个例子来学习下如何使用spy。
+我们只需要简单的对一个<strong>真实的对象</strong>调用API，<code>Mokito.spy()</code>。我们便可以在把持该对象的所有正常方法调用的同时，还能像mock对象一样来对他配置一些行为。
+好吧，让我们来快速看一个spy一个<code>ArrayList</code>的例子：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenSpyingOnList_thenCorrect</span><span class="params">()</span> </span>&#123;</div><div class="line">    List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">    List&lt;String&gt; spyList = Mockito.spy(list);</div><div class="line"> </div><div class="line">    spyList.add(<span class="string">"one"</span>);</div><div class="line">    spyList.add(<span class="string">"two"</span>);</div><div class="line"> </div><div class="line">    Mockito.verify(spyList).add(<span class="string">"one"</span>);</div><div class="line">    Mockito.verify(spyList).add(<span class="string">"two"</span>);</div><div class="line"> </div><div class="line">    assertEquals(<span class="number">2</span>, spyList.size());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>请注意，list对象的真实的add方法被调用，同时spyList的size变为了2</p>
+<h3 id="spy注解">@Spy注解</h3>
+<p>接着，我们看一下如何使用@Spy注解，下面的例子中我们使用@Spy注解替换了spy()方法：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Spy</span></div><div class="line">List&lt;String&gt; spyList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line"> </div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenUsingTheSpyAnnotation_thenObjectIsSpied</span><span class="params">()</span> </span>&#123;</div><div class="line">    spyList.add(<span class="string">"one"</span>);</div><div class="line">    spyList.add(<span class="string">"two"</span>);</div><div class="line"> </div><div class="line">    Mockito.verify(spyList).add(<span class="string">"one"</span>);</div><div class="line">    Mockito.verify(spyList).add(<span class="string">"two"</span>);</div><div class="line"> </div><div class="line">    assertEquals(<span class="number">2</span>, spyList.size());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在使用Mockito的注解（比如说@Mock，@Spy）等时，我们需要做如下配置：</p>
+<ul>
+<li>调用<code>MockitoAnnotations.initMocks(this)</code>方法对注解对象进行初始化</li>
+<li>使用内置的runner <code>@RunWith(MockitoJUnitRunner.class)</code></li>
+</ul>
+<h3 id="为spy对象打桩">为spy对象打桩</h3>
+<p>我们可以像使用mock对象时的语法一样，配置或者说重新改写spy对象的方法，
+下面的例子我们使用了<code>doReturn()</code>来重写了<code>size()</code>方法：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenStubASpy_thenStubbed</span><span class="params">()</span> </span>&#123;</div><div class="line">    List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">    List&lt;String&gt; spyList = Mockito.spy(list);</div><div class="line"> </div><div class="line">    assertEquals(<span class="number">0</span>, spyList.size());</div><div class="line"> </div><div class="line">    Mockito.doReturn(<span class="number">100</span>).when(spyList).size();</div><div class="line">    assertEquals(<span class="number">100</span>, spyList.size());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="mock-vs-spy">Mock vs. Spy</h2>
+<p>最后，我们来讨论一下在Mokita中Mock和Spy有什么区别。
+当Mockito创造一个mock对象时，它是从类的类型中创建，而不是从类的实例中创建。也就是说mock对象是一个简单的只带有骨架的空壳的对象实例，同时我们可以跟踪它的所有交互方法。
+不同的是，spy对象是对一个对象实例进行的封装，它仍然能够像正常对象实例一样有这正常的行为，唯一不同的是这些行为交互是可以跟踪和配置的。下面我们穿件一个mock的list例子：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenCreateMock_thenCreated</span><span class="params">()</span> </span>&#123;</div><div class="line">    List mockedList = Mockito.mock(ArrayList.class);</div><div class="line"> </div><div class="line">    mockedList.add(<span class="string">"one"</span>);</div><div class="line">    Mockito.verify(mockedList).add(<span class="string">"one"</span>);</div><div class="line"> </div><div class="line">    assertEquals(<span class="number">0</span>, mockedList.size());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可见，对mock的list增加一个元素并没有实际的真假任何东西，它仅仅是调用了该方法，没有任何的其他影响。
+而spy对象则不同，它会真是的在该对象中增加一个元素：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenCreateSpy_thenCreate</span><span class="params">()</span> </span>&#123;</div><div class="line">    List spyList = Mockito.spy(<span class="keyword">new</span> ArrayList());</div><div class="line"> </div><div class="line">    spyList.add(<span class="string">"one"</span>);</div><div class="line">    Mockito.verify(spyList).add(<span class="string">"one"</span>);</div><div class="line"> </div><div class="line">    assertEquals(<span class="number">1</span>, spyList.size());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="总结">总结</h2>
+<p>本文通过几个简单例子讨论了如何充分利用Mockito中的spy方法。我们学习了如何创建一个spy对象，如何使用@Spy注解，最后比较了Spy与Mock的区别。例子 代码实现可以参见<a href="https://github.com/eugenp/tutorials/tree/master/mockito#readme" target="_blank" rel="external">github</a>。想了解更多的Mockito用法，参看这一系列，<a href="/tag/mockito">Mockito</a>。</p>
+
       
     </div>
 
@@ -555,8 +588,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -656,6 +698,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的使用spy例子"><span class="nav-number">2.</span> <span class="nav-text">简单的使用Spy例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spy注解"><span class="nav-number">2.1.</span> <span class="nav-text">@Spy注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为spy对象打桩"><span class="nav-number">2.2.</span> <span class="nav-text">为spy对象打桩</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mock-vs-spy"><span class="nav-number">3.</span> <span class="nav-text">Mock vs. Spy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
